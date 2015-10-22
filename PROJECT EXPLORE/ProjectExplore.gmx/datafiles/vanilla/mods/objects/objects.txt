@@ -1,0 +1,42 @@
+name: Small Crate
+texture: mods\textures\texture_smallcrate.png
+hitbox: mods\hitbox\hitbox_32x32.png
+type: 0
+stat1: 3
+stat2: 3
+rot: 0
+3d: 1
+x: 0
+y: 0
+z1: 0
+z2: 24
+xsize: 26
+ysize: 26
+name: Large Crate
+texture: mods\textures\texture_largecrate.png
+hitbox: mods\hitbox\hitbox_32x32.png
+type: 0
+stat1: 5
+stat2: 5
+rot: 0
+3d: 1
+x: 0
+y: 0
+z1: 0
+z2: 32
+xsize: 32
+ysize: 32
+name: Wood Chair
+texture: mods\textures\texture_chair_1.png
+hitbox: mods\hitbox\hitbox_20x20.png
+type: 1
+stat1: 0
+stat2: 0
+rot: 1
+3d: 1
+x: 6,-6,-6,6,0,-6
+y: -6,-6,6,6,0,0
+z1: 0,0,0,0,6,10
+z2: 6,6,6,6,4,15
+xsize: 3,3,3,3,16,4
+ysize: 3,3,3,3,16,16

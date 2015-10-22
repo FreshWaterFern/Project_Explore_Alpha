@@ -1,0 +1,4 @@
+items: mods\scripts\items.txt
+items: mods\scripts\weapons.txt
+crafting: mods\scripts\crafting.txt
+object: mods\objects\objects.txt

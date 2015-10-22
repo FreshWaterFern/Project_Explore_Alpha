@@ -1,0 +1,117 @@
+/// Async Network
+var sock = ds_map_find_value(async_load,"id");
+if ( sock == server_id )
+{
+var t = ds_map_find_value(async_load,"type");
+
+if ( t == network_type_connect )
+{
+var socket = ds_map_find_value(async_load,"socket");
+var ip = ds_map_find_value(async_load,"ip");
+ds_list_add(pl_socket,socket);
+ds_list_add(pl_connect,0);
+ds_list_add(pl_ip,ip);
+console_add("'"+string(ip)+"' connecting");
+}
+
+if ( t == network_type_disconnect )
+{
+var socket = ds_map_find_value(async_load,"socket");
+var index = ds_list_find_index(pl_socket,socket);
+var connection = ds_list_find_value(pl_connect,index);
+    if (  connection == 0 )
+    {
+        ds_list_delete(pl_socket,index);
+        ds_list_delete(pl_ip,index);
+    }
+    if (  connection == 1 )
+    {
+        var index = ds_list_find_index(pl_socket,socket);
+        var name = ds_list_find_value(pl_name,index);
+        console_add("'"+string(name)+"' has disconnected");
+        ds_list_delete(pl_name,index);
+        ds_list_delete(pl_x,index);
+        ds_list_delete(pl_y,index);
+        ds_list_delete(pl_health,index);
+        ds_list_delete(pl_food,index);
+        ds_list_delete(pl_ip,index);
+        ds_list_delete(pl_socket,index);
+        ds_list_delete(pl_connect,index);
+    }
+}
+}
+
+
+var t = ds_map_find_value(async_load,"type");
+if ( t == network_type_data )
+{
+    var net_buffer = ds_map_find_value(async_load,"buffer");
+    var msg_id = buffer_read(net_buffer,buffer_u16);
+    switch(msg_id)
+    {
+        case 1: // Client Connecting
+        {
+        var client_socket = sock//ds_list_find_value(pl_socket,0);
+        var username = buffer_read(net_buffer,buffer_string);
+        var password = buffer_read(net_buffer,buffer_string);
+        if ( file_exists("player_data/player_"+string(username)+".dat") == true )
+        {
+        // Check for valid login info
+        var pl_data_buffer = buffer_load("player_data/player_"+string(username)+".dat");
+        var pl_data_name = buffer_read(pl_data_buffer,buffer_string);
+        var pl_data_pass = buffer_read(pl_data_buffer,buffer_string);
+        var send_buffer = buffer_create(1,buffer_grow,1);
+        buffer_write(send_buffer,buffer_u16,1);//msg_id
+        buffer_write(send_buffer,buffer_s32,client_socket);
+            if ( pl_data_name == username )
+            {
+                if ( pl_data_pass == password )
+                {
+    
+                    buffer_write(send_buffer,buffer_bool,true);//login
+                    console_add("'"+string(username)+"' has logged in.");
+                }
+                else
+                {
+                    buffer_write(send_buffer,buffer_bool,false);//login
+                    console_add("'"+string(username)+"' used an invalid password.");
+                }
+            }
+            else
+            {
+                buffer_write(send_buffer,buffer_bool,false);//login
+                console_add("'"+string(username)+"' has logged in with an invalid name.");
+            } 
+        network_send_packet(client_socket,send_buffer,buffer_tell(send_buffer));
+        }
+        else
+        {
+        var send_buffer = buffer_create(1,buffer_grow,1);
+        buffer_write(send_buffer,buffer_u8,1);//msg_id
+        buffer_write(send_buffer,buffer_s32,sock);
+        buffer_write(send_buffer,buffer_bool,true);//login
+        network_send_packet(client_socket,send_buffer,buffer_tell(send_buffer));
+        var pl_data_buffer = buffer_create(1,buffer_grow,1);
+        buffer_write(pl_data_buffer,buffer_string,username);
+        buffer_write(pl_data_buffer,buffer_string,password);
+        buffer_save(pl_data_buffer,"player_data/player_"+string(username)+".dat");
+        console_add("'"+string(username)+"' is a new player.");
+        }
+        break;
+        }
+        
+        case 2: // Client Connecting
+        {
+        var username = buffer_read(net_buffer,buffer_string);
+        var password = buffer_read(net_buffer,buffer_string);
+        if ( file_exists("player_"+string(username)+".dat") == true )
+        {
+        }
+        else
+        {
+        }
+        var pl_buffer = buffer_create(512,buffer_fixed,1);
+        break;
+        }
+    }
+}

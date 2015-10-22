@@ -1,0 +1,10 @@
+crafting_anim_slow_spd=0.025
+crafting_anim_start_spd=8
+DEV_MODE=1
+GAME_VERSION="Alpha 0.1.3.9"
+ITEM_TOTAL=104
+rock_attack_damage=15
+rock_kb_cd=30
+rock_kb_speed=4
+rock_kb_time=15
+wolf_armor=.10

@@ -1,0 +1,36 @@
+/// Async Network
+
+var type = ds_map_find_value(async_load,"type");
+if ( type == network_type_connect )
+{
+}
+
+if ( type == network_type_disconnect )
+{
+}
+
+if ( type == network_type_data )
+{
+    var net_buffer = ds_map_find_value(async_load,"buffer");
+    var msg_id = buffer_read(net_buffer,buffer_u16);
+    switch(msg_id)
+    {
+        case 1: // Client Connecting
+        {
+        var get_socket = buffer_read(net_buffer,buffer_s32);
+        var get_login = buffer_read(net_buffer,buffer_bool);
+        if ( get_login == 1 )
+        {
+        
+        }
+        break;
+        }
+        case 2: // Client Syncing
+        {
+        var get_socket = buffer_read(net_buffer,buffer_s32);
+        var get_login = buffer_read(net_buffer,buffer_bool);
+        show_message_async("Socket: "+string(get_socket)+", Login: "+string(get_login));
+        break;
+        }
+    }
+}

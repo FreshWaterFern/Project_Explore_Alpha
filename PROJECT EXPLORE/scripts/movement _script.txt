@@ -1,0 +1,397 @@
+/// Controls
+// Tile Editor Switch On/Off
+/*
+if ( keyboard_check(vk_shift) == true )
+{
+    if ( keyboard_check_pressed(vk_escape) )
+    {
+        if ( instance_number(obj_editor_tiles) == 0 ) 
+        {
+            view_object[0]=obj_editor_tiles;
+            instance_create(0,0,obj_editor_tiles);
+            room_speed = 15;
+        }
+        else
+        {
+            room_speed = 60;
+            with(obj_editor_tiles)
+            {
+                view_object[0]=obj_player;
+                instance_destroy();
+            }
+        }
+    }
+}
+*/
+// Allow movement when we aren't editing the world
+if ( global.v_inventory_open == false && global.render_world_map == false )
+{
+if ( instance_number(obj_editor_tiles) == 0 )
+{
+    v_is_moving = false;
+    if ( keyboard_check(key_right_main) or keyboard_check(key_right_alt) )
+    {
+        if ( keyboard_check(key_walk_main) or keyboard_check(key_walk_alt) )
+        {
+            if ( (!keyboard_check(key_up_main) && !keyboard_check(key_down_main)) or (!keyboard_check(key_up_alt) && !keyboard_check(key_down_alt)) )
+            {
+            x += pl_movespeed/2;image_xscale = 1;
+            }
+            else
+            {
+            x += pl_movespeed/3.5;image_xscale = 1;
+            }
+        }
+        else
+        {
+        if ( (!keyboard_check(key_up_main) && !keyboard_check(key_down_main)) or (!keyboard_check(key_up_alt) && !keyboard_check(key_down_alt)) )
+        {
+        // Right Direction Dash
+        if ( v_leap_dir == "Right" && v_leap_press_cd > 0 && v_dashing == false && v_dashing_cd == 0 )
+        {
+        if ( keyboard_check_pressed(key_right_main) or keyboard_check_pressed(key_right_alt) )
+        {
+        // DASH
+        v_dashing = true;
+        v_dash_time = 10;
+        }
+        }
+        else
+        {
+        if ( v_dashing == false )
+        {
+        v_leap_press_cd = 10;
+        v_leap_dir = "Right";
+        }
+        }
+        // Movement
+        x += pl_movespeed;image_xscale = 1;
+        }
+        else
+        {
+        x += pl_movespeed/1.5;image_xscale = 1;
+        }
+        }
+        v_is_moving = true;
+    }
+    if ( keyboard_check(key_left_main) or keyboard_check(key_left_alt) )
+    {
+        if ( keyboard_check(key_walk_main) or keyboard_check(key_walk_alt) )
+        {
+            if ( (!keyboard_check(key_up_main) && !keyboard_check(key_down_main)) or (!keyboard_check(key_up_alt) && !keyboard_check(key_down_alt)) )
+            {
+            x -= pl_movespeed/2;image_xscale = -1;
+            }
+            else
+            {
+            x -= pl_movespeed/3.5;image_xscale = -1;
+            }
+        }
+        else
+        {
+            if ( (!keyboard_check(key_up_main) && !keyboard_check(key_down_main)) or (!keyboard_check(key_up_alt) && !keyboard_check(key_down_alt)) )
+            {
+            // Left Direction Dash
+            if ( v_leap_dir == "Left" && v_leap_press_cd > 0 && v_dashing == false && v_dashing_cd == 0 )
+            {
+            if ( keyboard_check_pressed(key_left_main) or keyboard_check_pressed(key_left_alt) )
+            {
+            // DASH
+            v_dashing = true;
+            v_dash_time = 10;
+            }
+            }
+            else
+            {
+            if ( v_dashing == false )
+            {
+            v_leap_press_cd = 10;
+            v_leap_dir = "Left";
+            }
+            }
+            // Movement
+            x -= pl_movespeed;image_xscale = -1;
+            }
+            else
+            {
+            x -= pl_movespeed/1.5;image_xscale = -1;
+            }
+        }
+        v_is_moving = true;
+    }
+    if ( keyboard_check(key_up_main) or keyboard_check(key_up_alt) )
+    {
+        if ( keyboard_check(key_walk_main) or keyboard_check(key_walk_alt) )
+        {
+            if ( x == xprevious )
+            { 
+            y -= pl_movespeed/2;
+            }
+            else
+            {
+            y -= pl_movespeed/3.5;
+            }
+        }
+        else
+        {
+            if ( x == xprevious )
+            {
+            // Up Direction Dash
+            if ( v_leap_dir == "Up" && v_leap_press_cd > 0 && v_dashing == false && v_dashing_cd == 0 )
+            {
+            if ( keyboard_check_pressed(key_up_main) or keyboard_check_pressed(key_up_alt) )
+            {
+            // DASH
+            v_dashing = true;
+            v_dash_time = 10;
+            }
+            }
+            else
+            {
+            if ( v_dashing == false )
+            {
+            v_leap_press_cd = 10;
+            v_leap_dir = "Up";
+            }
+            }
+            // Movement
+            y -= pl_movespeed;
+            }
+            else
+            {
+            y -= pl_movespeed/1.5;
+            }
+        }
+        v_is_moving = true;
+    }
+    if ( keyboard_check(key_down_main) or keyboard_check(key_down_alt) )
+    {
+        if ( keyboard_check(key_walk_main) or keyboard_check(key_walk_alt) )
+        {
+            if ( x == xprevious )
+            { 
+            y += pl_movespeed/2;
+            }
+            else
+            {
+            y += pl_movespeed/3.5;
+            }
+        }
+        else
+        {
+            if ( x == xprevious )
+            {
+            // Down Direction Dash
+            if ( v_leap_dir == "Down" && v_leap_press_cd > 0 && v_dashing == false && v_dashing_cd == 0 )
+            {
+            if ( keyboard_check_pressed(key_down_main) or keyboard_check_pressed(key_down_alt) )
+            {
+            // DASH
+            v_dashing = true;
+            v_dash_time = 10;
+            }
+            }
+            else
+            {
+            if ( v_dashing == false )
+            {
+            v_leap_press_cd = 10;
+            v_leap_dir = "Down";
+            }
+            }
+            // Movement
+            y += pl_movespeed;
+            }
+            else
+            {
+            y += pl_movespeed/1.5;
+            }
+        }
+        v_is_moving = true;
+    }
+    // Update our direction
+    image_angle = point_direction(x,y,mouse_x,mouse_y)-90;
+    direction = image_angle;
+    // Dash Press Cooldown
+    if ( v_leap_press_cd > 0 )
+    {
+    v_leap_press_cd --;
+    }
+    if ( v_dashing_cd > 0 )
+    {
+    v_dashing_cd --;
+    }
+}
+}
+
+// Open Inventory
+if ( keyboard_check_pressed(key_inventory_main) or keyboard_check_pressed(key_inventory_alt) )
+{
+    if ( global.v_inventory_open == false )
+    {
+        io_clear();
+        v_gathering = false;
+        global.v_inventory_open = true;
+        //obj_game.render_characters = false;
+        //obj_game.render_world_tiles = false;
+        global.render_gui_inventory = true;
+        global.render_gui_1 = false;
+        //obj_game.render_world_shadows = false;
+        inventory_initiate(0);
+    }
+    else
+    {
+        global.v_inventory_open = false;
+        global.render_characters = true;
+        global.render_world_tiles = true;
+        global.render_gui_inventory = false;
+        global.render_gui_1 = true;
+        global.render_world_shadows = true;
+        obj_game.v_item_drop = false;
+        obj_game.v_item_moving = false;
+        obj_game.storage_id = 0;
+    }
+}
+
+// Hotbar Controls
+if ( global.v_inventory_open == false )
+{
+if ( keyboard_check_pressed(ord('1')) )
+{
+    obj_game.hotbar_alpha = 5;
+    v_construct = false;
+    if(obj_game.v_hotbar_set!=0){obj_game.v_hotbar_set = 0;}else{obj_game.v_hotbar_set=-1;v_item_equipped=-1;}
+}
+if ( keyboard_check_pressed(ord('2')) )
+{
+    obj_game.hotbar_alpha = 5;
+    v_construct = false;
+    if(obj_game.v_hotbar_set!=1){obj_game.v_hotbar_set = 1;}else{obj_game.v_hotbar_set=-1;v_item_equipped=-1;}
+}
+if ( keyboard_check_pressed(ord('3')) )
+{
+    obj_game.hotbar_alpha = 5;
+    v_construct = false;
+    if(obj_game.v_hotbar_set!=2){obj_game.v_hotbar_set = 2;}else{obj_game.v_hotbar_set=-1;v_item_equipped=-1;}
+}
+if ( keyboard_check_pressed(ord('4')) )
+{
+    obj_game.hotbar_alpha = 5;
+    v_construct = false;
+    if(obj_game.v_hotbar_set!=3){obj_game.v_hotbar_set = 3;}else{obj_game.v_hotbar_set=-1;v_item_equipped=-1;}
+}
+    if ( obj_game.v_hotbar_set != -1 )
+    {
+    with(obj_game){obj_player.v_item_equipped = ds_grid_get(c_inventory_hotbar,v_hotbar_set,0);}
+        if ( item_get_data(v_item_equipped,4) == true )
+        {
+            v_draw_equipped = true;
+            v_draw_equipped_sprite = item_get_data(v_item_equipped,2);
+        } 
+        else
+        {
+            v_draw_equipped = false;
+            v_draw_equipped_sprite = 0;
+        }
+    }
+    else
+    {
+    v_draw_equipped = false;
+    v_draw_equipped_sprite = 0;
+    v_construct = false;
+    }
+    v_terrain = false; // Reset Terrain State
+    v_shovel = false; // Reset Shovel State
+    // Check if it is a constructive item
+    if ( v_construct == false )
+    {
+        switch(string(item_get_data(v_item_equipped,0)))
+        {
+            case "Foundation":
+            {
+            v_construct = true;exit;
+            }
+            case "Wall":
+            {
+            v_construct = true;exit;
+            }
+            case "Doorway":
+            {
+            v_construct = true;exit;
+            }
+            case "Ceiling":
+            {
+            v_construct = true;exit;
+            }
+            case "Fence":
+            {
+            v_construct = true;exit;
+            }
+            case "Small Fire":
+            {
+            v_construct = true;exit;
+            }
+            case "Large Crate":
+            {
+            v_construct = true;exit;
+            }
+            case "Big Fire":
+            {
+            v_construct = true;exit;
+            }
+            case "Small Crate":
+            {
+            v_construct = true;exit;
+            }
+            case "Lantern":
+            {
+            v_construct = true;exit;
+            }
+            case "Shovel":
+            {
+            v_shovel = true;exit;
+            }
+            case "Grass Surface":
+            {
+            v_terrain = true;exit;
+            }
+            case "Fine Wood Surface":
+            {
+            v_terrain = true;exit;
+            }
+            case "Old Wood Surface":
+            {
+            v_terrain = true;exit;
+            }
+            case "Stone Tile Surface":
+            {
+            v_terrain = true;exit;
+            }
+            case "Stone Surface":
+            {
+            v_terrain = true;exit;
+            }
+        }
+    }
+    // Check if item is a torch
+    if ( string(item_get_data(v_item_equipped,0)) == "Torch" )
+        {
+        v_torch = true;
+        }
+        else
+        {
+        v_torch = false;
+            if ( instance_number(obj_torch) != 0 )
+            {
+                with(obj_torch){instance_destroy();}
+            }
+        }
+    // Check if the torch is already active
+    if ( v_torch == true )
+    {
+        if ( instance_number(obj_torch) == 0 )
+        {
+        instance_create(x,y,obj_torch);
+        }
+    }
+}
