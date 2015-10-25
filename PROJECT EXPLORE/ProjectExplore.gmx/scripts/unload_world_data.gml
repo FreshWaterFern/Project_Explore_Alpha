@@ -61,13 +61,10 @@ if ( audio_group_is_loaded(Ambience_Track1) == true )
 if ( audio_group_is_loaded(Ambience_Track2) == true )
 {audio_group_unload(Ambience_Track2);}
 
+// Music Track Unload
+
 var i = 0;
 for(i=0;i<ds_list_size(obj_game.music_list);i++){
 if ( obj_game.music_track != 0 ){audio_stop_sound(obj_game.music_track);obj_game.music_track=0;}
 audio_destroy_stream(ds_list_find_value(obj_game.music_list,i));}
-
-// Load menu audio back in memory //
-if ( audio_group_is_loaded(audiogroup_menu) == false )
-{
-audio_group_load(audiogroup_menu);
-}
+ds_list_destroy(obj_game.music_list);

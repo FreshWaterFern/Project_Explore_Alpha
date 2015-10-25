@@ -4,19 +4,30 @@ var inst = instance_create(argument0,argument1,argument2);
 
 inst.angle = argument3;
 with(inst){ // Parse mod information into the instance
-var list = ds_list_create();var i = 0;
-list = object_mod_inherit(db_object_get_name(global.item_data[#other.v_item_equipped,0]));
+var list = ds_list_create();var i = 0;var object_id = db_object_get_name(global.item_data[#other.v_item_equipped,0]);
+list = object_mod_inherit(object_id);
 obj_name=list[|0];
 index=other.v_item_equipped;
-texture=background_get_texture(list[|1]);
-sprite_index=list[|2];
-type=list[|3];
+texture=background_get_texture(real(list[|1]));
+sprite_index=real(list[|2]);
+type=real(list[|3]);
 switch(type)
 {
-case 0:{ds_grid_resize(c_inv,list[|4],list[|5]);ds_grid_resize(c_stack,list[|4],list[|5]);break;}
+
+case 0:{ds_grid_resize(c_inv,real(list[|4]),real(list[|5]));ds_grid_resize(c_stack,real(list[|4]),real(list[|5]));break;}
+
+case 2:{var datalist1 = convert_string_to_list(list[|4],",");var datalist2 = convert_string_to_list(list[|5],",");
+fire_effect = real(datalist1[|0]);glow_effect = real(datalist1[|1]);smoke_effect = real(datalist1[|2]);fuel_max = real(datalist1[|3]);burn_rate = real(datalist1[|4]);
+var list_size = ds_list_size(datalist2);
+for(i=0;i<list_size;i+=2){ds_list_add(fuel_item,datalist2[|i]);ds_list_add(fuel_gain,datalist2[|i+1]);}
+if ( !smoke_effect ){part_type_destroy(pt_1);}
+if ( !fire_effect ){part_type_destroy(pt_2);}
+if ( !glow_effect ){part_type_destroy(pt_3);}
+break;}
+
 }
-rot=list[|6];
-is_3d=list[|7];
+rot=real(list[|6]);
+is_3d=real(list[|7]);
 if ( is_3d != 0 )
 {
 var temp_list = ds_list_create();

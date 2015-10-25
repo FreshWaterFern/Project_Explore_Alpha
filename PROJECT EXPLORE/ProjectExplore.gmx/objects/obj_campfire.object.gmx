@@ -28,12 +28,10 @@
             <string>/// Initialize
 
 is_enabled = false;
-is_indoors = false;
 active = true;
 selected = false;
 obj_type = 0;
 mouse_frames = 0;
-v_indoors = false;
 
 c_inv = ds_grid_create(2,2);
 c_stack = ds_grid_create(2,2);
@@ -49,8 +47,6 @@ audio_emitter_gain(audio_emitter1,1);
 audio_index = 0;
 
 world_obj_add(id);
-
-alarm[1] = 2;
 
 col_orange = make_colour_rgb(210,112,0);;
 
@@ -98,8 +94,6 @@ part_type_colour1(pt_3,$0081BF);
 part_type_size(pt_3,4,5,0.05,0);
 part_type_alpha2(pt_3,0.13,0.002);
 part_type_blend(pt_3,false);
-
-alarm[0] = 1;
 </string>
           </argument>
         </arguments>
@@ -849,8 +843,7 @@ else
           <argument>
             <kind>1</kind>
             <string>/// Render
-if ( active == true )
-{if ( v_indoors == obj_player.v_indoors ){
+if ( active == true ){
 if ( global.render_gui_page == "none" ){
     if ( selected == true or (global.tablet_mode == 1 &amp;&amp; point_distance(x,y,obj_player.x,obj_player.y) &lt; 64) )
     {
@@ -878,7 +871,7 @@ if ( global.render_gui_page == "none" ){
     w3d_draw_sprite_ext(sprite_index,0,x,y,0,image_xscale,image_yscale,image_angle,c_white,1);
     part_system_drawit(ps_2);
     }
-}}
+}
 </string>
           </argument>
         </arguments>

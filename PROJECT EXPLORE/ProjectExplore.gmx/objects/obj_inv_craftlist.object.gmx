@@ -219,25 +219,33 @@ if ( !update )
 {
 update=true;
 req_grid = db_crafting_get_req(item_name); // Get our required crafting materials
-var count = 0;var pass = true;
-count = inventory_get_item(db_item_get_name(req_grid[#0,0]),0,0);
+var count = 0;var pass = true;var list_size = ds_grid_width(req_grid);
+if( list_size &gt; 0 ){count = inventory_get_item(db_item_get_name(req_grid[#0,0]),0,0);
 if ( count &gt;= req_grid[#0,1] ){/*Looks Like The Player Got This*/}else{if(req_grid[#0,1]!=0){pass=false;}}
-count = inventory_get_item(db_item_get_name(req_grid[#1,0]),0,0);
+if( list_size &gt; 1 ){count = inventory_get_item(db_item_get_name(req_grid[#1,0]),0,0);
 if ( count &gt;= req_grid[#1,1] ){/*Looks Like The Player Got This*/}else{if(req_grid[#1,1]!=0){pass=false;}}
-count = inventory_get_item(db_item_get_name(req_grid[#2,0]),0,0);
+if( list_size &gt; 2 ){count = inventory_get_item(db_item_get_name(req_grid[#2,0]),0,0);
 if ( count &gt;= req_grid[#2,1] ){/*Looks Like The Player Got This*/}else{if(req_grid[#2,1]!=0){pass=false;}}
-count = inventory_get_item(db_item_get_name(req_grid[#3,0]),0,0);
-if ( count &gt;= req_grid[#3,1] ){/*Looks Like The Player Got This*/}else{if(req_grid[#3,1]!=0){pass=false;}}
+if( list_size &gt; 3 ){count = inventory_get_item(db_item_get_name(req_grid[#3,0]),0,0);
+if ( count &gt;= req_grid[#3,1] ){/*Looks Like The Player Got This*/}else{if(req_grid[#3,1]!=0){pass=false;}}}}}}
 if ( pass == true ){craftable=true;sprite_index=spr_crafting_slot_pass;}else{sprite_index=spr_crafting_slot_fail;}
 
 // Next we need our sprites
-ds_list_add(sprite_cache,global.item_data[#db_item_get_name(req_grid[#0,0]),2]);
+if( list_size &gt; 0 ){
+var item_num = db_item_get_name(req_grid[#0,0]);if(item_num != undefined){
+ds_list_add(sprite_cache,global.item_data[#item_num,2]);}
+if( list_size &gt; 1 ){
 if ( string(req_grid[#1,0]) != "0" )
-{ds_list_add(sprite_cache,global.item_data[#db_item_get_name(req_grid[#1,0]),2]);}
+{item_num = db_item_get_name(req_grid[#1,0]);if(item_num != undefined){
+ds_list_add(sprite_cache,global.item_data[#db_item_get_name(req_grid[#1,0]),2]);}}
+if( list_size &gt; 2 ){
 if ( string(req_grid[#2,0]) != "0" )
-{ds_list_add(sprite_cache,global.item_data[#db_item_get_name(req_grid[#2,0]),2]);}
+{item_num = db_item_get_name(req_grid[#2,0]);if(item_num != undefined){
+ds_list_add(sprite_cache,global.item_data[#db_item_get_name(req_grid[#2,0]),2]);}}
+if( list_size &gt; 3 ){
 if ( string(req_grid[#3,0]) != "0" )
-{ds_list_add(sprite_cache,global.item_data[#db_item_get_name(req_grid[#3,0]),2]);}
+{item_num = db_item_get_name(req_grid[#3,0]);if(item_num != undefined){
+ds_list_add(sprite_cache,global.item_data[#db_item_get_name(req_grid[#3,0]),2]);}}}}}}
 }
 </string>
           </argument>

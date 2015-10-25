@@ -52,12 +52,6 @@ ds_list_add(global.equip_list,0);
             <string>/// Initialize
 if ( instance_number(obj_game) &lt; 2 )
 {
-// Clear Memory
-
-if ( audio_group_is_loaded(audiogroup_menu) == true )
-{
-audio_group_unload(audiogroup_menu);
-}
 
 // Load Memory
 
@@ -635,6 +629,11 @@ if ( global.pl_sickness &gt; 0 ){c_temperature += 10;}
                 -0.0228718340483046*power(c_temperature,1) + 
                 0.00014906661965485*power(c_temperature,2);*/
 
+if ( global.equip_list[|0] &gt; 0 ){
+var list1 = convert_string_to_list(global.item_data[#global.equip_list[|0],7],",");c_temperature += real(list1[|1]);ds_list_destroy(list1);}
+if ( global.equip_list[|1] &gt; 0 ){
+var list2 = convert_string_to_list(global.item_data[#global.equip_list[|1],7],",");c_temperature += real(list2[|1]);ds_list_destroy(list2);}
+
 get_temperature_effect(c_temperature);
 </string>
           </argument>
@@ -971,7 +970,7 @@ if ( c_sanity &lt; 70 )
           <argument>
             <kind>1</kind>
             <string>/// Music/Ambience Player
-if ( irandom(3) == 3 ){
+if ( irandom(5) == 5 ){
 if ( music_track == 0 ){
 music_track = audio_play_sound(ds_list_find_value(music_list,irandom(4)),5,false);
 ds_list_add(obj_volume.list_music,music_track);

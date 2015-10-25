@@ -40,3 +40,17 @@ z1: 0,0,0,0,6,10
 z2: 6,6,6,6,4,15
 xsize: 3,3,3,3,16,4
 ysize: 3,3,3,3,16,16
+name: Small Fire
+texture: mods\sprites\2D_Objects\sprite_smallfire.png
+hitbox: mods\sprites\2D_Objects\sprite_smallfire.png
+type: 2
+stat1: 1,1,1,1,0.0004
+stat2: Wood,1,Stick,0.5,Leaf,0.3
+rot: 0
+3d: 0
+x: 0
+y: 0
+z1: 0
+z2: 0
+xsize: 0
+ysize: 0

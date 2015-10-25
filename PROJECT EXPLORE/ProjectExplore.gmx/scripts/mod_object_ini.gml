@@ -26,11 +26,11 @@ global.object_data[#index,3]=real(str1);
 // -- Get Stat1 -- \\
 str1 = file_text_read_string(file);file_text_readln(file);
 str1 = string_replace(str1,"stat1: ","");
-global.object_data[#index,4]=real(str1);
+global.object_data[#index,4]=string(str1);
 // -- Get Stat2-- \\
 str1 = file_text_read_string(file);file_text_readln(file);
 str1 = string_replace(str1,"stat2: ","");
-global.object_data[#index,5]=real(str1);
+global.object_data[#index,5]=string(str1);
 // -- Get Rotation (0 or 1) -- \\
 str1 = file_text_read_string(file);file_text_readln(file);
 str1 = string_replace(str1,"rot: ","");

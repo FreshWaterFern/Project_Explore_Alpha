@@ -529,33 +529,6 @@ for(i=0; i &lt; size_list; i++){
         </arguments>
       </action>
     </event>
-    <event eventtype="7" enumb="72">
-      <action>
-        <libid>1</libid>
-        <id>603</id>
-        <kind>7</kind>
-        <userelative>0</userelative>
-        <isquestion>0</isquestion>
-        <useapplyto>-1</useapplyto>
-        <exetype>2</exetype>
-        <functionname></functionname>
-        <codestring></codestring>
-        <whoName>self</whoName>
-        <relative>0</relative>
-        <isnot>0</isnot>
-        <arguments>
-          <argument>
-            <kind>1</kind>
-            <string>if ( async_load[? "type"] == "audiogroup_load" ){
-if ( async_load[? "group_id"] == audiogroup_menu ){
-if ( audio_is_playing(snd_musicbox1) == false )
-{audio_play_sound(snd_musicbox1,3,true);}}
-}
-</string>
-          </argument>
-        </arguments>
-      </action>
-    </event>
     <event eventtype="7" enumb="5">
       <action>
         <libid>1</libid>
@@ -621,11 +594,6 @@ mode = 1;
           <argument>
             <kind>1</kind>
             <string>if(!font_exists(font_square)){font_square = font_add(working_directory + "Square.ttf",27,0,0,48,57);}
-
-if ( room == room_main_menu )
-{
-    audio_group_load(audiogroup_menu);
-}
 </string>
           </argument>
         </arguments>

@@ -206,6 +206,7 @@ global.equip_list[|0]=0;global.clothing_head="";}
 if ( inventory_get_item(global.equip_list[|1],0,0) == 0 ){
 global.equip_list[|1]=0;global.clothing_body="";}
 
+
 // Depth Update
 depth = w3d_depth(x,y,-y);
 
@@ -3187,21 +3188,8 @@ chunk_update(chunk_step_x,chunk_step_y);
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>/// Update Shadowed And Near Light
-v_shadowed = false;
-
-if ( v_time_check != 30 )
-{
-    v_time_check ++;
-}
-
-if ( v_time_check == 30 )
-{
-
-}
-
+            <string>/// Update Indoor
 v_indoors = false;
-pl_nearlight = false;
 </string>
           </argument>
         </arguments>
@@ -3260,7 +3248,7 @@ if ( irandom(15) == 5 )
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>/// Check if indoors
+            <string>/// Check if indoors &amp; Weather
 var inst = collision_circle(x,y,10,obj_roof_parent,false,true);
 var wall_right = collision_rectangle(x,y-48,x+128,y+48,obj_solid_parent,false,true);
 var wall_left = collision_line(x-128,y-48,x,y+48,obj_solid_parent,false,true);
@@ -3282,10 +3270,15 @@ if ( wall_count &gt;= 3 ){
 v_indoors = true;}
 }
 }
-
 if ( v_indoors == false ){
-if ( global.weather_mode &gt; 3 &amp;&amp; global.weather_mode &lt; 7 &amp;&amp; global.equip_list[| 0] != 151 ){obj_game.c_health -= 0.005*(global.weather_mode-3);}
-if ( global.weather_mode &gt; 3 &amp;&amp; global.weather_mode &lt; 7 ){obj_game.c_thirst -= 0.0005*(global.weather_mode-3);}
+var num1 = 0;var num2 = 0;
+if ( global.equip_list[|0] &gt; 0 ){
+var list1 = convert_string_to_list(global.item_data[#global.equip_list[|0],7],",");num1 = real(list1[|0]);ds_list_destroy(list1);}
+if ( global.equip_list[|1] &gt; 0 ){
+var list2 = convert_string_to_list(global.item_data[#global.equip_list[|1],7],",");num2 = real(list2[|0]);ds_list_destroy(list2);}
+var math_1 = (0.005*(global.weather_mode-3));var math_2 = num1 + num2;var math_3 = (math_1 * math_2);
+if ( global.weather_mode &gt; 3 &amp;&amp; global.weather_mode &lt; 7 ){obj_game.c_health -= clamp(math_1 - math_3,0,100);}
+if ( global.weather_mode &gt; 3 &amp;&amp; global.weather_mode &lt; 7 ){obj_game.c_thirst -= clamp((math_1*0.1) - math_3,0,100);}
 if ( global.weather_mode &gt; 0 &amp;&amp; global.weather_mode &lt; 4 ){global.pl_sickchance++;}else{global.pl_sickchance-=2;}}
 with(inst){roof_check()}
 
@@ -5030,7 +5023,8 @@ if ( v_con_col == false ){
 if ( mouse_check_button_pressed(mb_left) ){var obj_inst = 0;
 switch(global.object_data[#obj_id,3]){
 case 0:{obj_inst=obj_archetype_storage;break;}
-case 1:{obj_inst=obj_archetype_basic;break;}}
+case 1:{obj_inst=obj_archetype_basic;break;}
+case 2:{obj_inst=obj_archetype_cooking;break;}}
 player_create_object(v_con_x,v_con_y,obj_inst,v_con_angle); // Create instance
 inventory_get_item(v_item_equipped,1,1);// Clear it from inventory
 }}
@@ -5333,93 +5327,6 @@ else
 image_index = 0;
 image_speed = 0;
 }
-
-/*
-if ( v_draw_equipped == true )
-{
-    switch(v_draw_equipped_sprite)
-    {
-    case spr_weapon_stoneaxe:
-    {
-    draw_sprite_ext(v_draw_equipped_sprite,0,x+lengthdir_x(15,direction+16),y+lengthdir_y(18,direction+16),0.8,0.8,image_angle,v_color,1);
-    spr = global.ds_char_skin_item[| global.char_skin];
-    draw_sprite_ext(spr,image_index,x,y,1,1,image_angle,c_white,1);
-    break;
-    }
-    case spr_weapon_9mmpistol:
-    {
-    spr = global.ds_char_skin_noarms[| global.char_skin];
-    draw_sprite_ext(spr,image_index,x,y,1,1,image_angle,c_white,1);
-    spr = global.ds_char_shirt[| global.char_shirt];
-    draw_sprite_ext(spr,image_index,x,y,1,1,image_angle,c_white,1);
-    spr = global.ds_char_arms[| global.char_skin];
-    draw_sprite_ext(spr,image_index,x,y,1,1,image_angle,c_white,1);
-    draw_sprite_ext(spr_pl_item_pistol,0,x,y,0.8,0.8,image_angle,v_color,1);
-    break;
-    }
-    case spr_item_fishingrod:
-    {
-    spr = global.ds_char_skin_noarms[| global.char_skin];
-    draw_sprite_ext(spr,image_index,x,y,1,1,image_angle,c_white,1);
-    spr = global.ds_char_shirt[| global.char_shirt];
-    draw_sprite_ext(spr,image_index,x,y,1,1,image_angle,c_white,1);
-    spr = global.ds_char_arms[| global.char_skin];
-    draw_sprite_ext(spr,image_index,x,y,1,1,image_angle,c_white,1);
-    draw_sprite_ext(spr_pl_item_fishing,0,x,y,0.8,0.8,image_angle,v_color,1);
-    break;
-    }
-    case spr_item_hammer:
-    {
-    draw_sprite_ext(spr_item_hammer,0,x+lengthdir_x(15,direction+16),y+lengthdir_y(15,direction+16),0.8,0.8,image_angle-45,v_color,1);
-    spr = global.ds_char_skin_item[| global.char_skin];
-    draw_sprite_ext(spr,image_index,x,y,1,1,image_angle,c_white,1);
-    break;
-    }
-    case spr_weapon_fryingpan:
-    {
-    sprite_set_offset(spr_weapon_fryingpan,17,20);
-    draw_sprite_ext(spr_weapon_fryingpan,0,x+lengthdir_x(24,direction),y+lengthdir_y(24,direction),1,1,image_angle-10,v_color,1);
-    spr = global.ds_char_skin_item[| global.char_skin];
-    draw_sprite_ext(spr,image_index,x,y,1,1,image_angle,c_white,1);
-    sprite_set_offset(spr_weapon_fryingpan,13,12);
-    break;
-    }
-    case spr_weapon_woodsword:
-    {
-    sprite_set_offset(spr_weapon_woodsword,17,22);
-    draw_sprite_ext(spr_weapon_woodsword,0,x+lengthdir_x(24,direction),y+lengthdir_y(24,direction),1,1,image_angle-10,v_color,1);
-    spr = global.ds_char_skin_item[| global.char_skin];
-    draw_sprite_ext(spr,image_index,x,y,1,1,image_angle,c_white,1);
-    sprite_set_offset(spr_weapon_woodsword,14,14);
-    break;
-    }
-    case spr_weapon_lightmetalsword:
-    {
-    sprite_set_offset(spr_weapon_lightmetalsword,17,22);
-    draw_sprite_ext(spr_weapon_lightmetalsword,0,x+lengthdir_x(24,direction),y+lengthdir_y(24,direction),1,1,image_angle-10,v_color,1);
-    spr = global.ds_char_skin_item[| global.char_skin];
-    draw_sprite_ext(spr,image_index,x,y,1,1,image_angle,c_white,1);
-    sprite_set_offset(spr_weapon_lightmetalsword,14,14);
-    break;
-    }
-    case spr_weapon_heavymetalsword:
-    {
-    sprite_set_offset(spr_weapon_heavymetalsword,17,22);
-    draw_sprite_ext(spr_weapon_heavymetalsword,0,x+lengthdir_x(24,direction),y+lengthdir_y(24,direction),1,1,image_angle-10,v_color,1);
-    spr = global.ds_char_skin_item[| global.char_skin];
-    draw_sprite_ext(spr,image_index,x,y,1,1,image_angle,c_white,1);
-    sprite_set_offset(spr_weapon_heavymetalsword,14,14);
-    break;
-    }
-    default:
-    {
-    draw_sprite_ext(v_draw_equipped_sprite,0,x+lengthdir_x(15,direction+16),y+lengthdir_y(18,direction+16),0.8,0.8,image_angle,v_color,1);
-    spr = global.ds_char_skin_item[| global.char_skin];
-    draw_sprite_ext(spr,image_index,x,y,1,1,image_angle,c_white,1);
-    break;
-    }
-    }
-}*/
 
 if ( v_item_equipped &gt; 0 ){
 if ( global.item_data[#v_item_equipped,4] == 1 ){ // If the item is a "Weapon" type
