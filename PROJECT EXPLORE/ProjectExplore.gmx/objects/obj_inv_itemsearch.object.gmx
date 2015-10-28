@@ -302,22 +302,39 @@ if ( global.render_gui_page == "inventory" ){
           <argument>
             <kind>1</kind>
             <string>/// Render Other Slots
-if ( global.render_gui_page == "inventory" ){draw_set_color(c_white);draw_set_halign(fa_left);draw_set_valign(fa_middle);
-with(obj_inv_slot){draw_sprite(sprite_index,image_index,x,y);}
-with(obj_inv_slot){if ( item_sprite != 0 &amp;&amp; global.item_data[#item_id,0] != "" )
+
+// This just renders the slot and the item in it
+if ( global.render_gui_page == "inventory" ){
+with(obj_inv_slot){draw_set_color(c_white);draw_set_halign(fa_left);draw_set_valign(fa_middle);draw_set_font(font_gulim_12);
+draw_sprite(sprite_index,image_index,x,y);}
+with(obj_inv_slot){
+if ( item_sprite != 0 &amp;&amp; item_id &gt; 0 )
 {draw_external_sprite(item_sprite,0,x,y);}}
-draw_set_font(font_gulim_12);
-with(obj_inv_slot){if ( item_stack &gt; 1 )
+with(obj_inv_slot){
+if ( item_stack &gt; 1 )
 {draw_text_outline(string(item_stack),x-15,y-13,c_white,c_black);}}
-with(obj_inv_slot){var m_x = mouse_x-view_xview[0];var m_y = mouse_y-view_yview[0];
+
+// Draw mouse over text
+with(obj_inv_slot){
 if ( draw_name == true ){
-if ( string(global.item_data[#item_id,0]) != "" ){
+var m_x = mouse_x-view_xview[0];var m_y = mouse_y-view_yview[0];
 draw_set_halign(fa_center);draw_set_valign(fa_middle);draw_set_font(font_gulim_12);
 var item_name = string(global.item_data[#item_id,0]);
 draw_set_color(c_black);draw_set_alpha(0.75);
 draw_rectangle(m_x-(string_width(item_name)/2)-4,m_y-(string_height(item_name)/2)-7,(string_width(item_name)/2)+m_x+7,m_y+(string_height(item_name)/2)-5,false);
 draw_set_color(c_white);draw_set_alpha(1);
-draw_text(m_x,m_y-6,item_name);}}}}
+draw_text(m_x,m_y-6,item_name);}}
+
+// This will render the cooking effect on the slot if it is the child of a cooking object
+with(obj_inv_slot){
+if ( storage_id.object_index == obj_archetype_cooking ){
+var list = 0;
+if ( storage_id.c_inv[#grid_x,grid_y] &gt; 0 ){list = convert_string_to_list(global.item_data[#storage_id.c_inv[#grid_x,grid_y],9],",");
+if ( list[|1] != "0" ){draw_set_alpha(0.2);draw_set_color(c_yellow);
+draw_rectangle(x-16,y+16,x+16,y+16-((storage_id.cooking_grid[#grid_x,grid_y]/real(list[|0]))*33),false);
+draw_set_color(c_white);draw_set_alpha(1);ds_list_destroy(list);}}}}
+
+}
 </string>
           </argument>
         </arguments>

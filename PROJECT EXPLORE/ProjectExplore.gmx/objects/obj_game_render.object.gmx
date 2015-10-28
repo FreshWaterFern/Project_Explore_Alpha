@@ -737,7 +737,8 @@ surface_free(surface_terrain)
 if ( global.v_item_moving == true ){
 var m_x = mouse_x-view_xview[0];
 var m_y = mouse_y-view_yview[0];
-if(global.v_slot_inst.item_id!=0){draw_external_sprite_ext(global.item_data[#global.v_slot_inst.item_id,2],0,m_x,m_y,1+global.tablet_scaling,1+global.tablet_scaling,0,c_white,0.5);}}
+if(global.v_slot_inst!=0){
+if(global.v_slot_inst.item_id!=0){draw_external_sprite_ext(global.item_data[#global.v_slot_inst.item_id,2],0,m_x,m_y,1+global.tablet_scaling,1+global.tablet_scaling,0,c_white,0.5);}}}
 </string>
           </argument>
         </arguments>

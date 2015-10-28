@@ -193,7 +193,7 @@ desc: Can be ignited to keep you warm and sane through the night.
 spr: mods\sprites\items\spr_item_bigfire.png
 stack: 1
 type: 2
-stat1: 0
+stat1: 96
 stat2: 0
 stat3: 0
 stat4: 0

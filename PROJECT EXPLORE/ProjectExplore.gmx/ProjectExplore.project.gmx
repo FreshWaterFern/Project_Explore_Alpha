@@ -3,7 +3,7 @@
   <Configs name="configs">
     <Config>Configs\Default</Config>
   </Configs>
-  <datafiles number="178" name="datafiles">
+  <datafiles number="179" name="datafiles">
     <datafile>
       <name>Square.ttf</name>
       <exists>-1</exists>
@@ -140,7 +140,7 @@
       </ConfigOptions>
       <filename>bg_screen1.png</filename>
     </datafile>
-    <datafiles number="178" name="vanilla">
+    <datafiles number="179" name="vanilla">
       <datafile>
         <name>file_list.txt</name>
         <exists>-1</exists>
@@ -175,9 +175,9 @@
         </ConfigOptions>
         <filename>version.txt</filename>
       </datafile>
-      <datafiles number="178" name="mods">
-        <datafiles number="178" name="sprites">
-          <datafiles number="178" name="items">
+      <datafiles number="179" name="mods">
+        <datafiles number="179" name="sprites">
+          <datafiles number="179" name="items">
             <datafile>
               <name>spr_item_9mmbullet.png</name>
               <exists>-1</exists>
@@ -2525,7 +2525,7 @@
               <filename>spr_weapon_woodsword.png</filename>
             </datafile>
           </datafiles>
-          <datafiles number="178" name="clothing">
+          <datafiles number="179" name="clothing">
             <datafile>
               <name>spr_clothing_bearhide_mantle.png</name>
               <exists>-1</exists>
@@ -2612,7 +2612,7 @@
               <filename>spr_clothing_wolfhood.png</filename>
             </datafile>
           </datafiles>
-          <datafiles number="178" name="2D_Objects">
+          <datafiles number="179" name="2D_Objects">
             <datafile>
               <name>sprite_smallfire.png</name>
               <exists>-1</exists>
@@ -2630,9 +2630,26 @@
               </ConfigOptions>
               <filename>sprite_smallfire.png</filename>
             </datafile>
+            <datafile>
+              <name>sprite_bigfire.png</name>
+              <exists>-1</exists>
+              <size>523</size>
+              <exportAction>2</exportAction>
+              <exportDir></exportDir>
+              <overwrite>0</overwrite>
+              <freeData>-1</freeData>
+              <removeEnd>0</removeEnd>
+              <store>0</store>
+              <ConfigOptions>
+                <Config name="Default">
+                  <CopyToMask>9223372036854775807</CopyToMask>
+                </Config>
+              </ConfigOptions>
+              <filename>sprite_bigfire.png</filename>
+            </datafile>
           </datafiles>
         </datafiles>
-        <datafiles number="178" name="textures">
+        <datafiles number="179" name="textures">
           <datafile>
             <name>texture_largecrate.png</name>
             <exists>-1</exists>
@@ -2685,7 +2702,7 @@
             <filename>texture_chair_1.png</filename>
           </datafile>
         </datafiles>
-        <datafiles number="178" name="scripts">
+        <datafiles number="179" name="scripts">
           <datafile>
             <name>crafting.txt</name>
             <exists>-1</exists>
@@ -2755,7 +2772,7 @@
             <filename>weapons.txt</filename>
           </datafile>
         </datafiles>
-        <datafiles number="178" name="objects">
+        <datafiles number="179" name="objects">
           <datafile>
             <name>objects.txt</name>
             <exists>-1</exists>
@@ -2774,7 +2791,7 @@
             <filename>objects.txt</filename>
           </datafile>
         </datafiles>
-        <datafiles number="178" name="hitbox">
+        <datafiles number="179" name="hitbox">
           <datafile>
             <name>hitbox_32x32.png</name>
             <exists>-1</exists>
@@ -2812,7 +2829,7 @@
         </datafiles>
       </datafiles>
     </datafiles>
-    <datafiles number="178" name="music">
+    <datafiles number="179" name="music">
       <datafile>
         <name>01 Exploration.oga</name>
         <exists>-1</exists>
@@ -3490,6 +3507,7 @@
       <scripts name="handling">
         <script>scripts\inventory_initiate.gml</script>
         <script>scripts\inventory_add.gml</script>
+        <script>scripts\inventory_add_object.gml</script>
         <script>scripts\inventory_drop_item.gml</script>
         <script>scripts\inventory_move_item.gml</script>
         <script>scripts\inventory_get_item.gml</script>

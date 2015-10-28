@@ -2,7 +2,7 @@
 <object>
   <spriteName>&lt;undefined&gt;</spriteName>
   <solid>0</solid>
-  <visible>-1</visible>
+  <visible>0</visible>
   <depth>0</depth>
   <persistent>0</persistent>
   <parentName>obj_solid_parent</parentName>
@@ -45,6 +45,34 @@ data_z1 = ds_list_create();
 data_z2 = ds_list_create();
 data_xsize = ds_list_create();
 data_ysize = ds_list_create();
+</string>
+          </argument>
+        </arguments>
+      </action>
+    </event>
+    <event eventtype="1" enumb="0">
+      <action>
+        <libid>1</libid>
+        <id>603</id>
+        <kind>7</kind>
+        <userelative>0</userelative>
+        <isquestion>0</isquestion>
+        <useapplyto>-1</useapplyto>
+        <exetype>2</exetype>
+        <functionname></functionname>
+        <codestring></codestring>
+        <whoName>self</whoName>
+        <relative>0</relative>
+        <isnot>0</isnot>
+        <arguments>
+          <argument>
+            <kind>1</kind>
+            <string>ds_list_destroy(data_x);
+ds_list_destroy(data_y);
+ds_list_destroy(data_z1);
+ds_list_destroy(data_z2);
+ds_list_destroy(data_xsize);
+ds_list_destroy(data_ysize);
 </string>
           </argument>
         </arguments>
@@ -156,118 +184,6 @@ if ( active == true )
     {selected = false;}
     }
 }
-</string>
-          </argument>
-        </arguments>
-      </action>
-    </event>
-    <event eventtype="8" enumb="64">
-      <action>
-        <libid>1</libid>
-        <id>603</id>
-        <kind>7</kind>
-        <userelative>0</userelative>
-        <isquestion>0</isquestion>
-        <useapplyto>-1</useapplyto>
-        <exetype>2</exetype>
-        <functionname></functionname>
-        <codestring></codestring>
-        <whoName>self</whoName>
-        <relative>0</relative>
-        <isnot>0</isnot>
-        <arguments>
-          <argument>
-            <kind>1</kind>
-            <string>/// Render GUI For Usage
-var x_draw = x-view_xview[0];
-var y_draw = y-view_yview[0];
-
-if ( selected == true ){
-if ( keyboard_check(obj_player.key_walk_main) or keyboard_check(obj_player.key_walk_alt) )
-{
-// Set font and alignment
-if ( global.tablet_mode == 0 ){draw_set_font(font_gulim_12)}else{draw_set_font(font_gulim_18)}
-draw_set_halign(fa_center);
-draw_set_valign(fa_middle);
-
-// Draw prompts
-mouse_frames += 0.025;
-if ( mouse_frames &gt;= 2 )
-{mouse_frames = 0;}
-var sprite_set = spr_mouse_image;
-draw_sprite_ext(sprite_set,mouse_frames,x_draw,y_draw-16,1,1,0,c_white,1);
-draw_set_font(font_gulim_12);
-draw_text_outline("Destroy",x_draw,y_draw+8,c_white,c_black);
-}
-else
-{
-// Set font and alignment
-draw_set_font(font_gulim_12);
-draw_set_halign(fa_center);
-draw_set_valign(fa_middle);
-// Draw prompts
-mouse_frames += 0.025;
-if ( mouse_frames &gt;= 2 )
-{mouse_frames = 0;}
-if ( mouse_frames &lt; 1 )
-{draw_text_outline(string(keyboard_get_str(obj_player.key_walk_main)),x_draw,y_draw,c_white,c_black);}
-else
-{draw_text_outline(string(keyboard_get_str(obj_player.key_walk_main)),x_draw,y_draw,c_dkgray,c_black);}
-}}
-</string>
-          </argument>
-        </arguments>
-      </action>
-    </event>
-    <event eventtype="8" enumb="0">
-      <action>
-        <libid>1</libid>
-        <id>603</id>
-        <kind>7</kind>
-        <userelative>0</userelative>
-        <isquestion>0</isquestion>
-        <useapplyto>-1</useapplyto>
-        <exetype>2</exetype>
-        <functionname></functionname>
-        <codestring></codestring>
-        <whoName>self</whoName>
-        <relative>0</relative>
-        <isnot>0</isnot>
-        <arguments>
-          <argument>
-            <kind>1</kind>
-            <string>/// Render
-//if ( active == true )
-//{if ( v_indoors == obj_player.v_indoors ){
-/*
-if ( global.render_gui_page == "none" ){
-if ( selected == true ){
-draw_set_color(c_green);
-draw_set_alpha(0.25);
-draw_circle(x,y,sprite_width*2,false);
-draw_set_alpha(1);
-draw_set_color(c_white);}
-
-draw_set_alpha(1);
-draw_set_color(c_white);
-if ( is_3d != 0 ){
-var i = 0;var px = 0;var py = 0;var theta = degtorad(angle);
-if ( !rot ){for(i=0;i&lt;ds_list_size(data_x);i++)
-{w3d_draw_cube_ext(texture,texture,x+data_x[|i],y+data_y[|i],data_z1[|i],data_z2[|i],data_xsize[|i],data_ysize[|i]);}}else{
-switch(angle){
-case 0:{for(i=0;i&lt;ds_list_size(data_x);i++)
-{w3d_draw_cube_ext(texture,texture,x+data_x[|i],y+data_y[|i],data_z1[|i],data_z2[|i],data_xsize[|i],data_ysize[|i]);}break;}
-case 90:{for(i=0;i&lt;ds_list_size(data_x);i++)
-{w3d_draw_cube_ext(texture,texture,x+data_x[|i],y-data_y[|i],data_z1[|i],data_z2[|i],data_ysize[|i],data_xsize[|i]);}break;}
-case 180:{for(i=0;i&lt;ds_list_size(data_x);i++)
-{w3d_draw_cube_ext(texture,texture,x-data_x[|i],y-data_y[|i],data_z1[|i],data_z2[|i],data_xsize[|i],data_ysize[|i]);}break;}
-case 270:{for(i=0;i&lt;ds_list_size(data_x);i++)
-{w3d_draw_cube_ext(texture,texture,x+data_x[|i],y-data_y[|i],data_z1[|i],data_z2[|i],data_ysize[|i],data_xsize[|i]);}break;}}}
-}else
-{w3d_draw_sprite(texture,0,x+data_x[|i],y+data_y[|i],data_z1[|i]);}
-
-}
-//}}
 </string>
           </argument>
         </arguments>

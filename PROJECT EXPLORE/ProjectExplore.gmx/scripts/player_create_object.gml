@@ -17,7 +17,9 @@ switch(type)
 case 0:{ds_grid_resize(c_inv,real(list[|4]),real(list[|5]));ds_grid_resize(c_stack,real(list[|4]),real(list[|5]));break;}
 
 case 2:{var datalist1 = convert_string_to_list(list[|4],",");var datalist2 = convert_string_to_list(list[|5],",");
-fire_effect = real(datalist1[|0]);glow_effect = real(datalist1[|1]);smoke_effect = real(datalist1[|2]);fuel_max = real(datalist1[|3]);burn_rate = real(datalist1[|4]);
+fire_effect = real(datalist1[|0]);glow_effect = real(datalist1[|1]);smoke_effect = real(datalist1[|2]);burn_rate = real(datalist1[|3]);cook_rate = real(datalist1[|4]);
+ds_grid_resize(c_inv,real(datalist1[|5]),real(datalist1[|6]));ds_grid_resize(c_stack,real(datalist1[|5]),real(datalist1[|6]));
+ds_grid_resize(cooking_grid,real(datalist1[|5]),real(datalist1[|6]));
 var list_size = ds_list_size(datalist2);
 for(i=0;i<list_size;i+=2){ds_list_add(fuel_item,datalist2[|i]);ds_list_add(fuel_gain,datalist2[|i+1]);}
 if ( !smoke_effect ){part_type_destroy(pt_1);}

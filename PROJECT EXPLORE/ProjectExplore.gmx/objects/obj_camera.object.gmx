@@ -58,13 +58,13 @@ draw_set_color(c_white);draw_set_alpha(1);
 /*|| Smoke Effect ||*/
 if (instance_exists(obj_archetype_cooking)){
 with(obj_archetype_cooking){
-if ( global.render_gui_page == "none" &amp;&amp; is_enabled &amp;&amp; active ){
+if ( global.render_gui_page == "none" &amp;&amp; active ){
 if(smoke_effect){part_system_drawit(ps_2);}}}}
 
 /*|| Fire Effect ||*/
 if (instance_exists(obj_archetype_cooking)){
 with(obj_archetype_cooking){
-if ( global.render_gui_page == "none" &amp;&amp; is_enabled &amp;&amp; active ){
+if ( global.render_gui_page == "none" &amp;&amp; active ){
 draw_set_blend_mode(bm_add);
 if(fire_effect){part_system_drawit(ps_1);}
 }}}
@@ -80,6 +80,142 @@ if ( active == true ){
 if ( resource_count &gt;= resource_max ){
 w3d_draw_sprite_ext(spr_tree_top1,tree_top_sub,x,y,height,1,1,tree_top_rot,c_white,tree_top_alpha);}
 }}}
+</string>
+          </argument>
+        </arguments>
+      </action>
+    </event>
+    <event eventtype="8" enumb="64">
+      <action>
+        <libid>1</libid>
+        <id>603</id>
+        <kind>7</kind>
+        <userelative>0</userelative>
+        <isquestion>0</isquestion>
+        <useapplyto>-1</useapplyto>
+        <exetype>2</exetype>
+        <functionname></functionname>
+        <codestring></codestring>
+        <whoName>self</whoName>
+        <relative>0</relative>
+        <isnot>0</isnot>
+        <arguments>
+          <argument>
+            <kind>1</kind>
+            <string>/// Render GUIs
+
+// Basic Objects
+if (instance_exists(obj_archetype_basic)){
+with(obj_archetype_basic){
+if ( global.render_gui_page == "none" &amp;&amp; active ){
+var x_draw = x-view_xview[0];
+var y_draw = y-view_yview[0];
+
+if ( selected == true ){
+if ( keyboard_check(obj_player.key_walk_main) or keyboard_check(obj_player.key_walk_alt) )
+{
+// Set font and alignment
+draw_set_font(font_gulim_12)draw_set_halign(fa_center);draw_set_valign(fa_middle);
+// Draw prompts
+mouse_frames += 0.025;
+if ( mouse_frames &gt;= 2 )
+{mouse_frames = 0;}
+var sprite_set = spr_mouse_image;
+draw_sprite_ext(sprite_set,mouse_frames,x_draw,y_draw-16,1,1,0,c_white,1);
+draw_set_font(font_gulim_12);
+draw_text_outline("Destroy",x_draw,y_draw+8,c_white,c_black);
+}else{
+// Set font and alignment
+draw_set_font(font_gulim_12);draw_set_halign(fa_center);draw_set_valign(fa_middle);
+// Draw prompts
+mouse_frames += 0.025;
+if ( mouse_frames &gt;= 2 )
+{mouse_frames = 0;}
+if ( mouse_frames &lt; 1 )
+{draw_text_outline(string(keyboard_get_str(obj_player.key_walk_main)),x_draw,y_draw,c_white,c_black);}
+else
+{draw_text_outline(string(keyboard_get_str(obj_player.key_walk_main)),x_draw,y_draw,c_dkgray,c_black);}
+}}}}}
+
+// Storage Objects
+if (instance_exists(obj_archetype_storage)){
+with(obj_archetype_storage){
+if ( global.render_gui_page == "none" &amp;&amp; active ){
+/// Render GUI For Usage
+var x_draw = x-view_xview[0];
+var y_draw = y-view_yview[0];
+draw_set_alpha(1);draw_set_color(c_white);
+if ( selected == true ){
+if ( keyboard_check(obj_player.key_walk_main) or keyboard_check(obj_player.key_walk_alt) ){
+// Set font and alignment
+draw_set_font(font_gulim_12);draw_set_halign(fa_center);draw_set_valign(fa_middle);
+// Draw prompts
+mouse_frames += 0.025;
+if ( mouse_frames &gt;= 2 )
+{mouse_frames = 0;}
+var sprite_set = spr_mouse_image;
+draw_sprite_ext(sprite_set,mouse_frames,x_draw+48,y_draw-16,1,1,0,c_white,1);
+draw_sprite_ext(sprite_set,mouse_frames,x_draw-48,y_draw-16,-1,1,0,c_white,1);
+draw_set_font(font_gulim_12);
+draw_text_outline("Open",x_draw-48,y_draw+8,c_white,c_black);
+draw_text_outline("Destroy",x_draw+48,y_draw+8,c_white,c_black);
+}else{
+// Set font and alignment
+draw_set_font(font_gulim_12);draw_set_halign(fa_center);draw_set_valign(fa_middle);
+// Draw prompts
+mouse_frames += 0.025;
+if ( mouse_frames &gt;= 2 )
+{mouse_frames = 0;}
+if ( mouse_frames &lt; 1 )
+{draw_text_outline(string(keyboard_get_str(obj_player.key_walk_main)),x_draw,y_draw,c_white,c_black);}
+else
+{draw_text_outline(string(keyboard_get_str(obj_player.key_walk_main)),x_draw,y_draw,c_dkgray,c_black);}
+}}}}}
+
+// Cooking Objects
+if (instance_exists(obj_archetype_cooking)){
+with(obj_archetype_cooking){
+if ( global.render_gui_page == "none" &amp;&amp; active ){
+var x_draw = x-view_xview[0];
+var y_draw = y-view_yview[0];
+
+if ( selected == true ){
+if ( keyboard_check(obj_player.key_walk_main) or keyboard_check(obj_player.key_walk_alt) ){
+// Set font and alignment
+draw_set_font(font_gulim_12)draw_set_halign(fa_center);draw_set_valign(fa_middle);
+
+// Draw prompts
+mouse_frames += 0.025;
+if ( mouse_frames &gt;= 2 )
+{mouse_frames = 0;}
+var offset_tabx = 0;var offset_taby = 0;var sprite_set = spr_mouse_image;
+draw_sprite_ext(sprite_set,mouse_frames,x_draw-80-offset_tabx,y_draw-16-offset_taby,-1,1,0,c_white,1);
+draw_sprite_ext(sprite_set,mouse_frames,x_draw+80+offset_tabx,y_draw-16-offset_taby,1,1,0,c_white,1);
+if ( is_enabled )
+{draw_text_outline("Extinguish",x_draw-80-offset_tabx,y_draw+8,c_white,c_black);}
+else
+{draw_text_outline("Ignite",x_draw-80-offset_tabx,y_draw+8,c_white,c_black);}
+draw_set_font(font_gulim_28);
+if ( mouse_frames &lt; 1 )
+{draw_text_outline(string(keyboard_get_str(obj_player.key_interact_main)),x_draw,y_draw-24,c_white,c_black);}
+else
+{draw_text_outline(string(keyboard_get_str(obj_player.key_interact_main)),x_draw,y_draw-24,c_dkgray,c_black);}
+draw_set_font(font_gulim_12);
+draw_text_outline("Destroy",x_draw+80+offset_tabx,y_draw+8,c_white,c_black);
+draw_text_outline("Open",x_draw,y_draw+8,c_white,c_black);
+}
+else
+{
+// Set font and alignment
+draw_set_font(font_gulim_12);draw_set_halign(fa_center);draw_set_valign(fa_middle);
+// Draw prompts
+mouse_frames += 0.025;
+if ( mouse_frames &gt;= 2 )
+{mouse_frames = 0;}
+if ( mouse_frames &lt; 1 )
+{draw_text_outline(string(keyboard_get_str(obj_player.key_walk_main)),x_draw,y_draw,c_white,c_black);}
+else
+{draw_text_outline(string(keyboard_get_str(obj_player.key_walk_main)),x_draw,y_draw,c_dkgray,c_black);}}}}}}
 </string>
           </argument>
         </arguments>
@@ -151,7 +287,7 @@ case 270:{for(i=0;i&lt;ds_list_size(data_x);i++)
 {w3d_draw_sprite(sprite_index,0,x,y,0);}
 }}
 
-// obj_archetype_basic
+// obj_archetype_storage
 if ( instance_exists(obj_archetype_storage) ){
 with(obj_archetype_storage){
 if ( selected == true ){

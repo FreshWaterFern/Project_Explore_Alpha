@@ -2,7 +2,7 @@
 <object>
   <spriteName>spr_inventory_slot</spriteName>
   <solid>0</solid>
-  <visible>-1</visible>
+  <visible>0</visible>
   <depth>-5000001</depth>
   <persistent>0</persistent>
   <parentName>&lt;undefined&gt;</parentName>
@@ -173,6 +173,7 @@ if ( image_index == 1 )
         global.v_item_moving = true;
         global.v_slot_inst = id;
     }
+
     if ( mouse_check_button_pressed(mb_right) &amp;&amp; item_stack &gt; 0 )
     {
     global.v_slot_x = grid_x;

@@ -44,7 +44,21 @@ name: Small Fire
 texture: mods\sprites\2D_Objects\sprite_smallfire.png
 hitbox: mods\sprites\2D_Objects\sprite_smallfire.png
 type: 2
-stat1: 1,1,1,1,0.0004
+stat1: 1,1,1,0.0004,0.0004,3,1
+stat2: Wood,1,Stick,0.5,Leaf,0.3
+rot: 0
+3d: 0
+x: 0
+y: 0
+z1: 0
+z2: 0
+xsize: 0
+ysize: 0
+name: Big Fire
+texture: mods\sprites\2D_Objects\sprite_bigfire.png
+hitbox: mods\sprites\2D_Objects\sprite_bigfire.png
+type: 2
+stat1: 1,1,1,0.00055,0.00045,5,1
 stat2: Wood,1,Stick,0.5,Leaf,0.3
 rot: 0
 3d: 0
