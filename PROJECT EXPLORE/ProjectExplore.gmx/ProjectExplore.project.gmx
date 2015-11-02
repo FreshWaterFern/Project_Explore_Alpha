@@ -3,7 +3,7 @@
   <Configs name="configs">
     <Config>Configs\Default</Config>
   </Configs>
-  <datafiles number="179" name="datafiles">
+  <datafiles number="221" name="datafiles">
     <datafile>
       <name>Square.ttf</name>
       <exists>-1</exists>
@@ -140,7 +140,7 @@
       </ConfigOptions>
       <filename>bg_screen1.png</filename>
     </datafile>
-    <datafiles number="179" name="vanilla">
+    <datafiles number="221" name="vanilla">
       <datafile>
         <name>file_list.txt</name>
         <exists>-1</exists>
@@ -175,9 +175,9 @@
         </ConfigOptions>
         <filename>version.txt</filename>
       </datafile>
-      <datafiles number="179" name="mods">
-        <datafiles number="179" name="sprites">
-          <datafiles number="179" name="items">
+      <datafiles number="221" name="mods">
+        <datafiles number="221" name="sprites">
+          <datafiles number="221" name="items">
             <datafile>
               <name>spr_item_9mmbullet.png</name>
               <exists>-1</exists>
@@ -2525,7 +2525,7 @@
               <filename>spr_weapon_woodsword.png</filename>
             </datafile>
           </datafiles>
-          <datafiles number="179" name="clothing">
+          <datafiles number="221" name="clothing">
             <datafile>
               <name>spr_clothing_bearhide_mantle.png</name>
               <exists>-1</exists>
@@ -2612,7 +2612,7 @@
               <filename>spr_clothing_wolfhood.png</filename>
             </datafile>
           </datafiles>
-          <datafiles number="179" name="2D_Objects">
+          <datafiles number="221" name="2D_Objects">
             <datafile>
               <name>sprite_smallfire.png</name>
               <exists>-1</exists>
@@ -2649,7 +2649,7 @@
             </datafile>
           </datafiles>
         </datafiles>
-        <datafiles number="179" name="textures">
+        <datafiles number="221" name="textures">
           <datafile>
             <name>texture_largecrate.png</name>
             <exists>-1</exists>
@@ -2702,7 +2702,7 @@
             <filename>texture_chair_1.png</filename>
           </datafile>
         </datafiles>
-        <datafiles number="179" name="scripts">
+        <datafiles number="221" name="scripts">
           <datafile>
             <name>crafting.txt</name>
             <exists>-1</exists>
@@ -2772,7 +2772,7 @@
             <filename>weapons.txt</filename>
           </datafile>
         </datafiles>
-        <datafiles number="179" name="objects">
+        <datafiles number="221" name="objects">
           <datafile>
             <name>objects.txt</name>
             <exists>-1</exists>
@@ -2791,7 +2791,7 @@
             <filename>objects.txt</filename>
           </datafile>
         </datafiles>
-        <datafiles number="179" name="hitbox">
+        <datafiles number="221" name="hitbox">
           <datafile>
             <name>hitbox_32x32.png</name>
             <exists>-1</exists>
@@ -2827,9 +2827,731 @@
             <filename>hitbox_20x20.png</filename>
           </datafile>
         </datafiles>
+        <datafiles number="221" name="plants">
+          <datafiles number="221" name="corn">
+            <datafile>
+              <name>spr_plant_corn_0.png</name>
+              <exists>-1</exists>
+              <size>338</size>
+              <exportAction>2</exportAction>
+              <exportDir></exportDir>
+              <overwrite>0</overwrite>
+              <freeData>-1</freeData>
+              <removeEnd>0</removeEnd>
+              <store>0</store>
+              <ConfigOptions>
+                <Config name="Default">
+                  <CopyToMask>9223372036854775807</CopyToMask>
+                </Config>
+              </ConfigOptions>
+              <filename>spr_plant_corn_0.png</filename>
+            </datafile>
+            <datafile>
+              <name>spr_plant_corn_1.png</name>
+              <exists>-1</exists>
+              <size>354</size>
+              <exportAction>2</exportAction>
+              <exportDir></exportDir>
+              <overwrite>0</overwrite>
+              <freeData>-1</freeData>
+              <removeEnd>0</removeEnd>
+              <store>0</store>
+              <ConfigOptions>
+                <Config name="Default">
+                  <CopyToMask>9223372036854775807</CopyToMask>
+                </Config>
+              </ConfigOptions>
+              <filename>spr_plant_corn_1.png</filename>
+            </datafile>
+            <datafile>
+              <name>spr_plant_corn_2.png</name>
+              <exists>-1</exists>
+              <size>356</size>
+              <exportAction>2</exportAction>
+              <exportDir></exportDir>
+              <overwrite>0</overwrite>
+              <freeData>-1</freeData>
+              <removeEnd>0</removeEnd>
+              <store>0</store>
+              <ConfigOptions>
+                <Config name="Default">
+                  <CopyToMask>9223372036854775807</CopyToMask>
+                </Config>
+              </ConfigOptions>
+              <filename>spr_plant_corn_2.png</filename>
+            </datafile>
+            <datafile>
+              <name>spr_plant_corn_3.png</name>
+              <exists>-1</exists>
+              <size>358</size>
+              <exportAction>2</exportAction>
+              <exportDir></exportDir>
+              <overwrite>0</overwrite>
+              <freeData>-1</freeData>
+              <removeEnd>0</removeEnd>
+              <store>0</store>
+              <ConfigOptions>
+                <Config name="Default">
+                  <CopyToMask>9223372036854775807</CopyToMask>
+                </Config>
+              </ConfigOptions>
+              <filename>spr_plant_corn_3.png</filename>
+            </datafile>
+            <datafile>
+              <name>spr_plant_corn_4.png</name>
+              <exists>-1</exists>
+              <size>357</size>
+              <exportAction>2</exportAction>
+              <exportDir></exportDir>
+              <overwrite>0</overwrite>
+              <freeData>-1</freeData>
+              <removeEnd>0</removeEnd>
+              <store>0</store>
+              <ConfigOptions>
+                <Config name="Default">
+                  <CopyToMask>9223372036854775807</CopyToMask>
+                </Config>
+              </ConfigOptions>
+              <filename>spr_plant_corn_4.png</filename>
+            </datafile>
+            <datafile>
+              <name>spr_plant_corn_5.png</name>
+              <exists>-1</exists>
+              <size>360</size>
+              <exportAction>2</exportAction>
+              <exportDir></exportDir>
+              <overwrite>0</overwrite>
+              <freeData>-1</freeData>
+              <removeEnd>0</removeEnd>
+              <store>0</store>
+              <ConfigOptions>
+                <Config name="Default">
+                  <CopyToMask>9223372036854775807</CopyToMask>
+                </Config>
+              </ConfigOptions>
+              <filename>spr_plant_corn_5.png</filename>
+            </datafile>
+            <datafile>
+              <name>spr_plant_corn_6.png</name>
+              <exists>-1</exists>
+              <size>361</size>
+              <exportAction>2</exportAction>
+              <exportDir></exportDir>
+              <overwrite>0</overwrite>
+              <freeData>-1</freeData>
+              <removeEnd>0</removeEnd>
+              <store>0</store>
+              <ConfigOptions>
+                <Config name="Default">
+                  <CopyToMask>9223372036854775807</CopyToMask>
+                </Config>
+              </ConfigOptions>
+              <filename>spr_plant_corn_6.png</filename>
+            </datafile>
+            <datafile>
+              <name>spr_plant_corn_7.png</name>
+              <exists>-1</exists>
+              <size>395</size>
+              <exportAction>2</exportAction>
+              <exportDir></exportDir>
+              <overwrite>0</overwrite>
+              <freeData>-1</freeData>
+              <removeEnd>0</removeEnd>
+              <store>0</store>
+              <ConfigOptions>
+                <Config name="Default">
+                  <CopyToMask>9223372036854775807</CopyToMask>
+                </Config>
+              </ConfigOptions>
+              <filename>spr_plant_corn_7.png</filename>
+            </datafile>
+            <datafile>
+              <name>spr_plant_corn_8.png</name>
+              <exists>-1</exists>
+              <size>398</size>
+              <exportAction>2</exportAction>
+              <exportDir></exportDir>
+              <overwrite>0</overwrite>
+              <freeData>-1</freeData>
+              <removeEnd>0</removeEnd>
+              <store>0</store>
+              <ConfigOptions>
+                <Config name="Default">
+                  <CopyToMask>9223372036854775807</CopyToMask>
+                </Config>
+              </ConfigOptions>
+              <filename>spr_plant_corn_8.png</filename>
+            </datafile>
+            <datafile>
+              <name>spr_plant_corn_9.png</name>
+              <exists>-1</exists>
+              <size>404</size>
+              <exportAction>2</exportAction>
+              <exportDir></exportDir>
+              <overwrite>0</overwrite>
+              <freeData>-1</freeData>
+              <removeEnd>0</removeEnd>
+              <store>0</store>
+              <ConfigOptions>
+                <Config name="Default">
+                  <CopyToMask>9223372036854775807</CopyToMask>
+                </Config>
+              </ConfigOptions>
+              <filename>spr_plant_corn_9.png</filename>
+            </datafile>
+            <datafile>
+              <name>spr_plant_corn_10.png</name>
+              <exists>-1</exists>
+              <size>410</size>
+              <exportAction>2</exportAction>
+              <exportDir></exportDir>
+              <overwrite>0</overwrite>
+              <freeData>-1</freeData>
+              <removeEnd>0</removeEnd>
+              <store>0</store>
+              <ConfigOptions>
+                <Config name="Default">
+                  <CopyToMask>9223372036854775807</CopyToMask>
+                </Config>
+              </ConfigOptions>
+              <filename>spr_plant_corn_10.png</filename>
+            </datafile>
+            <datafile>
+              <name>spr_plant_corn_11.png</name>
+              <exists>-1</exists>
+              <size>408</size>
+              <exportAction>2</exportAction>
+              <exportDir></exportDir>
+              <overwrite>0</overwrite>
+              <freeData>-1</freeData>
+              <removeEnd>0</removeEnd>
+              <store>0</store>
+              <ConfigOptions>
+                <Config name="Default">
+                  <CopyToMask>9223372036854775807</CopyToMask>
+                </Config>
+              </ConfigOptions>
+              <filename>spr_plant_corn_11.png</filename>
+            </datafile>
+            <datafile>
+              <name>spr_plant_corn_12.png</name>
+              <exists>-1</exists>
+              <size>423</size>
+              <exportAction>2</exportAction>
+              <exportDir></exportDir>
+              <overwrite>0</overwrite>
+              <freeData>-1</freeData>
+              <removeEnd>0</removeEnd>
+              <store>0</store>
+              <ConfigOptions>
+                <Config name="Default">
+                  <CopyToMask>9223372036854775807</CopyToMask>
+                </Config>
+              </ConfigOptions>
+              <filename>spr_plant_corn_12.png</filename>
+            </datafile>
+            <datafile>
+              <name>spr_plant_corn_13.png</name>
+              <exists>-1</exists>
+              <size>430</size>
+              <exportAction>2</exportAction>
+              <exportDir></exportDir>
+              <overwrite>0</overwrite>
+              <freeData>-1</freeData>
+              <removeEnd>0</removeEnd>
+              <store>0</store>
+              <ConfigOptions>
+                <Config name="Default">
+                  <CopyToMask>9223372036854775807</CopyToMask>
+                </Config>
+              </ConfigOptions>
+              <filename>spr_plant_corn_13.png</filename>
+            </datafile>
+            <datafile>
+              <name>spr_plant_corn_14.png</name>
+              <exists>-1</exists>
+              <size>450</size>
+              <exportAction>2</exportAction>
+              <exportDir></exportDir>
+              <overwrite>0</overwrite>
+              <freeData>-1</freeData>
+              <removeEnd>0</removeEnd>
+              <store>0</store>
+              <ConfigOptions>
+                <Config name="Default">
+                  <CopyToMask>9223372036854775807</CopyToMask>
+                </Config>
+              </ConfigOptions>
+              <filename>spr_plant_corn_14.png</filename>
+            </datafile>
+            <datafile>
+              <name>spr_plant_corn_15.png</name>
+              <exists>-1</exists>
+              <size>453</size>
+              <exportAction>2</exportAction>
+              <exportDir></exportDir>
+              <overwrite>0</overwrite>
+              <freeData>-1</freeData>
+              <removeEnd>0</removeEnd>
+              <store>0</store>
+              <ConfigOptions>
+                <Config name="Default">
+                  <CopyToMask>9223372036854775807</CopyToMask>
+                </Config>
+              </ConfigOptions>
+              <filename>spr_plant_corn_15.png</filename>
+            </datafile>
+            <datafile>
+              <name>spr_plant_corn_16.png</name>
+              <exists>-1</exists>
+              <size>480</size>
+              <exportAction>2</exportAction>
+              <exportDir></exportDir>
+              <overwrite>0</overwrite>
+              <freeData>-1</freeData>
+              <removeEnd>0</removeEnd>
+              <store>0</store>
+              <ConfigOptions>
+                <Config name="Default">
+                  <CopyToMask>9223372036854775807</CopyToMask>
+                </Config>
+              </ConfigOptions>
+              <filename>spr_plant_corn_16.png</filename>
+            </datafile>
+            <datafile>
+              <name>spr_plant_corn_17.png</name>
+              <exists>-1</exists>
+              <size>492</size>
+              <exportAction>2</exportAction>
+              <exportDir></exportDir>
+              <overwrite>0</overwrite>
+              <freeData>-1</freeData>
+              <removeEnd>0</removeEnd>
+              <store>0</store>
+              <ConfigOptions>
+                <Config name="Default">
+                  <CopyToMask>9223372036854775807</CopyToMask>
+                </Config>
+              </ConfigOptions>
+              <filename>spr_plant_corn_17.png</filename>
+            </datafile>
+            <datafile>
+              <name>spr_plant_corn_18.png</name>
+              <exists>-1</exists>
+              <size>497</size>
+              <exportAction>2</exportAction>
+              <exportDir></exportDir>
+              <overwrite>0</overwrite>
+              <freeData>-1</freeData>
+              <removeEnd>0</removeEnd>
+              <store>0</store>
+              <ConfigOptions>
+                <Config name="Default">
+                  <CopyToMask>9223372036854775807</CopyToMask>
+                </Config>
+              </ConfigOptions>
+              <filename>spr_plant_corn_18.png</filename>
+            </datafile>
+            <datafile>
+              <name>spr_plant_corn_19.png</name>
+              <exists>-1</exists>
+              <size>506</size>
+              <exportAction>2</exportAction>
+              <exportDir></exportDir>
+              <overwrite>0</overwrite>
+              <freeData>-1</freeData>
+              <removeEnd>0</removeEnd>
+              <store>0</store>
+              <ConfigOptions>
+                <Config name="Default">
+                  <CopyToMask>9223372036854775807</CopyToMask>
+                </Config>
+              </ConfigOptions>
+              <filename>spr_plant_corn_19.png</filename>
+            </datafile>
+          </datafiles>
+          <datafiles number="221" name="potato">
+            <datafile>
+              <name>spr_plant_potato_0.png</name>
+              <exists>-1</exists>
+              <size>329</size>
+              <exportAction>2</exportAction>
+              <exportDir></exportDir>
+              <overwrite>0</overwrite>
+              <freeData>-1</freeData>
+              <removeEnd>0</removeEnd>
+              <store>0</store>
+              <ConfigOptions>
+                <Config name="Default">
+                  <CopyToMask>9223372036854775807</CopyToMask>
+                </Config>
+              </ConfigOptions>
+              <filename>spr_plant_potato_0.png</filename>
+            </datafile>
+            <datafile>
+              <name>spr_plant_potato_1.png</name>
+              <exists>-1</exists>
+              <size>343</size>
+              <exportAction>2</exportAction>
+              <exportDir></exportDir>
+              <overwrite>0</overwrite>
+              <freeData>-1</freeData>
+              <removeEnd>0</removeEnd>
+              <store>0</store>
+              <ConfigOptions>
+                <Config name="Default">
+                  <CopyToMask>9223372036854775807</CopyToMask>
+                </Config>
+              </ConfigOptions>
+              <filename>spr_plant_potato_1.png</filename>
+            </datafile>
+            <datafile>
+              <name>spr_plant_potato_2.png</name>
+              <exists>-1</exists>
+              <size>347</size>
+              <exportAction>2</exportAction>
+              <exportDir></exportDir>
+              <overwrite>0</overwrite>
+              <freeData>-1</freeData>
+              <removeEnd>0</removeEnd>
+              <store>0</store>
+              <ConfigOptions>
+                <Config name="Default">
+                  <CopyToMask>9223372036854775807</CopyToMask>
+                </Config>
+              </ConfigOptions>
+              <filename>spr_plant_potato_2.png</filename>
+            </datafile>
+            <datafile>
+              <name>spr_plant_potato_3.png</name>
+              <exists>-1</exists>
+              <size>348</size>
+              <exportAction>2</exportAction>
+              <exportDir></exportDir>
+              <overwrite>0</overwrite>
+              <freeData>-1</freeData>
+              <removeEnd>0</removeEnd>
+              <store>0</store>
+              <ConfigOptions>
+                <Config name="Default">
+                  <CopyToMask>9223372036854775807</CopyToMask>
+                </Config>
+              </ConfigOptions>
+              <filename>spr_plant_potato_3.png</filename>
+            </datafile>
+            <datafile>
+              <name>spr_plant_potato_4.png</name>
+              <exists>-1</exists>
+              <size>345</size>
+              <exportAction>2</exportAction>
+              <exportDir></exportDir>
+              <overwrite>0</overwrite>
+              <freeData>-1</freeData>
+              <removeEnd>0</removeEnd>
+              <store>0</store>
+              <ConfigOptions>
+                <Config name="Default">
+                  <CopyToMask>9223372036854775807</CopyToMask>
+                </Config>
+              </ConfigOptions>
+              <filename>spr_plant_potato_4.png</filename>
+            </datafile>
+            <datafile>
+              <name>spr_plant_potato_5.png</name>
+              <exists>-1</exists>
+              <size>345</size>
+              <exportAction>2</exportAction>
+              <exportDir></exportDir>
+              <overwrite>0</overwrite>
+              <freeData>-1</freeData>
+              <removeEnd>0</removeEnd>
+              <store>0</store>
+              <ConfigOptions>
+                <Config name="Default">
+                  <CopyToMask>9223372036854775807</CopyToMask>
+                </Config>
+              </ConfigOptions>
+              <filename>spr_plant_potato_5.png</filename>
+            </datafile>
+            <datafile>
+              <name>spr_plant_potato_6.png</name>
+              <exists>-1</exists>
+              <size>333</size>
+              <exportAction>2</exportAction>
+              <exportDir></exportDir>
+              <overwrite>0</overwrite>
+              <freeData>-1</freeData>
+              <removeEnd>0</removeEnd>
+              <store>0</store>
+              <ConfigOptions>
+                <Config name="Default">
+                  <CopyToMask>9223372036854775807</CopyToMask>
+                </Config>
+              </ConfigOptions>
+              <filename>spr_plant_potato_6.png</filename>
+            </datafile>
+            <datafile>
+              <name>spr_plant_potato_7.png</name>
+              <exists>-1</exists>
+              <size>333</size>
+              <exportAction>2</exportAction>
+              <exportDir></exportDir>
+              <overwrite>0</overwrite>
+              <freeData>-1</freeData>
+              <removeEnd>0</removeEnd>
+              <store>0</store>
+              <ConfigOptions>
+                <Config name="Default">
+                  <CopyToMask>9223372036854775807</CopyToMask>
+                </Config>
+              </ConfigOptions>
+              <filename>spr_plant_potato_7.png</filename>
+            </datafile>
+            <datafile>
+              <name>spr_plant_potato_8.png</name>
+              <exists>-1</exists>
+              <size>330</size>
+              <exportAction>2</exportAction>
+              <exportDir></exportDir>
+              <overwrite>0</overwrite>
+              <freeData>-1</freeData>
+              <removeEnd>0</removeEnd>
+              <store>0</store>
+              <ConfigOptions>
+                <Config name="Default">
+                  <CopyToMask>9223372036854775807</CopyToMask>
+                </Config>
+              </ConfigOptions>
+              <filename>spr_plant_potato_8.png</filename>
+            </datafile>
+            <datafile>
+              <name>spr_plant_potato_9.png</name>
+              <exists>-1</exists>
+              <size>314</size>
+              <exportAction>2</exportAction>
+              <exportDir></exportDir>
+              <overwrite>0</overwrite>
+              <freeData>-1</freeData>
+              <removeEnd>0</removeEnd>
+              <store>0</store>
+              <ConfigOptions>
+                <Config name="Default">
+                  <CopyToMask>9223372036854775807</CopyToMask>
+                </Config>
+              </ConfigOptions>
+              <filename>spr_plant_potato_9.png</filename>
+            </datafile>
+          </datafiles>
+          <datafiles number="221" name="tomato">
+            <datafile>
+              <name>spr_plant_tomato_0.png</name>
+              <exists>-1</exists>
+              <size>345</size>
+              <exportAction>2</exportAction>
+              <exportDir></exportDir>
+              <overwrite>0</overwrite>
+              <freeData>-1</freeData>
+              <removeEnd>0</removeEnd>
+              <store>0</store>
+              <ConfigOptions>
+                <Config name="Default">
+                  <CopyToMask>9223372036854775807</CopyToMask>
+                </Config>
+              </ConfigOptions>
+              <filename>spr_plant_tomato_0.png</filename>
+            </datafile>
+            <datafile>
+              <name>spr_plant_tomato_1.png</name>
+              <exists>-1</exists>
+              <size>348</size>
+              <exportAction>2</exportAction>
+              <exportDir></exportDir>
+              <overwrite>0</overwrite>
+              <freeData>-1</freeData>
+              <removeEnd>0</removeEnd>
+              <store>0</store>
+              <ConfigOptions>
+                <Config name="Default">
+                  <CopyToMask>9223372036854775807</CopyToMask>
+                </Config>
+              </ConfigOptions>
+              <filename>spr_plant_tomato_1.png</filename>
+            </datafile>
+            <datafile>
+              <name>spr_plant_tomato_2.png</name>
+              <exists>-1</exists>
+              <size>350</size>
+              <exportAction>2</exportAction>
+              <exportDir></exportDir>
+              <overwrite>0</overwrite>
+              <freeData>-1</freeData>
+              <removeEnd>0</removeEnd>
+              <store>0</store>
+              <ConfigOptions>
+                <Config name="Default">
+                  <CopyToMask>9223372036854775807</CopyToMask>
+                </Config>
+              </ConfigOptions>
+              <filename>spr_plant_tomato_2.png</filename>
+            </datafile>
+            <datafile>
+              <name>spr_plant_tomato_3.png</name>
+              <exists>-1</exists>
+              <size>346</size>
+              <exportAction>2</exportAction>
+              <exportDir></exportDir>
+              <overwrite>0</overwrite>
+              <freeData>-1</freeData>
+              <removeEnd>0</removeEnd>
+              <store>0</store>
+              <ConfigOptions>
+                <Config name="Default">
+                  <CopyToMask>9223372036854775807</CopyToMask>
+                </Config>
+              </ConfigOptions>
+              <filename>spr_plant_tomato_3.png</filename>
+            </datafile>
+            <datafile>
+              <name>spr_plant_tomato_4.png</name>
+              <exists>-1</exists>
+              <size>350</size>
+              <exportAction>2</exportAction>
+              <exportDir></exportDir>
+              <overwrite>0</overwrite>
+              <freeData>-1</freeData>
+              <removeEnd>0</removeEnd>
+              <store>0</store>
+              <ConfigOptions>
+                <Config name="Default">
+                  <CopyToMask>9223372036854775807</CopyToMask>
+                </Config>
+              </ConfigOptions>
+              <filename>spr_plant_tomato_4.png</filename>
+            </datafile>
+            <datafile>
+              <name>spr_plant_tomato_5.png</name>
+              <exists>-1</exists>
+              <size>339</size>
+              <exportAction>2</exportAction>
+              <exportDir></exportDir>
+              <overwrite>0</overwrite>
+              <freeData>-1</freeData>
+              <removeEnd>0</removeEnd>
+              <store>0</store>
+              <ConfigOptions>
+                <Config name="Default">
+                  <CopyToMask>9223372036854775807</CopyToMask>
+                </Config>
+              </ConfigOptions>
+              <filename>spr_plant_tomato_5.png</filename>
+            </datafile>
+            <datafile>
+              <name>spr_plant_tomato_6.png</name>
+              <exists>-1</exists>
+              <size>349</size>
+              <exportAction>2</exportAction>
+              <exportDir></exportDir>
+              <overwrite>0</overwrite>
+              <freeData>-1</freeData>
+              <removeEnd>0</removeEnd>
+              <store>0</store>
+              <ConfigOptions>
+                <Config name="Default">
+                  <CopyToMask>9223372036854775807</CopyToMask>
+                </Config>
+              </ConfigOptions>
+              <filename>spr_plant_tomato_6.png</filename>
+            </datafile>
+            <datafile>
+              <name>spr_plant_tomato_7.png</name>
+              <exists>-1</exists>
+              <size>354</size>
+              <exportAction>2</exportAction>
+              <exportDir></exportDir>
+              <overwrite>0</overwrite>
+              <freeData>-1</freeData>
+              <removeEnd>0</removeEnd>
+              <store>0</store>
+              <ConfigOptions>
+                <Config name="Default">
+                  <CopyToMask>9223372036854775807</CopyToMask>
+                </Config>
+              </ConfigOptions>
+              <filename>spr_plant_tomato_7.png</filename>
+            </datafile>
+            <datafile>
+              <name>spr_plant_tomato_8.png</name>
+              <exists>-1</exists>
+              <size>367</size>
+              <exportAction>2</exportAction>
+              <exportDir></exportDir>
+              <overwrite>0</overwrite>
+              <freeData>-1</freeData>
+              <removeEnd>0</removeEnd>
+              <store>0</store>
+              <ConfigOptions>
+                <Config name="Default">
+                  <CopyToMask>9223372036854775807</CopyToMask>
+                </Config>
+              </ConfigOptions>
+              <filename>spr_plant_tomato_8.png</filename>
+            </datafile>
+            <datafile>
+              <name>spr_plant_tomato_9.png</name>
+              <exists>-1</exists>
+              <size>379</size>
+              <exportAction>2</exportAction>
+              <exportDir></exportDir>
+              <overwrite>0</overwrite>
+              <freeData>-1</freeData>
+              <removeEnd>0</removeEnd>
+              <store>0</store>
+              <ConfigOptions>
+                <Config name="Default">
+                  <CopyToMask>9223372036854775807</CopyToMask>
+                </Config>
+              </ConfigOptions>
+              <filename>spr_plant_tomato_9.png</filename>
+            </datafile>
+            <datafile>
+              <name>spr_plant_tomato_10.png</name>
+              <exists>-1</exists>
+              <size>379</size>
+              <exportAction>2</exportAction>
+              <exportDir></exportDir>
+              <overwrite>0</overwrite>
+              <freeData>-1</freeData>
+              <removeEnd>0</removeEnd>
+              <store>0</store>
+              <ConfigOptions>
+                <Config name="Default">
+                  <CopyToMask>9223372036854775807</CopyToMask>
+                </Config>
+              </ConfigOptions>
+              <filename>spr_plant_tomato_10.png</filename>
+            </datafile>
+            <datafile>
+              <name>spr_plant_tomato_11.png</name>
+              <exists>-1</exists>
+              <size>374</size>
+              <exportAction>2</exportAction>
+              <exportDir></exportDir>
+              <overwrite>0</overwrite>
+              <freeData>-1</freeData>
+              <removeEnd>0</removeEnd>
+              <store>0</store>
+              <ConfigOptions>
+                <Config name="Default">
+                  <CopyToMask>9223372036854775807</CopyToMask>
+                </Config>
+              </ConfigOptions>
+              <filename>spr_plant_tomato_11.png</filename>
+            </datafile>
+          </datafiles>
+        </datafiles>
       </datafiles>
     </datafiles>
-    <datafiles number="179" name="music">
+    <datafiles number="221" name="music">
       <datafile>
         <name>01 Exploration.oga</name>
         <exists>-1</exists>
@@ -3301,7 +4023,6 @@
         <sprite>sprites\spr_inv_deconstructitem</sprite>
       </sprites>
       <sprites name="hud">
-        <sprite>sprites\spr_hud_test</sprite>
         <sprite>sprites\spr_clock</sprite>
         <sprite>sprites\spr_clock_arrow</sprite>
         <sprite>sprites\spr_compass_arrow</sprite>
@@ -3323,13 +4044,6 @@
       </sprites>
       <sprite>sprites\spr_mouse_image</sprite>
       <sprite>sprites\spr_map_tile</sprite>
-      <sprites name="tablet">
-        <sprite>sprites\spr_gui_tablet_tapbutton</sprite>
-        <sprite>sprites\spr_gui_tablet_arrowup</sprite>
-        <sprite>sprites\spr_gui_tablet_arrowdown</sprite>
-        <sprite>sprites\spr_gui_tablet_arrowleft</sprite>
-        <sprite>sprites\spr_gui_tablet_arrowright</sprite>
-      </sprites>
     </sprites>
     <sprites name="menu">
       <sprites name="main">
@@ -3976,7 +4690,7 @@
     <constant name="TABLET_TEST">0</constant>
     <constant name="crafting_anim_slow_spd">0.025</constant>
     <constant name="crafting_anim_start_spd">8</constant>
-    <constant name="GAME_VERSION">"Preview Build 0.2.2.8"</constant>
+    <constant name="GAME_VERSION">"Preview Build 0.2.2.9"</constant>
     <constant name="wolf_armor">0.10</constant>
     <constant name="wolf_kb_resist">0.05</constant>
     <constant name="bear_armor">0.25</constant>

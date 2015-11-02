@@ -406,7 +406,7 @@ return( _back );
     DELETE THE DS_LIST AFTER USAGE TO AVOID A MEMORY LEAK
     ! IMPORTANT !
 */
-
+gml_pragma("forceinline"); // in YYC, proccessing boost but it inflates the final exe size
 // SORT THEIR IMAGES BY THEIR SIZE
 for( var n = 0; n < ds_list_size( __s_l_background ); n += 5 ){
     var _size = ( ( background_get_width( __s_l_background[| n ] ) div __s_l_background[| n + 2 ] ) + background_get_height( __s_l_background[| n ] ) ) / 2;
@@ -579,7 +579,6 @@ ds_list_destroy( _l_trash );
 ds_list_destroy( _l_texpage );
 
 return( _l_return );
-
 
 #define sprite_load_get
 ///sprite_load_get(identifier)

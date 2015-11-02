@@ -472,7 +472,7 @@ name: Cute Bear Doll
 desc: Keep this in your perk slots, it will help you maintain sanity.
 spr: mods\sprites\items\spr_item_teddy1.png
 stack: 1
-type: 4
+type: 99
 stat1: 0
 stat2: 0
 stat3: 0
@@ -482,7 +482,7 @@ name: Black Jogging Shoes
 desc: Keep this in your perk slots, it will help you move slightly faster.
 spr: mods\sprites\items\spr_item_joggingshoes1.png
 stack: 1
-type: 4
+type: 99
 stat1: 0
 stat2: 0
 stat3: 0
@@ -492,7 +492,7 @@ name: Red Jogging Shoes
 desc: Keep this in your perk slots, it will help you move slightly faster.
 spr: mods\sprites\items\spr_item_joggingshoes2.png
 stack: 1
-type: 4
+type: 99
 stat1: 0
 stat2: 0
 stat3: 0
@@ -502,7 +502,7 @@ name: Black Running Shoes
 desc: Keep this in your (perks section) will help you move much faster.
 spr: mods\sprites\items\spr_item_runningshoes1.png
 stack: 1
-type: 4
+type: 99
 stat1: 0
 stat2: 0
 stat3: 0
@@ -632,7 +632,7 @@ name: Sturdy backpack
 desc: Keep this in your (perks section) to gain 7 more storage slots.
 spr: mods\sprites\items\spr_item_backpack1.png
 stack: 1
-type: 4
+type: 99
 stat1: 0
 stat2: 0
 stat3: 0
@@ -1110,9 +1110,9 @@ stat4: 0
 cook: 0,0
 name: Corn Seeds
 desc: Seeds that when placed will begin to grow a stalk of corn.
-spr: mods\sprites\items\spr_item_corn_seed1.png
+spr: mods\sprites\items\spr_item_corn_seed1.png,mods\plants\corn\spr_plant_corn_0.png,mods\plants\corn\spr_plant_corn_1.png,mods\plants\corn\spr_plant_corn_2.png,mods\plants\corn\spr_plant_corn_3.png,mods\plants\corn\spr_plant_corn_4.png,mods\plants\corn\spr_plant_corn_5.png,mods\plants\corn\spr_plant_corn_6.png,mods\plants\corn\spr_plant_corn_7.png,mods\plants\corn\spr_plant_corn_8.png,mods\plants\corn\spr_plant_corn_9.png,mods\plants\corn\spr_plant_corn_10.png,mods\plants\corn\spr_plant_corn_11.png,mods\plants\corn\spr_plant_corn_12.png,mods\plants\corn\spr_plant_corn_13.png,mods\plants\corn\spr_plant_corn_14.png,mods\plants\corn\spr_plant_corn_15.png,mods\plants\corn\spr_plant_corn_16.png,mods\plants\corn\spr_plant_corn_17.png,mods\plants\corn\spr_plant_corn_18.png,mods\plants\corn\spr_plant_corn_19.png
 stack: 16
-type: 21
+type: 4
 stat1: 0
 stat2: 0
 stat3: 0
@@ -1152,7 +1152,7 @@ name: Tomato Seeds
 desc: Seeds that when placed will begin to grow tomatoes.
 spr: mods\sprites\items\spr_item_tomato_seed1.png
 stack: 16
-type: 21
+type: 99
 stat1: 0
 stat2: 0
 stat3: 0

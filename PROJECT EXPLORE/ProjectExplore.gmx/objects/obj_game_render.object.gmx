@@ -760,18 +760,6 @@ if(global.v_slot_inst.item_id!=0){draw_external_sprite_ext(global.item_data[#glo
           <argument>
             <kind>1</kind>
             <string>/// Game Version &amp; Debug Display
-
-/*
-draw_set_color(c_white);
-draw_set_halign(fa_left);
-draw_set_valign(fa_top);
-draw_set_font(font_verdana_12);
-draw_text(view_xview[0]+8,view_yview[0]+8,"Alpha 0.1.0.7");
-draw_text(view_xview[0]+8,view_yview[0]+24,"Object Count: "+string(instance_count));
-draw_text(view_xview[0]+8,view_yview[0]+40,"FPS: "+string(fps_real));
-*/
-
-if ( global.tablet_mode == 0 ){
 draw_set_color(c_white);
 draw_set_halign(fa_left);
 draw_set_valign(fa_top);
@@ -798,7 +786,7 @@ draw_text(8,40,"Object Count: "+string(instance_count));
 if ( DEV_MODE )
 {
 show_debug_overlay(true);
-}}
+}
 </string>
           </argument>
         </arguments>
@@ -973,7 +961,6 @@ draw_set_alpha(1);
             <string>/// Prepare Surface
 /// Generate World Textures &amp; Decals
 //surface_update = true
- 
 // the top left coord, 128 outside the view, aligned to a 128x128 grid
 sz=128;
 offset=2*sz; // how many tiles in each direction extra we are placing, just change the 1*
@@ -1221,73 +1208,26 @@ if ( global.game_pause == false )
 {
 if ( global.render_gui_1 == true ){
     var offset_tab = 0;
-    if ( global.tablet_mode == 0 )
-    {var offset_tab = 0;var offset_x = 0;var offset_y = 0;}else{/*obj_game.hotbar_alpha = 1;var offset_tab = -160;var offset_x = 17;var offset_y = 17;*/}
+    var offset_x = 0;var offset_y = 0;
     var view_xcenter = view_wview[0]/2;
     var view_ybottom = view_hview[0];
     var health_length = min(obj_game.c_health/100,1)*83;
     var food_length = min(obj_game.c_food/100,1)*83;
     var sanity_length = min(obj_game.c_sanity/100,1)*81;
-    draw_set_color(c_white);  
-    draw_set_font(font_gulim_8);
-    draw_set_halign(fa_left);
-    draw_set_valign(fa_middle);
-    if ( global.tablet_mode == 0 )
-    {draw_set_alpha(obj_game.hotbar_alpha);}
+    draw_set_color(c_white);draw_set_font(font_gulim_8);draw_set_halign(fa_left);draw_set_valign(fa_middle);draw_set_alpha(obj_game.hotbar_alpha);
     if ( obj_game.v_hotbar_set == 0 ){draw_sprite_ext(spr_inventory_slot,1,view_xcenter-72-(offset_x*3),view_ybottom-25-offset_y,1+global.tablet_scaling,1+global.tablet_scaling,0,c_white,obj_game.hotbar_alpha);}else{draw_sprite_ext(spr_inventory_slot,0,view_xcenter-72-(offset_x*3),view_ybottom-25-offset_y,1+global.tablet_scaling,1+global.tablet_scaling,0,c_white,obj_game.hotbar_alpha);}
     if ( obj_game.v_hotbar_set == 1 ){draw_sprite_ext(spr_inventory_slot,1,view_xcenter-24-offset_x,view_ybottom-25-offset_y,1+global.tablet_scaling,1+global.tablet_scaling,0,c_white,obj_game.hotbar_alpha);}else{draw_sprite_ext(spr_inventory_slot,0,view_xcenter-24-offset_x,view_ybottom-25-offset_y,1+global.tablet_scaling,1+global.tablet_scaling,0,c_white,obj_game.hotbar_alpha);}
     if ( obj_game.v_hotbar_set == 2 ){draw_sprite_ext(spr_inventory_slot,1,view_xcenter+24+offset_x,view_ybottom-25-offset_y,1+global.tablet_scaling,1+global.tablet_scaling,0,c_white,obj_game.hotbar_alpha);}else{draw_sprite_ext(spr_inventory_slot,0,view_xcenter+24+offset_x,view_ybottom-25-offset_y,1+global.tablet_scaling,1+global.tablet_scaling,0,c_white,obj_game.hotbar_alpha);}
     if ( obj_game.v_hotbar_set == 3 ){draw_sprite_ext(spr_inventory_slot,1,view_xcenter+72+(offset_x*3),view_ybottom-25-offset_y,1+global.tablet_scaling,1+global.tablet_scaling,0,c_white,obj_game.hotbar_alpha);}else{draw_sprite_ext(spr_inventory_slot,0,view_xcenter+72+(offset_x*3),view_ybottom-25-offset_y,1+global.tablet_scaling,1+global.tablet_scaling,0,c_white,obj_game.hotbar_alpha);}
     item_slot_1 = global.c_inventory_pack[#0,4];item_slot_2 = global.c_inventory_pack[#1,4];item_slot_3 = global.c_inventory_pack[#2,4];item_slot_4 = global.c_inventory_pack[#3,4];
     item_stack_1 = global.c_stack_pack[#0,4];item_stack_2 = global.c_stack_pack[#1,4];item_stack_3 = global.c_stack_pack[#2,4];item_stack_4 = global.c_stack_pack[#3,4];
-    if(item_slot_1&gt;0){draw_external_sprite_ext(global.item_data[#item_slot_1,2],0,view_xcenter-72-(offset_x*3),view_ybottom-25-offset_y,1+global.tablet_scaling,1+global.tablet_scaling,0,c_white,obj_game.hotbar_alpha);if(item_stack_1 &gt; 1){draw_text_outline(string(item_stack_1),view_xcenter-86-(offset_x*3),view_ybottom-36-offset_y,c_white,c_black);}}
-    if(item_slot_2&gt;0){draw_external_sprite_ext(global.item_data[#item_slot_2,2],0,view_xcenter-24-offset_x,view_ybottom-25-offset_y,1+global.tablet_scaling,1+global.tablet_scaling,0,c_white,obj_game.hotbar_alpha);if(item_stack_2 &gt; 1){draw_text_outline(string(item_stack_2),view_xcenter-38-offset_x,view_ybottom-36-offset_y,c_white,c_black);}}
-    if(item_slot_3&gt;0){draw_external_sprite_ext(global.item_data[#item_slot_3,2],0,view_xcenter+24+offset_x,view_ybottom-25-offset_y,1+global.tablet_scaling,1+global.tablet_scaling,0,c_white,obj_game.hotbar_alpha);if(item_stack_3 &gt; 1){draw_text_outline(string(item_stack_3),view_xcenter+10+offset_x,view_ybottom-36-offset_y,c_white,c_black);}}
-    if(item_slot_4&gt;0){draw_external_sprite_ext(global.item_data[#item_slot_4,2],0,view_xcenter+72+(offset_x*3),view_ybottom-25-offset_y,1+global.tablet_scaling,1+global.tablet_scaling,0,c_white,obj_game.hotbar_alpha);if(item_stack_4 &gt; 1){draw_text_outline(string(item_stack_4),view_xcenter+58+(offset_x*3),view_ybottom-36-offset_y,c_white,c_black);}}
     draw_set_alpha(1);
-    
-    draw_sprite(spr_hud_base,0,view_wview[0]-256,view_hview[0]-81);draw_sprite(spr_hud_base,0,view_wview[0]-128,view_hview[0]-81);
-    draw_sprite(spr_hud_base,0,view_wview[0]-256,view_hview[0]-27);draw_sprite(spr_hud_base,0,view_wview[0]-128,view_hview[0]-27);
-    draw_sprite(spr_hud_health,0,view_wview[0]-256+30,view_hview[0]-81);draw_sprite(spr_hud_sanity,0,view_wview[0]-128+30,view_hview[0]-81);
-    draw_sprite(spr_hud_hunger,0,view_wview[0]-256+30,view_hview[0]-27);draw_sprite(spr_hud_thirst,0,view_wview[0]-128+30,view_hview[0]-27);
-    draw_set_font(font_gulim_22);draw_set_halign(fa_center);
-    draw_text(view_wview[0]-256+90,view_hview[0]-81,string(round(obj_game.c_health)));draw_text(view_wview[0]-128+90,view_hview[0]-81,string(round(obj_game.c_sanity)));
-    draw_text(view_wview[0]-256+90,view_hview[0]-27,string(round(obj_game.c_food)));draw_text(view_wview[0]-128+90,view_hview[0]-27,string(round(obj_game.c_thirst)));
-    draw_set_font(font_gulim_12);
-    draw_set_halign(fa_center);
-    draw_set_valign(fa_middle);
-    var temperature = obj_game.c_temperature;if ( global.render_temp == 1 ){temperature = (temperature-32)*0.5555555555555556;}
-    if ( clock_alpha == 0 )
-    {
-    draw_text_outline(string(round(temperature)),view_wview[0]-40,16,c_white,c_black);draw_sprite(spr_degree_sign,global.render_temp,view_wview[0]-40+string_width(string(round(temperature))),16);
-    }
-    else
-    {
-    draw_text_outline(string(round(temperature)),view_wview[0]-40,76,c_white,c_black);draw_sprite(spr_degree_sign,global.render_temp,view_wview[0]-40+string_width(string(round(temperature))),76);
-    }
-
-    if ( obj_player.v_shadowed == true )
-    {
-        draw_text(obj_player.x,obj_player.y-20,"Hidden");
-    }
     
     // Draw World Clock
     if ( global.render_clock_1 == true )
-    {
-        clock_alpha += 0.07;
-    }
-    else
-    {
-        clock_alpha -= 0.07;
-    }
-    if ( clock_alpha &lt; 0 )
-    {
-        clock_alpha = 0;
-    }
-    if ( clock_alpha &gt; 1 )
-    {
-        clock_alpha = 1;
-    }
+    {clock_alpha += 0.07;}else{clock_alpha -= 0.07;}
+    if ( clock_alpha &lt; 0 ){clock_alpha = 0;}if ( clock_alpha &gt; 1 ){clock_alpha = 1;}
+    
     // Get image_angle for arrow
     draw_set_alpha(clock_alpha);
     var arrow_angle = (global.world_time/-20)*360+90;
@@ -1321,185 +1261,67 @@ if ( global.render_gui_1 == true ){
     draw_sprite_ext(spr_compass_arrow,0,view_wview[0]-104,34,1,1,compass_arrow_angle,c_white,compass_alpha);
     draw_set_alpha(1);
     
+    // Draw all the text at once
+    draw_sprite(spr_hud_base,0,view_wview[0]-256,view_hview[0]-81);draw_sprite(spr_hud_base,0,view_wview[0]-128,view_hview[0]-81);
+    draw_sprite(spr_hud_base,0,view_wview[0]-256,view_hview[0]-27);draw_sprite(spr_hud_base,0,view_wview[0]-128,view_hview[0]-27);
+    draw_sprite(spr_hud_health,0,view_wview[0]-256+30,view_hview[0]-81);draw_sprite(spr_hud_sanity,0,view_wview[0]-128+30,view_hview[0]-81);
+    draw_sprite(spr_hud_hunger,0,view_wview[0]-256+30,view_hview[0]-27);draw_sprite(spr_hud_thirst,0,view_wview[0]-128+30,view_hview[0]-27);
+    draw_set_font(font_gulim_22);draw_set_halign(fa_center);
+    draw_text(view_wview[0]-256+90,view_hview[0]-81,string(round(obj_game.c_health)));draw_text(view_wview[0]-128+90,view_hview[0]-81,string(round(obj_game.c_sanity)));
+    draw_text(view_wview[0]-256+90,view_hview[0]-27,string(round(obj_game.c_food)));draw_text(view_wview[0]-128+90,view_hview[0]-27,string(round(obj_game.c_thirst)));
+    draw_set_font(font_gulim_12);draw_set_halign(fa_center);draw_set_valign(fa_middle);
+    var temperature = obj_game.c_temperature;if ( global.render_temp == 1 ){temperature = (temperature-32)*0.5555555555555556;}
+    
+    // Draw external sprites all at once
+    if(item_slot_1&gt;0){draw_external_sprite_ext(global.item_data[#item_slot_1,2],0,view_xcenter-72-(offset_x*3),view_ybottom-25-offset_y,1+global.tablet_scaling,1+global.tablet_scaling,0,c_white,obj_game.hotbar_alpha);}
+    if(item_slot_2&gt;0){draw_external_sprite_ext(global.item_data[#item_slot_2,2],0,view_xcenter-24-offset_x,view_ybottom-25-offset_y,1+global.tablet_scaling,1+global.tablet_scaling,0,c_white,obj_game.hotbar_alpha);}
+    if(item_slot_3&gt;0){draw_external_sprite_ext(global.item_data[#item_slot_3,2],0,view_xcenter+24+offset_x,view_ybottom-25-offset_y,1+global.tablet_scaling,1+global.tablet_scaling,0,c_white,obj_game.hotbar_alpha);}
+    if(item_slot_4&gt;0){draw_external_sprite_ext(global.item_data[#item_slot_4,2],0,view_xcenter+72+(offset_x*3),view_ybottom-25-offset_y,1+global.tablet_scaling,1+global.tablet_scaling,0,c_white,obj_game.hotbar_alpha);}
+    
+    if ( clock_alpha == 0 )
+    {draw_text_outline(string(round(temperature)),view_wview[0]-40,16,c_white,c_black);draw_sprite(spr_degree_sign,global.render_temp,view_wview[0]-40+string_width(string(round(temperature))),16);}
+    else
+    {draw_text_outline(string(round(temperature)),view_wview[0]-40,76,c_white,c_black);draw_sprite(spr_degree_sign,global.render_temp,view_wview[0]-40+string_width(string(round(temperature))),76);}
+    draw_set_color(c_white); draw_set_font(font_gulim_8);draw_set_halign(fa_left);draw_set_valign(fa_middle);draw_set_alpha(obj_game.hotbar_alpha);
+    if(item_stack_1 &gt; 1){draw_text_outline(string(item_stack_1),view_xcenter-86-(offset_x*3),view_ybottom-36-offset_y,c_white,c_black);}
+    if(item_stack_2 &gt; 1){draw_text_outline(string(item_stack_2),view_xcenter-38-offset_x,view_ybottom-36-offset_y,c_white,c_black);}
+    if(item_stack_3 &gt; 1){draw_text_outline(string(item_stack_3),view_xcenter+10+offset_x,view_ybottom-36-offset_y,c_white,c_black);}
+    if(item_stack_4 &gt; 1){draw_text_outline(string(item_stack_4),view_xcenter+58+(offset_x*3),view_ybottom-36-offset_y,c_white,c_black);}
+    
     // Draw Passives
     var offset_y = 0;
     if ( global.pl_bleeding &gt; 0 ){
     draw_sprite(spr_passive_bleeding,0,view_wview[0]-18,view_hview[0]-72-offset_y+offset_tab-96);
-    if(global.tablet_mode==0){draw_set_font(font_gulim_8)}else{draw_set_font(font_gulim_18)}
-    draw_set_halign(fa_right);
-    draw_set_valign(fa_middle);
-    draw_set_color(c_white);
+    draw_set_font(font_gulim_8);draw_set_halign(fa_right);draw_set_valign(fa_middle);draw_set_color(c_white);
     var str_passive1 = "Health Loss: 0.01%";
-    //draw_text(view_wview[0]-4,view_hview[0]-48-offset_y,str_passive1);
     draw_text_outline(str_passive1,view_wview[0]-4,view_hview[0]-40-offset_y+offset_tab-96,c_white,c_black);
-    draw_set_color(c_white);
-    draw_set_alpha(1);
+    draw_set_color(c_white);draw_set_alpha(1);
     offset_y = 64;}
     
     if ( obj_player.pl_nearlight == true ){
     draw_sprite(spr_passive_light,0,view_wview[0]-18,view_hview[0]-72-offset_y+offset_tab-96);
-    if(global.tablet_mode==0){draw_set_font(font_gulim_8)}else{draw_set_font(font_gulim_18)}
-    draw_set_halign(fa_right);
-    draw_set_valign(fa_middle);
-    draw_set_color(c_white);
+    draw_set_font(font_gulim_8);draw_set_halign(fa_right);draw_set_valign(fa_middle);draw_set_color(c_white);
     var str_passive1 = "Insanity Reduction: "+string_delete(string(1-obj_game.v_lightlevel),1,2)+"%";
     draw_text_outline(str_passive1,view_wview[0]-4,view_hview[0]-40-offset_y+offset_tab-96,c_white,c_black);
-    draw_set_color(c_white);
-    draw_set_alpha(1);
+    draw_set_color(c_white);draw_set_alpha(1);
     offset_y = 128;}
     
     if ( global.pl_sickness &gt; 0 ){
     draw_sprite(spr_passive_sickness,0,view_wview[0]-18,view_hview[0]-72-offset_y+offset_tab-96);
-    if(global.tablet_mode==0){draw_set_font(font_gulim_8)}else{draw_set_font(font_gulim_18)}
-    draw_set_halign(fa_right);
-    draw_set_valign(fa_middle);
-    draw_set_color(c_white);
+    draw_set_font(font_gulim_8);draw_set_halign(fa_right);draw_set_valign(fa_middle);draw_set_color(c_white);
     var str_passive1 = "Body Temperature: +10";
     draw_text_outline(str_passive1,view_wview[0]-4,view_hview[0]-40-offset_y+offset_tab-96,c_white,c_black);
-    draw_set_color(c_white);
-    draw_set_alpha(1);
+    draw_set_color(c_white);draw_set_alpha(1);
     offset_y = 192;}
 }
 
 if ( global.render_gui_page == "inventory" )
 {
-    var view_xcenter = view_wview[0]/2;
-    var view_ycenter = view_hview[0]/2;
-    draw_set_alpha(0.8);
-    draw_set_color(c_black);
+    var view_xcenter = view_wview[0]/2;var view_ycenter = view_hview[0]/2;
+    draw_set_alpha(0.8);draw_set_color(c_black);
     draw_rectangle(0,0,view_wview[0],view_hview[0],false);
-    draw_set_alpha(1);
-    draw_set_color(c_white);
-    if(global.tablet_mode==0){draw_set_font(font_gulim_12)}else{draw_set_font(font_gulim_18)}
-    draw_set_halign(fa_center);
-    draw_set_valign(fa_middle);
-    /*if(global.tablet_mode==0){
-    draw_text(view_xcenter,view_ycenter-82,"Storage");
-    draw_text(view_xcenter,view_ycenter+98,"Hotbar");
-    draw_text(view_xcenter,view_ycenter-208,"Perk Slots");}else{
-    draw_text(view_xcenter+136,view_ycenter-112,"Storage");
-    draw_text(view_xcenter+136,view_ycenter+212,"Hotbar");
-    draw_text(view_xcenter+136,view_ycenter-340,"Perk Slots");}
-    
-    if ( global.storage_id != 0 )
-    {
-    if ( global.storage_type == 21 )
-    {
-    if(global.tablet_mode==0){draw_set_font(font_gulim_8)}else{draw_set_font(font_gulim_18)}draw_set_valign(fa_middle);draw_set_halign(fa_center);
-    if(global.tablet_mode==0){
-    draw_text(view_xcenter-448-16,view_ycenter-98,"Food");
-    draw_text(view_xcenter-192-16,view_ycenter-66,"Output");
-    draw_text(view_xcenter-448-16,view_ycenter-34,"Wood");}
-    else{
-    draw_text(view_xcenter-482,view_ycenter-141,"Food");
-    draw_text(view_xcenter-192,view_ycenter-83,"Output");
-    draw_text(view_xcenter-482,view_ycenter+73,"Wood");
-    }
-    if(global.tablet_mode==0){draw_set_font(font_gulim_12)}else{draw_set_font(font_gulim_18)}
-    }
-    if ( global.storage_type == 23 )
-    {
-    if(global.tablet_mode==0){draw_set_font(font_gulim_8)}else{draw_set_font(font_gulim_18)}draw_set_valign(fa_middle);draw_set_halign(fa_center);
-    if(global.tablet_mode==0){
-    draw_text(view_xcenter-448-16,view_ycenter-98,"Food");
-    draw_text(view_xcenter-192-16,view_ycenter-66,"Output");
-    draw_text(view_xcenter-448-16,view_ycenter-34,"Wood");}
-    else{
-    draw_text(view_xcenter-482,view_ycenter-141,"Food");
-    draw_text(view_xcenter-192,view_ycenter-83,"Output");
-    draw_text(view_xcenter-482,view_ycenter+73,"Wood");
-    }
-    if(global.tablet_mode==0){draw_set_font(font_gulim_12)}else{draw_set_font(font_gulim_18)}
-    }
-    if(global.tablet_mode==0){draw_set_font(font_gulim_12)}else{draw_set_font(font_gulim_18)}
-    if ( global.storage_type == 29 )
-    {
-    if(global.tablet_mode==0){draw_text(view_xcenter-376,view_ycenter-84,"Large Crate");}
-    else{draw_text(view_xcenter-376,view_ycenter-122,"Large Crate");}
-    }
-    if ( global.storage_type == 32 )
-    {
-    if(global.tablet_mode==0){draw_text(view_xcenter-376,view_ycenter-84,"Small Crate");}
-    else{draw_text(view_xcenter-376,view_ycenter-122,"Small Crate");}
-    }
-    if ( global.storage_type == 33 )
-    {
-    if(global.tablet_mode==0){draw_text(view_xcenter-376,view_ycenter-84,"Skeleton");}
-    else{draw_text(view_xcenter-354,view_ycenter-128,"Skeleton");}
-    }
-    if ( global.storage_type == 100 )
-    {
-    if(global.tablet_mode==0){draw_text(view_xcenter-376,view_ycenter-84,"Small Table");}
-    else{draw_text(view_xcenter-376,view_ycenter-96,"Small Table");}
-    }
-    if ( global.storage_type == 104 )
-    {
-    if(global.tablet_mode==0){draw_text(view_xcenter-376,view_ycenter-84,"Wood Chest");}
-    else{draw_text(view_xcenter-430,view_ycenter-124,"Wood Chest");}
-    }
-    if ( global.storage_type == 133 )
-    {
-    if(global.tablet_mode==0){
-    draw_text(view_xcenter-360,view_ycenter-192,"Weapons And Tools");
-    var length_half = (string_width("Weapons And Tools")/2)+8;
-    draw_line(view_xcenter-360-length_half,view_ycenter-192+(string_height("Weapons And Tools")/2),view_xcenter-360+length_half,view_ycenter-192+string_height("Weapons And Tools")/2);
-    draw_text(view_xcenter-360,view_ycenter+64,"Crafting Resources");
-    var length_half = (string_width("Crafting Resources")/2)+8;
-    draw_line(view_xcenter-360-length_half,view_ycenter+64+(string_height("Crafting Resources")/2),view_xcenter-360+length_half,view_ycenter+64+string_height("Crafting Resources")/2);
-    draw_set_font(font_gulim_8);draw_set_valign(fa_middle);draw_set_halign(fa_center);
-    draw_text(view_xcenter-448-16,view_ycenter-98,"Material");
-    draw_text(view_xcenter-192-16,view_ycenter-66,"Output");
-    draw_text(view_xcenter-448-16,view_ycenter-34,"Wood");
-    draw_set_font(font_gulim_12);}
-    else
-    {
-    draw_set_font(font_gulim_18);draw_set_valign(fa_middle);draw_set_halign(fa_center);
-    draw_text(view_xcenter-360,view_ycenter-192,"Weapons And Tools");
-    var length_half = (string_width("Weapons And Tools")/2)+8;
-    draw_line(view_xcenter-360-length_half,view_ycenter-192+(string_height("Weapons And Tools")/2),view_xcenter-360+length_half,view_ycenter-192+string_height("Weapons And Tools")/2);
-    draw_text(view_xcenter-360,view_ycenter+64,"Crafting Resources");
-    var length_half = (string_width("Crafting Resources")/2)+8;
-    draw_line(view_xcenter-360-length_half,view_ycenter+64+(string_height("Crafting Resources")/2),view_xcenter-360+length_half,view_ycenter+64+string_height("Crafting Resources")/2);
-    draw_text(view_xcenter-578,view_ycenter-132,"Material");
-    draw_text(view_xcenter-192,view_ycenter-98,"Output");
-    draw_text(view_xcenter-578,view_ycenter+64,"Wood");
-    draw_set_font(font_gulim_12);
-    }
-    }
-    if ( global.storage_type == 134 )
-    {
-    if(global.tablet_mode==0){
-    draw_set_halign(fa_center);
-    draw_set_valign(fa_middle);
-    draw_set_font(font_gulim_8);
-    draw_text(view_xcenter-438,view_ycenter-48,"Input");
-    draw_text(view_xcenter-242,view_ycenter-48,"Output");
-    draw_set_font(font_gulim_12);}
-    else
-    {
-    draw_set_halign(fa_center);
-    draw_set_valign(fa_middle);
-    draw_set_font(font_gulim_18);
-    draw_text(view_xcenter-540,view_ycenter-56,"Input");
-    draw_text(view_xcenter-276,view_ycenter-56,"Output");
-    draw_set_font(font_gulim_12);
-    }
-    }
-    }
-    */
-    // Draw Health &amp; Food Stats
-    draw_set_halign(fa_left);
-    /*
-    if (global.tablet_mode == 0){
-    draw_text(view_xcenter+158,view_ycenter+140,"Health: "+string(obj_game.c_health));
-    draw_text(view_xcenter+158,view_ycenter+160,"Hunger: "+string(obj_game.c_food));
-    draw_text(view_xcenter+158,view_ycenter+180,"Thirst: "+string(obj_game.c_thirst));
-    draw_text(view_xcenter+158,view_ycenter+200,"Sanity: "+string(obj_game.c_sanity));}else{
-    draw_text(view_xcenter+232,view_ycenter+140,"Health: "+string(obj_game.c_health));
-    draw_text(view_xcenter+232,view_ycenter+165,"Hunger: "+string(obj_game.c_food));
-    draw_text(view_xcenter+232,view_ycenter+190,"Thirst: "+string(obj_game.c_thirst));
-    draw_text(view_xcenter+232,view_ycenter+215,"Sanity: "+string(obj_game.c_sanity));}
-    */
+    draw_set_alpha(1);draw_set_color(c_white);
+    draw_set_font(font_gulim_12);draw_set_valign(fa_middle);draw_set_halign(fa_left);
     
     // Drop Item Box
     if ( global.v_item_drop == false )
@@ -1564,6 +1386,7 @@ if ( global.render_gui_page == "stats" )
           <argument>
             <kind>1</kind>
             <string>/// Tablet GUI &amp;&amp; Logic
+/*
 if ( global.tablet_mode == 1 ){
 // Logic
 
@@ -1690,6 +1513,7 @@ draw_set_alpha(0.5);draw_text(96*1.5,17*1.5,"Inventory");draw_text(288*1.5,17*1.
           <argument>
             <kind>1</kind>
             <string>/// Tablet GUI &amp;&amp; Hot Bar
+/*
 if ( global.tablet_mode == 1 )
 {
 // Logic
