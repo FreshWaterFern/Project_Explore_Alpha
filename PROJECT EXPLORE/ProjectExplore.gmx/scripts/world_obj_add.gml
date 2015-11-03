@@ -1,4 +1,5 @@
 /// world_obj_add(instance_id)
+/*
 if ( global.world_loading == false && global.map_loaded == false )
 {
 // This should be the instance_id

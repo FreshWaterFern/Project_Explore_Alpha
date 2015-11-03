@@ -4316,7 +4316,6 @@
     <scripts name="world data">
       <script>scripts\world_obj_add.gml</script>
       <script>scripts\world_data_save.gml</script>
-      <script>scripts\world_data_ini.gml</script>
       <script>scripts\world_data_load.gml</script>
       <script>scripts\world_obj_update.gml</script>
       <script>scripts\world_obj_delete.gml</script>
@@ -4333,33 +4332,8 @@
       <scripts name="generate">
         <scripts name="base">
           <script>scripts\world_generate.gml</script>
-          <script>scripts\world_structures.gml</script>
-          <script>scripts\world_spawn_item.gml</script>
-        </scripts>
-        <scripts name="chunks 0-9">
-          <script>scripts\chunk_0.gml</script>
-          <script>scripts\chunk_1.gml</script>
-          <script>scripts\chunk_2.gml</script>
-          <script>scripts\chunk_3.gml</script>
-          <script>scripts\chunk_4.gml</script>
-          <script>scripts\chunk_5.gml</script>
-          <script>scripts\chunk_6.gml</script>
-          <script>scripts\chunk_7.gml</script>
-          <script>scripts\chunk_8.gml</script>
-          <script>scripts\chunk_9.gml</script>
-        </scripts>
-        <scripts name="chunks 10-19">
-          <script>scripts\chunk_10.gml</script>
-          <script>scripts\chunk_11.gml</script>
-        </scripts>
-        <scripts name="structures">
-          <script>scripts\structure_wood_1x1.gml</script>
-          <script>scripts\structure_wood_1x2.gml</script>
         </scripts>
       </scripts>
-    </scripts>
-    <scripts name="loading">
-      <script>scripts\unload_world_data.gml</script>
     </scripts>
     <scripts name="Text Inputs">
       <script>scripts\input_text_create_singleline.gml</script>
@@ -4418,9 +4392,27 @@
     </scripts>
     <scripts name="instance">
       <script>scripts\object_mod_inherit.gml</script>
+      <script>scripts\object_active.gml</script>
+      <script>scripts\object_item_drop.gml</script>
     </scripts>
     <scripts name="player">
+      <script>scripts\player_create_plant.gml</script>
       <script>scripts\player_create_object.gml</script>
+    </scripts>
+    <scripts name="loading">
+      <scripts name="initialize">
+        <script>scripts\temperature_grid_ini.gml</script>
+        <script>scripts\heartbeat_effect_ini.gml</script>
+        <script>scripts\world_data_ini.gml</script>
+        <script>scripts\player_inventory_ini.gml</script>
+        <script>scripts\player_stats_ini.gml</script>
+      </scripts>
+      <scripts name="files">
+        <script>scripts\load_game_settings.gml</script>
+      </scripts>
+      <scripts name="unload">
+        <script>scripts\unload_world_data.gml</script>
+      </scripts>
     </scripts>
   </scripts>
   <shaders name="shaders">
@@ -4467,15 +4459,8 @@
     </objects>
     <objects name="entity">
       <object>objects\obj_player</object>
-      <object>objects\obj_map_tile_pop</object>
-      <object>objects\obj_worldmap</object>
       <object>objects\obj_camera</object>
       <objects name="interactable">
-        <object>objects\obj_campfire</object>
-        <object>objects\obj_lantern</object>
-        <object>objects\obj_bigfire</object>
-        <object>objects\obj_largecrate</object>
-        <object>objects\obj_smallcrate</object>
         <object>objects\obj_dead_skeleton1</object>
         <object>objects\obj_item_dropped</object>
         <object>objects\obj_torch</object>
@@ -4483,6 +4468,7 @@
         <object>objects\obj_archetype_storage</object>
         <object>objects\obj_archetype_cooking</object>
         <object>objects\obj_archetype_basic</object>
+        <object>objects\obj_archetype_plant</object>
       </objects>
       <objects name="sanity">
         <object>objects\obj_sanity_1</object>
@@ -4571,18 +4557,6 @@
         <object>objects\obj_world_water1</object>
         <object>objects\obj_world_water2</object>
         <object>objects\obj_water_parent</object>
-      </objects>
-      <objects name="furniture">
-        <object>objects\obj_furn_table1</object>
-        <object>objects\obj_furn_woodchest1</object>
-        <object>objects\obj_furn_chair1</object>
-      </objects>
-      <objects name="plants">
-        <object>objects\obj_plant</object>
-      </objects>
-      <objects name="crafting">
-        <object>objects\obj_furn_forgetable</object>
-        <object>objects\obj_furn_deconstructtable</object>
       </objects>
       <objects name="environment">
         <objects name="foliage">

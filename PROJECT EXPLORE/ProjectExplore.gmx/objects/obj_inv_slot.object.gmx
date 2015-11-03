@@ -280,7 +280,10 @@ item_stack = storage_id.c_stack[#grid_x,grid_y];
 }
 
 // Get Item Sprite
-item_sprite = global.item_data[#item_id,2];
+if ( global.item_data[#item_id,4] != 4 ){
+item_sprite = global.item_data[#item_id,2];}
+else{
+item_sprite = ds_list_find_value(global.item_data[#item_id,2],0);}
 </string>
           </argument>
         </arguments>

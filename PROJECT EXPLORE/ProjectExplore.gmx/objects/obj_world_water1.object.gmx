@@ -151,7 +151,7 @@ ai_grid_add_self(x,y,x+(sprite_width),y+(sprite_height));
         </arguments>
       </action>
     </event>
-    <event eventtype="3" enumb="1">
+    <event eventtype="3" enumb="0">
       <action>
         <libid>1</libid>
         <id>603</id>
@@ -168,22 +168,13 @@ ai_grid_add_self(x,y,x+(sprite_width),y+(sprite_height));
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>/// Object Activity
+            <string>/// Object Active
 
-if ( point_distance(x,y,obj_player.x,obj_player.y) &lt; 1400 or global.render_world_map == true )
-{
-active = true;
-}
-else
-{
-active = false;
-}
+object_active();
 </string>
           </argument>
         </arguments>
       </action>
-    </event>
-    <event eventtype="3" enumb="0">
       <action>
         <libid>1</libid>
         <id>603</id>

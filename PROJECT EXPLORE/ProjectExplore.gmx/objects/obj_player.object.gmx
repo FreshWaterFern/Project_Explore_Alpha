@@ -2738,7 +2738,7 @@ if ( v_construct == true )
           <argument>
             <kind>1</kind>
             <string>/// Footstep Audio Handling
-var inst = collision_point(x,y,obj_foundation_parent,false,true);
+
 if ( y == yprevious )
 {
 pl_fs_dist += abs(x-xprevious);
@@ -2759,10 +2759,11 @@ pl_fs_dist += abs(y-yprevious)/1.1;
 if ( pl_fs_dist &gt;= pl_fs_dist_max )
 {
     pl_fs_dist = 0;
+    var inst = collision_point(x,y,obj_foundation_parent,false,true);
     if ( inst == noone )
     {
-    var i = round(other.x/128);
-    var r = round(other.y/128);
+    var i = floor(x/128);
+    var r = floor(y/128);
     pl_surface_type = ds_grid_get(global.world_tiles,i,r);
     switch(pl_surface_type)
     {
@@ -3633,30 +3634,6 @@ if ( v_terrain == true )
         }
         }
     }
-}
-}
-
-if ( update_plants == true )
-{
-with(obj_plant)
-{
-// Get Surface Type
-var i = round(x/128);
-var r = round(y/128);
-var surface_type = ds_grid_get(global.world_tiles,i,r);
-switch(surface_type)
-{
-        case 0:{
-        can_grow = true;break;}
-        case 1:{
-        can_grow = true;break;}
-        case 4:{
-        can_grow = true;break;}
-        case 9:{
-        can_grow = true;break;}
-        case 10:{
-        can_grow = true;break;}
-}
 }
 }
 </string>
@@ -4954,8 +4931,7 @@ if ( x != xprevious &amp;&amp; y != yprevious )
           <argument>
             <kind>1</kind>
             <string>/// Draw Mouse Prompt
-if ( global.tablet_mode == 0){var sprite_set = spr_mouse_image;}
-else{var sprite_set = spr_gui_tablet_tapbutton;}
+var sprite_set = spr_mouse_image;
 if ( pl_refill_display == true )
     {
     draw_set_alpha(1);draw_set_color(c_white);
@@ -5044,6 +5020,43 @@ case 180:draw_arrow(v_con_x+(dist*0.5),v_con_y,v_con_x-(dist*0.5),v_con_y,5)brea
 case 270:draw_arrow(v_con_x,v_con_y-(dist*0.5),v_con_x,v_con_y+(dist*0.5),5)break;
 }}draw_set_color(c_white);draw_set_alpha(1);
 
+}
+
+
+
+if ( global.item_data[#v_item_equipped,4] == 4 ){ // Is it a plantable item?
+var _id = v_item_equipped;
+var spr_list = global.item_data[#_id,2];
+var place_sprite = spr_list[|ds_list_size(spr_list)-1];
+var list = convert_string_to_list(global.item_data[#_id,6],",");
+var place_range = list[|2];ds_list_destroy(list);
+
+// Handle mouse movement and limited distance placement
+var get_dir = point_direction(x,y,mouse_x,mouse_y);
+if ( point_distance(x,y,mouse_x,mouse_y) &gt; real(place_range) )
+{v_con_x = x+lengthdir_x(real(place_range),get_dir);v_con_y = y+lengthdir_y(real(place_range),get_dir);}
+else
+{v_con_x = mouse_x;v_con_y = mouse_y;}
+
+v_con_x = (round(v_con_x/32))*32;v_con_y = (round(v_con_y/32))*32;
+
+
+// Check for water and collisions
+var width = sprite_get_width(place_sprite)*0.5;var height = sprite_get_height(place_sprite)*0.5;var v_con_col = false;
+if ( collision_rectangle(v_con_x-width,v_con_y-height,v_con_x+width,v_con_y+height,obj_solid_parent,false,true) != noone ){v_con_col = true;}else{
+if ( collision_rectangle(v_con_x-width,v_con_y-height,v_con_x+width,v_con_y+height,obj_water_parent,false,true) != noone ){v_con_col = true;
+if ( collision_rectangle(v_con_x-width,v_con_y-height,v_con_x+width,v_con_y+height,obj_foundation_parent,false,true) != noone ){v_con_col = false;}}}
+if ( v_con_col == false ){
+if ( mouse_check_button_pressed(mb_left) ){var obj_inst = 0;
+player_create_plant(v_con_x,v_con_y); // Create instance
+inventory_get_item(v_item_equipped,1,1);// Clear it from inventory
+}}
+
+// Draw hitbox
+if ( !v_con_col ){var col = c_green;}else{var col = c_red;}
+var spr_height = sprite_external_get_height(ds_list_find_value(global.item_data[#_id,2],1));
+draw_external_sprite_ext(place_sprite,0,v_con_x,v_con_y+(spr_height/2)-4,1,1,0,col,0.75);
+draw_set_color(c_white);draw_set_alpha(1);
 }}
 </string>
           </argument>

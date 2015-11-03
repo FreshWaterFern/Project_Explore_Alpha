@@ -1113,10 +1113,10 @@ desc: Seeds that when placed will begin to grow a stalk of corn.
 spr: mods\sprites\items\spr_item_corn_seed1.png,mods\plants\corn\spr_plant_corn_0.png,mods\plants\corn\spr_plant_corn_1.png,mods\plants\corn\spr_plant_corn_2.png,mods\plants\corn\spr_plant_corn_3.png,mods\plants\corn\spr_plant_corn_4.png,mods\plants\corn\spr_plant_corn_5.png,mods\plants\corn\spr_plant_corn_6.png,mods\plants\corn\spr_plant_corn_7.png,mods\plants\corn\spr_plant_corn_8.png,mods\plants\corn\spr_plant_corn_9.png,mods\plants\corn\spr_plant_corn_10.png,mods\plants\corn\spr_plant_corn_11.png,mods\plants\corn\spr_plant_corn_12.png,mods\plants\corn\spr_plant_corn_13.png,mods\plants\corn\spr_plant_corn_14.png,mods\plants\corn\spr_plant_corn_15.png,mods\plants\corn\spr_plant_corn_16.png,mods\plants\corn\spr_plant_corn_17.png,mods\plants\corn\spr_plant_corn_18.png,mods\plants\corn\spr_plant_corn_19.png
 stack: 16
 type: 4
-stat1: 0
-stat2: 0
-stat3: 0
-stat4: 0
+stat1: 0,0,0,0
+stat2: 0.0003,20,96
+stat3: Corn Seeds,1,Corn,1
+stat4: 0,0,1,3
 cook: 0,0
 name: Corn
 desc: Fresh corn! Each bite is delicious!
@@ -1130,13 +1130,13 @@ stat4: 0
 cook: 0,0
 name: Potato
 desc: Fresh potato! Each bite is delicious!#You can even grow more!
-spr: mods\sprites\items\spr_item_potato.png
+spr: mods\sprites\items\spr_item_potato.png,mods\plants\potato\spr_plant_potato_0.png,mods\plants\potato\spr_plant_potato_1.png,mods\plants\potato\spr_plant_potato_2.png,mods\plants\potato\spr_plant_potato_3.png,mods\plants\potato\spr_plant_potato_4.png,mods\plants\potato\spr_plant_potato_5.png,mods\plants\potato\spr_plant_potato_6.png,mods\plants\potato\spr_plant_potato_7.png,mods\plants\potato\spr_plant_potato_8.png,mods\plants\potato\spr_plant_potato_9.png
 stack: 8
-type: 0
+type: 4
 stat1: 2.5,6,0,0
-stat2: 0
-stat3: 0
-stat4: 0
+stat2: 0.0003,10,96
+stat3: Potato,1,Potato,2
+stat4: 0,0,0,0
 cook: 0,0
 name: Tomato
 desc: Fresh tomato! Each bite is juicy and delicious!
@@ -1150,13 +1150,13 @@ stat4: 0
 cook: 0,0
 name: Tomato Seeds
 desc: Seeds that when placed will begin to grow tomatoes.
-spr: mods\sprites\items\spr_item_tomato_seed1.png
+spr: mods\sprites\items\spr_item_tomato_seed1.png,mods\plants\tomato\spr_plant_tomato_0.png,mods\plants\tomato\spr_plant_tomato_1.png,mods\plants\tomato\spr_plant_tomato_2.png,mods\plants\tomato\spr_plant_tomato_3.png,mods\plants\tomato\spr_plant_tomato_4.png,mods\plants\tomato\spr_plant_tomato_5.png,mods\plants\tomato\spr_plant_tomato_6.png,mods\plants\tomato\spr_plant_tomato_7.png,mods\plants\tomato\spr_plant_tomato_8.png,mods\plants\tomato\spr_plant_tomato_9.png,mods\plants\tomato\spr_plant_tomato_10.png,mods\plants\tomato\spr_plant_tomato_11.png
 stack: 16
-type: 99
-stat1: 0
-stat2: 0
-stat3: 0
-stat4: 0
+type: 4
+stat1: 0,0,0,0
+stat2: 0.0003,12,96
+stat3: Tomato Seeds,1,Tomato,2
+stat4: 0,0,1,4
 cook: 0,0
 name: Forging Table
 desc: Used to craft more complex metal items.

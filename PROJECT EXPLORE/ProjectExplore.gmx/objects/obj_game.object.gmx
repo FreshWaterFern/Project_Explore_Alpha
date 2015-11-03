@@ -50,44 +50,25 @@ ds_list_add(global.equip_list,0);
           <argument>
             <kind>1</kind>
             <string>/// Initialize
-if ( instance_number(obj_game) &lt; 2 )
+//if ( instance_number(obj_game) &lt; 2 )
 {
 
-// Load Memory
+// Load Audio Into Memory
 
 if ( audio_group_is_loaded(audiogroup_default) == false )
-{
-audio_group_load(audiogroup_default);
-}
+{audio_group_load(audiogroup_default);}
 if ( audio_group_is_loaded(audiogroup_footstep) == false )
-{
-audio_group_load(audiogroup_footstep);
-}
+{audio_group_load(audiogroup_footstep);}
 
 // A* Path Finding
 global.pathing_grid = mp_grid_create(0,0,floor(room_width/32),floor(room_height/32),32,32);
 
-// Load Settings
-ini_open("settings.ini");
-m_vsync = real(ini_read_string("graphics","vsync","0"));
-m_vignette = real(ini_read_string("graphics","vignette","1"));
-m_blood = real(ini_read_string("graphics","blood","1"));
-m_particles = real(ini_read_string("graphics","particles","1"));
-m_temp = real(ini_read_string("settings","temperature","0"));
-global.setting_autosave = real(ini_read_string("settings","autosave","1"));
-ini_close();
+load_game_settings();
 
 // Temporary Variable Use
-temp_x = 0;
-temp_y = 0;
-temp_i = 0;
-temp_t = 0;
-temp_str1 = "";
-temp_str2 = "";
-temp_str3 = "";
-temp_str4 = "";
-temp_str5 = "";
-temp_str6 = "";
+temp_x = 0;temp_y = 0;temp_i = 0;temp_t = 0;
+temp_str1 = "";temp_str2 = "";temp_str3 = "";
+temp_str4 = "";temp_str5 = "";temp_str6 = "";
 i = 0;
 
 loading = true;
@@ -111,18 +92,11 @@ render_saving = 0;
 save_buffer1=buffer_create(1,buffer_grow,1);
 save_buffer2=buffer_create(1,buffer_grow,1);
 
-// Audio Variables
-start_hurt = false;
-audio_heartbeat_main = 0;
-audio_heartbeat_fade = 0;
-audio_heartbeat_start = 0;
-audio_track_started = false;
-audio_ambience_track = 0;
+// Heartbeat Effect Variables
+heartbeat_effect_ini();
 
 // World Data Structures
 world_data_ini();
-time_speed = 0.0008;
-//time_speed = 0.0256; // Good for showing off a day cycle
 
 // Render Variables
 global.render_characters = true;
@@ -135,35 +109,15 @@ global.render_world_shadows = true;
 global.render_vignette_shader = m_vignette;
 global.render_particle_quality = m_particles;
 global.render_blood = m_blood;
-global.render_world_map = false;
-global.render_map_outlines = false;
 global.render_temp = m_temp;
 global.game_pause = false;
 global.render_gui_page = "none";
 
-// Inventory Moving Variables
-global.get_stack = 0;
-global.get_other_stack = 0;
-global.stack_max = 0;
-global.stack_remain = 0;
-global.did_stack = -1;
-global.slot_found = false;
-global.stack = 0;
-global.stack_remaining = 0;
-
 /// Item Inventory Bonuses Variables
-slot_1_id = 0;
-slot_2_id = 0;
-slot_3_id = 0;
-slot_4_id = 0;
+slot_1_id = 0;slot_2_id = 0;slot_3_id = 0;slot_4_id = 0;
 
 // World Variables
-global.chunk_x = 0;
-global.chunk_y = 0;
 global.ai_check = 0;
-//global.world_time = 1.5;
-global.world_time = time_speed;
-global.world_days = 1;
 global.new_game = false;
 buffer_pos = 0;
 music_track = 0;
@@ -172,69 +126,16 @@ global.world_loading = false;
 global.map_loaded = false;
 
 // Player Stats
-global.pl_bleeding = 0;
-global.pl_sickness = 0;
-global.pl_sickchance = 0;
-global.distance_travelled = 0;
-global.wolves_killed = 0;
-global.bears_killed = 0;
-global.fish_caught = 0;
-global.bucks_killed = 0;
-global.stalkers_killed = 0;
-global.rippers_killed = 0;
-global.days_survived = 0;
-global.trees_cut = 0;
-global.rocks_cut = 0;
+player_stats_ini();
 
-// Inventory &amp; World
-v_drag_bar_x = 72;
-global.v_inventory_tab = 0;
-global.v_backpack = 0;
-global.v_item_drop = false;
-global.v_slot_x = 0;
-global.v_slot_y = 0;
-global.v_slot_inst = 0;
-global.v_slot_item_id = 0;
-global.v_item_moving = false;
-global.v_item_stack = 0;
-itemlist_ini();
-global.roof_list = ds_list_create();
-global.status_list = ds_list_create();
-global.status_map = status_ini();
-global.waypoint_data_x = ds_list_create();
-global.waypoint_data_y = ds_list_create();
-global.waypoint_data_name = ds_list_create();
-global.c_inventory_pack = ds_grid_create(7,5);
-global.c_stack_pack = ds_grid_create(7,5);
-global.c_worldmap = ds_grid_create(floor(room_width/128)+15,floor(room_height/128)+15);
-global.world_temperature = ds_grid_create(floor(room_width/512)+15,floor(room_height/512)+15);
-global.world_temperature_base = random_range(70,83);
-global.storage_id = 0;
-global.storage_type = 0;
-move_to_player = false;
-global.waypoint_x = 0;
-global.waypoint_y = 0;
-
-// Gathering
-v_gather_time = 0;
+// Inventory
+player_inventory_ini();
 
 // Clothing
-global.clothing_head = "";
-global.clothing_body = "";
-global.inv_item_id = 0;
+global.clothing_head = "";global.clothing_body = "";global.inv_item_id = 0;
 
 // Hotbar
-v_hotbar_set = -1;
-v_item_equipped = -1;
-
-// Player Stats
-c_thirst = 100;
-c_food = 100;
-c_health = 100;
-c_sanity = 100;
-c_status = "Healthy";
-c_temperature = 80;
-c_armor = 0;
+v_hotbar_set = -1;v_item_equipped = -1;
 
 // Sanity
 v_lightlevel = 1;
@@ -242,31 +143,7 @@ v_lightlevel = 1;
 // GUI
 hotbar_alpha = 5;
 
-// -- -- Set Temperature Grid -- -- \\
-var t1 = 0;var t2 = 0;var t3 = 0;
-var width = (room_width/512)+1;
-var height = (room_height/512)+1;
-for(t1=0;t1&lt;width;t1++)
-{
-    for(t2=0;t2&lt;height;t2++)
-    {
-    t3 = random_range(70,83);
-    ds_grid_set(global.world_temperature,t1,t2,t3);
-    }
-}
-
-//alarm[0] = 5;
-if ( global.game_online == false )
-{
-if ( global.save_loading == false )
-{
-// Give starting items
-}
-}
-}
-else
-{
-instance_destroy();
+temperature_grid_ini();
 }
 </string>
           </argument>
@@ -614,20 +491,16 @@ if ( global.render_gui_page == "inventory" )
           <argument>
             <kind>1</kind>
             <string>/// Temperature Check
-var s1 = ds_grid_get(global.world_temperature,floor(obj_player.x/512),floor(obj_player.y/512));
-var s2 = ds_grid_get(global.world_temperature,floor(obj_player.x/512)-1,floor(obj_player.y/512));
-var s3 = ds_grid_get(global.world_temperature,floor(obj_player.x/512)+1,floor(obj_player.y/512));
-var s4 = ds_grid_get(global.world_temperature,floor(obj_player.x/512),floor(obj_player.y/512)-1);
-var s5 = ds_grid_get(global.world_temperature,floor(obj_player.x/512),floor(obj_player.y/512)+1);
+var x_floor = floor(obj_player.x/512);var y_floor = floor(obj_player.y/512);
+var s1 = global.world_temperature[#x_floor,y_floor];
+var s2 = global.world_temperature[#clamp(x_floor-1,0,x_floor),y_floor];
+var s3 = global.world_temperature[#x_floor+1,y_floor];
+var s4 = global.world_temperature[#x_floor,clamp(y_floor-1,0,y_floor)];
+var s5 = global.world_temperature[#x_floor,y_floor+1];
 if ( s2 == undefined ){s2=s1;}if ( s3 == undefined ){s3=s1;}
 if ( s4 == undefined ){s4=s1;}if ( s5 == undefined ){s5=s1;}
 c_temperature = mean(s1,s2,s3,s4,s5,global.world_temperature_base);
 if ( global.pl_sickness &gt; 0 ){c_temperature += 10;}
-
-// Health &amp;&amp; Food Depletion
-/*var food_loss = 1.0587725999490711*power(c_temperature,0) + 
-                -0.0228718340483046*power(c_temperature,1) + 
-                0.00014906661965485*power(c_temperature,2);*/
 
 if ( global.equip_list[|0] &gt; 0 ){
 var list1 = convert_string_to_list(global.item_data[#global.equip_list[|0],7],",");c_temperature += real(list1[|1]);ds_list_destroy(list1);}
@@ -1318,9 +1191,8 @@ break;}
 case 4:{
 var inst = instance_create(obj_player.x,obj_player.y,obj_popup_days_survived);
 inst.days = global.world_days;
-slot_1_id = ds_grid_get(global.c_inventory_pack,4,4);
-slot_2_id = ds_grid_get(global.c_inventory_pack,4,5);
-slot_3_id = ds_grid_get(global.c_inventory_pack,4,6);
+slot_1_id = ds_grid_get(global.c_inventory_pack,0,4);slot_2_id = ds_grid_get(global.c_inventory_pack,1,4);
+slot_3_id = ds_grid_get(global.c_inventory_pack,2,4);slot_4_id = ds_grid_get(global.c_inventory_pack,3,4);
 loading_step = 5;loading = false;
 break;}
 }

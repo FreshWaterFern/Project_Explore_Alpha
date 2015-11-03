@@ -1,4 +1,5 @@
 /// world_obj_update(instance_id)
+/*
 if ( global.save_loading == false )
 {
 if ( global.world_loading == false )

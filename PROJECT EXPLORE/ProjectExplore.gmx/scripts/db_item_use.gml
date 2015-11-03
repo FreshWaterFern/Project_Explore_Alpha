@@ -3,7 +3,7 @@ gml_pragma("forceinline");
 var grid = global.item_data;var check_destroy = false;
 
 if ( argument0 != 0 ){
-if ( global.item_data[#argument0,4] == 0 ){ // Type (0 = Consumable)
+if ( global.item_data[#argument0,4] == 0 or global.item_data[#argument0,4] == 4 ){ // Type (0 = Consumable, 4 = Plantable)
 var list = convert_string_to_list(grid[#argument0,5],",");
 var str = "";var offset = 0;
 
@@ -12,6 +12,7 @@ var food = real(list[|1]);
 var thirst = real(list[|2]);
 var sanity = real(list[|3]);
 
+if ( hp > 0 or food > 0 or thirst > 0 or sanity > 0 ){
 obj_game.c_health+=hp;
 obj_game.c_food+=food;
 obj_game.c_thirst+=thirst;
@@ -52,7 +53,7 @@ else
 global.c_stack_pack[#obj_game.v_hotbar_set,4] = global.c_stack_pack[#obj_game.v_hotbar_set,4]-1;
 if ( global.c_stack_pack[#obj_game.v_hotbar_set,4] == 0 )
 {global.c_inventory_pack[#obj_game.v_hotbar_set,4] = 0;}
-}}
+}}}
 
 if ( global.item_data[#argument0,4] == 3 ){ // Type (3 = Wearable)
 var list1 = convert_string_to_list(global.item_data[#argument0,8],",");

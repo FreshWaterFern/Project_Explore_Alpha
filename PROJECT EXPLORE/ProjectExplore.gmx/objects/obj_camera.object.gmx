@@ -242,6 +242,16 @@ else
 
 draw_set_color(c_white);draw_set_alpha(1);
 
+// Plants
+if ( instance_exists(obj_archetype_plant) ){
+with(obj_archetype_plant){
+if ( selected == true ){
+draw_set_alpha(0.25);draw_set_color(c_green);
+draw_circle(x,y+(spr_height/2),16,false);
+draw_set_color(c_white);draw_set_alpha(1);}
+draw_external_sprite(sprite,0,x,y+(spr_height/2));
+}}
+
 // Rocks
 if (instance_exists(obj_world_rock_1)){
 with(obj_world_rock_1){if ( active == true ){
@@ -353,18 +363,20 @@ if ( active == true ){
 draw_circle(x,y,12+((z/15)*2),false);}}
 draw_set_color(c_white);draw_set_alpha(1);
 with(obj_item_dropped){
-if ( mouse_over == true ){if ( pl_inrange == false )
-{w3d_draw_external_sprite_ext(global.item_data[#item_id,2],0,x,y,z,image_xscale,image_yscale,image_angle,c_red,1);}
+if ( global.item_data[#item_id,4] != 4 ){var spr = global.item_data[#item_id,2];}else{var spr = ds_list_find_value(global.item_data[#item_id,2],0);}
+if ( mouse_over == true ){
+if ( pl_inrange == false )
+{w3d_draw_external_sprite_ext(spr,0,x,y,z,image_xscale,image_yscale,image_angle,c_red,1);}
 else
-{w3d_draw_external_sprite_ext(global.item_data[#item_id,2],0,x,y,z,image_xscale,image_yscale,image_angle,c_lime,1);}
+{w3d_draw_external_sprite_ext(spr,0,x,y,z,image_xscale,image_yscale,image_angle,c_lime,1);}
 }
 else
-{w3d_draw_external_sprite_ext(global.item_data[#item_id,2],0,x,y,z,image_xscale,image_yscale,image_angle,c_white,1);}}
-draw_set_color(c_white);draw_set_font(font_gulim_8);
-draw_set_halign(fa_center);draw_set_valign(fa_middle);
+{w3d_draw_external_sprite_ext(spr,0,x,y,z,image_xscale,image_yscale,image_angle,c_white,1);}}
 with(obj_item_dropped){
 if ( active == true ){
 if ( mouse_over == true ){
+draw_set_color(c_white);draw_set_font(font_gulim_8);
+draw_set_halign(fa_center);draw_set_valign(fa_middle);
 draw_text_outline(string(global.item_data[#item_id,0]+" ("+string(item_stack)+"x)"),x,y-20,c_white,c_black);
 }}}}
 

@@ -1,4 +1,5 @@
 /// world_obj_delete(instance_id)
+/*
 var inst_id = argument0;
 var index = ds_list_find_index(global.w_obj_id,inst_id);
 if ( index != -1 ){

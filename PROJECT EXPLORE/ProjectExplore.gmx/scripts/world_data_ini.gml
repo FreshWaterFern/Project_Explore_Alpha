@@ -2,34 +2,33 @@
 
 /*
 This will initialize all of the data structures 
-and variables needed for the world data system
+and variables needed for the world
 */
 
-global.w_plants_id = ds_list_create();
-global.w_plants_type = ds_list_create();
-global.w_plants_state = ds_list_create();
-global.w_obj_id = ds_list_create();
-global.w_obj_index = ds_list_create();
-global.w_obj_x = ds_list_create();
-global.w_obj_y = ds_list_create();
-global.w_obj_angle = ds_list_create();
-global.w_obj_var1 = ds_list_create();
-global.w_obj_var2 = ds_list_create();
-global.w_obj_var3 = ds_list_create();
-global.w_obj_var4 = ds_list_create();
+// Chunk, biome, and temperature data \\
 global.world_chunks = ds_grid_create(floor(room_width/1280)+15,floor(room_height/1280)+15);
 global.world_biomes = ds_grid_create(floor(room_width/1280)+15,floor(room_height/1280)+15);
+global.world_temperature = ds_grid_create(floor(room_width/512)+15,floor(room_height/512)+15);
+global.world_temperature_base = random_range(70,83);
 
-// Also include various lists if needed for some objects
-global.cook_list = ds_list_create();
-ds_list_add(global.cook_list,9);
-ds_list_add(global.cook_list,70);
-ds_list_add(global.cook_list,73);
-ds_list_add(global.cook_list,75);
-ds_list_add(global.cook_list,76);
-ds_list_add(global.cook_list,77);
-ds_list_add(global.cook_list,87);
-ds_list_add(global.cook_list,140);
-ds_list_add(global.cook_list,141);
-ds_list_add(global.cook_list,142);
-ds_list_add(global.cook_list,143);
+// World time \\
+obj_game.time_speed = 0.0008;
+global.world_time = time_speed;
+global.world_days = 1;
+
+// Status update message initialization \\
+global.status_map = status_ini();
+global.status_list = ds_list_create();
+
+// Waypoint system initialization \\
+global.waypoint_data_x = ds_list_create();
+global.waypoint_data_y = ds_list_create();
+global.waypoint_data_name = ds_list_create();
+global.waypoint_x = 0;global.waypoint_y = 0;
+
+// Roof loop data structure \\
+global.roof_list = ds_list_create();
+
+// Client related world variables \\
+global.chunk_x = 0;
+global.chunk_y = 0;

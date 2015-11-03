@@ -28,7 +28,7 @@
             <string>/// Initialize World
 var width = floor(room_width/128);var height = floor(room_height/128);
 global.world_tiles = ds_grid_create(width,height);
-//ds_grid_resize(global.world_tiles,floor(room_width/128)+30,floor(room_height/128)+30);
+
 window_x = window_get_x();window_y = window_get_y();
 
 global.render_texture_transitions = true;
@@ -318,11 +318,12 @@ ini_close();
           <argument>
             <kind>1</kind>
             <string>/// Initialize Surfaces
-surface_terrain = surface_create(1664,896);
+surface_terrain = surface_create(1536,976);
 surface_update = true;
 xview_prev = 0;
 yview_prev = 0;
 camera_move = 128;
+alpha_blend = 0;
 </string>
           </argument>
         </arguments>
@@ -733,12 +734,17 @@ surface_free(surface_terrain)
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>/// Render GUI 2
+            <string>/// Render Item Moving
 if ( global.v_item_moving == true ){
 var m_x = mouse_x-view_xview[0];
 var m_y = mouse_y-view_yview[0];
 if(global.v_slot_inst!=0){
-if(global.v_slot_inst.item_id!=0){draw_external_sprite_ext(global.item_data[#global.v_slot_inst.item_id,2],0,m_x,m_y,1+global.tablet_scaling,1+global.tablet_scaling,0,c_white,0.5);}}}
+if(global.v_slot_inst.item_id!=0){
+if ( global.item_data[#global.v_slot_inst.item_id,4] != 4 ){
+var item_sprite = global.item_data[#global.v_slot_inst.item_id,2];}
+else{
+var item_sprite = ds_list_find_value(global.item_data[#global.v_slot_inst.item_id,2],0);}
+draw_external_sprite_ext(item_sprite,0,m_x,m_y,1+global.tablet_scaling,1+global.tablet_scaling,0,c_white,0.5);}}}
 </string>
           </argument>
         </arguments>
@@ -989,7 +995,9 @@ draw_clear_alpha(0,0); //this is to make sure no residual stuff is placed on the
 var r,i,inst, iCoord, rCoord;
 var xwview = (xx+view_wview+(offset*2)) div sz;
 var yhview = (yy+view_hview+(offset*2)) div sz;
- 
+var width = ds_grid_width(global.world_tiles)-1;
+var height = ds_grid_height(global.world_tiles)-1;
+
 var x2,y2; // these are the GRID coords
 x2=xx div sz;
 y2=yy div sz;
@@ -1000,8 +1008,9 @@ for (i=x2; i&lt;=xwview; i++){
    
     for(r=y2; r&lt;=yhview; r++){
         rCoord = ((r-y2)*sz);
-       draw_enable_alphablend(false);
+       draw_enable_alphablend(false);alpha_blend=0;
         //Start Check For Specific Terrain
+        if ( i &gt; -1 &amp;&amp; i &lt;= width &amp;&amp; r &gt; -1 &amp;&amp; r &lt;= height ){
         switch( ds_grid_get(global.world_tiles,i,r))
         {
             case 0:
@@ -1020,6 +1029,7 @@ for (i=x2; i&lt;=xwview; i++){
             }
             case 2:
             {
+                if(alpha_blend==1){draw_enable_alphablend(false);alpha_blend=0;}
                 draw_sprite(t_concrete1,0,iCoord,rCoord);
                 break;
             }
@@ -1039,21 +1049,25 @@ for (i=x2; i&lt;=xwview; i++){
             }
             case 5:
             {
+                if(alpha_blend==1){draw_enable_alphablend(false);alpha_blend=0;}
                 draw_sprite(t_tile1,0,iCoord,rCoord);
                 break;
             }
             case 6:
             {
+                if(alpha_blend==1){draw_enable_alphablend(false);alpha_blend=0;}
                 draw_sprite(t_stones1,0,iCoord,rCoord);
                 break;
             }
             case 7:
             {
+                if(alpha_blend==1){draw_enable_alphablend(false);alpha_blend=0;}
                 draw_sprite(t_stones2,0,iCoord,rCoord);
                 break;
             }
             case 8:
             {
+                if(alpha_blend==1){draw_enable_alphablend(false);alpha_blend=0;}
                 draw_sprite(t_wood1,0,iCoord,rCoord);
                 break;
             }
@@ -1073,21 +1087,25 @@ for (i=x2; i&lt;=xwview; i++){
             }
             case 11:
             {
+                if(alpha_blend==1){draw_enable_alphablend(false);alpha_blend=0;}
                 draw_sprite(t_wood2,0,iCoord,rCoord);
                 break;
             }
             case 12:
             {
+                if(alpha_blend==1){draw_enable_alphablend(false);alpha_blend=0;}
                 draw_sprite(t_road1,0,iCoord,rCoord);
                 break;
             }
             case 13:
             {
+                if(alpha_blend==1){draw_enable_alphablend(false);alpha_blend=0;}
                 draw_sprite(t_road2,0,iCoord,rCoord);
                 break;
             }
             case 14:
             {
+                if(alpha_blend==1){draw_enable_alphablend(false);alpha_blend=0;}
                 draw_sprite(t_road3,0,iCoord,rCoord);
                 break;
             }
@@ -1100,6 +1118,7 @@ for (i=x2; i&lt;=xwview; i++){
             }
             case 16:
             {
+                if(alpha_blend==1){draw_enable_alphablend(false);alpha_blend=0;}
                 draw_sprite(t_sand2,0,iCoord,rCoord);
                 break;
             }
@@ -1125,6 +1144,7 @@ for (i=x2; i&lt;=xwview; i++){
                 break;
             }
         }
+    }
         //End Terrain Generation
     }
 }
@@ -1159,7 +1179,7 @@ if ( global.render_world_tiles == true )
 if ( surface_exists(surface_terrain) )
 {
 // Terrain
-draw_surface(surface_terrain,((view_xview div 128)*128)-320,((view_yview div 128)*128)-320);
+draw_surface(surface_terrain,((view_xview div 128)*128)-256,((view_yview div 128)*128)-256);
 }
 // Render Decals
 var i = 0;var list_size = ds_list_size(global.ai_sdecal);
@@ -1209,6 +1229,7 @@ if ( global.game_pause == false )
 if ( global.render_gui_1 == true ){
     var offset_tab = 0;
     var offset_x = 0;var offset_y = 0;
+    var spr = 0;
     var view_xcenter = view_wview[0]/2;
     var view_ybottom = view_hview[0];
     var health_length = min(obj_game.c_health/100,1)*83;
@@ -1273,10 +1294,14 @@ if ( global.render_gui_1 == true ){
     var temperature = obj_game.c_temperature;if ( global.render_temp == 1 ){temperature = (temperature-32)*0.5555555555555556;}
     
     // Draw external sprites all at once
-    if(item_slot_1&gt;0){draw_external_sprite_ext(global.item_data[#item_slot_1,2],0,view_xcenter-72-(offset_x*3),view_ybottom-25-offset_y,1+global.tablet_scaling,1+global.tablet_scaling,0,c_white,obj_game.hotbar_alpha);}
-    if(item_slot_2&gt;0){draw_external_sprite_ext(global.item_data[#item_slot_2,2],0,view_xcenter-24-offset_x,view_ybottom-25-offset_y,1+global.tablet_scaling,1+global.tablet_scaling,0,c_white,obj_game.hotbar_alpha);}
-    if(item_slot_3&gt;0){draw_external_sprite_ext(global.item_data[#item_slot_3,2],0,view_xcenter+24+offset_x,view_ybottom-25-offset_y,1+global.tablet_scaling,1+global.tablet_scaling,0,c_white,obj_game.hotbar_alpha);}
-    if(item_slot_4&gt;0){draw_external_sprite_ext(global.item_data[#item_slot_4,2],0,view_xcenter+72+(offset_x*3),view_ybottom-25-offset_y,1+global.tablet_scaling,1+global.tablet_scaling,0,c_white,obj_game.hotbar_alpha);}
+    if(item_slot_1&gt;0){if ( global.item_data[#item_slot_1,4] != 4 ){spr = global.item_data[#item_slot_1,2];}else{spr = ds_list_find_value(global.item_data[#item_slot_1,2],0);}
+    draw_external_sprite_ext(spr,0,view_xcenter-72-(offset_x*3),view_ybottom-25-offset_y,1+global.tablet_scaling,1+global.tablet_scaling,0,c_white,obj_game.hotbar_alpha);}
+    if(item_slot_2&gt;0){if ( global.item_data[#item_slot_2,4] != 4 ){spr = global.item_data[#item_slot_2,2];}else{spr = ds_list_find_value(global.item_data[#item_slot_2,2],0);}
+    draw_external_sprite_ext(spr,0,view_xcenter-24-offset_x,view_ybottom-25-offset_y,1+global.tablet_scaling,1+global.tablet_scaling,0,c_white,obj_game.hotbar_alpha);}
+    if(item_slot_3&gt;0){if ( global.item_data[#item_slot_3,4] != 4 ){spr = global.item_data[#item_slot_3,2];}else{spr = ds_list_find_value(global.item_data[#item_slot_3,2],0);}
+    draw_external_sprite_ext(spr,0,view_xcenter+24+offset_x,view_ybottom-25-offset_y,1+global.tablet_scaling,1+global.tablet_scaling,0,c_white,obj_game.hotbar_alpha);}
+    if(item_slot_4&gt;0){if ( global.item_data[#item_slot_4,4] != 4 ){spr = global.item_data[#item_slot_4,2];}else{spr = ds_list_find_value(global.item_data[#item_slot_4,2],0);}
+    draw_external_sprite_ext(spr,0,view_xcenter+72+(offset_x*3),view_ybottom-25-offset_y,1+global.tablet_scaling,1+global.tablet_scaling,0,c_white,obj_game.hotbar_alpha);}
     
     if ( clock_alpha == 0 )
     {draw_text_outline(string(round(temperature)),view_wview[0]-40,16,c_white,c_black);draw_sprite(spr_degree_sign,global.render_temp,view_wview[0]-40+string_width(string(round(temperature))),16);}
