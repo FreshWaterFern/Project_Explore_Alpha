@@ -17,10 +17,10 @@ switch(argument0)
     io_clear();
     global.save_loading = true;
     global.world_name = m_str[1];
-    var buff1 = buffer_load(m_str[1]);
-    room_set_width(room_world_editor,buffer_read(buff1,buffer_u32));
-    room_set_width(room_world_editor,buffer_read(buff1,buffer_u32));
-    buffer_delete(buff1);
+    var file = file_text_open_read(m_str[1]);file_text_readln(file);file_text_readln(file);
+    room_set_width(room_world_editor,file_text_read_real(file));file_text_readln(file);
+    room_set_height(room_world_editor,file_text_read_real(file));file_text_readln(file);
+    file_text_close(file);
     room_goto(room_world_editor);
     break;
     }
@@ -31,10 +31,10 @@ switch(argument0)
     io_clear();
     global.save_loading = true;
     global.world_name = m_str[2];
-    var buff1 = buffer_load(m_str[2]);
-    room_set_width(room_world_editor,buffer_read(buff1,buffer_u32));
-    room_set_width(room_world_editor,buffer_read(buff1,buffer_u32));
-    buffer_delete(buff1);
+    var file = file_text_open_read(m_str[2]);file_text_readln(file);file_text_readln(file);
+    room_set_width(room_world_editor,file_text_read_real(file));file_text_readln(file);
+    room_set_height(room_world_editor,file_text_read_real(file));file_text_readln(file);
+    file_text_close(file);
     room_goto(room_world_editor);
     break;
     }
@@ -45,10 +45,10 @@ switch(argument0)
     io_clear();
     global.save_loading = true;
     global.world_name = m_str[3];
-    var buff1 = buffer_load(m_str[3]);
-    room_set_width(room_world_editor,buffer_read(buff1,buffer_u32));
-    room_set_width(room_world_editor,buffer_read(buff1,buffer_u32));
-    buffer_delete(buff1);
+    var file = file_text_open_read(m_str[3]);file_text_readln(file);file_text_readln(file);
+    room_set_width(room_world_editor,file_text_read_real(file));file_text_readln(file);
+    room_set_height(room_world_editor,file_text_read_real(file));file_text_readln(file);
+    file_text_close(file);
     room_goto(room_world_editor);
     break;
     }
@@ -59,10 +59,10 @@ switch(argument0)
     io_clear();
     global.save_loading = true;
     global.world_name = m_str[4];
-    var buff1 = buffer_load(m_str[4]);
-    room_set_width(room_world_editor,buffer_read(buff1,buffer_u32));
-    room_set_width(room_world_editor,buffer_read(buff1,buffer_u32));
-    buffer_delete(buff1);
+    var file = file_text_open_read(m_str[4]);file_text_readln(file);file_text_readln(file);
+    room_set_width(room_world_editor,file_text_read_real(file));file_text_readln(file);
+    room_set_height(room_world_editor,file_text_read_real(file));file_text_readln(file);
+    file_text_close(file);
     room_goto(room_world_editor);
     break;
     }
@@ -73,10 +73,10 @@ switch(argument0)
     io_clear();
     global.save_loading = true;
     global.world_name = m_str[5];
-    var buff1 = buffer_load(m_str[5]);
-    room_set_width(room_world_editor,buffer_read(buff1,buffer_u32));
-    room_set_width(room_world_editor,buffer_read(buff1,buffer_u32));
-    buffer_delete(buff1);
+    var file = file_text_open_read(m_str[5]);file_text_readln(file);file_text_readln(file);
+    room_set_width(room_world_editor,file_text_read_real(file));file_text_readln(file);
+    room_set_height(room_world_editor,file_text_read_real(file));file_text_readln(file);
+    file_text_close(file);
     room_goto(room_world_editor);
     break;
     }
@@ -87,10 +87,10 @@ switch(argument0)
     io_clear();
     global.save_loading = true;
     global.world_name = m_str[6];
-    var buff1 = buffer_load(m_str[6]);
-    room_set_width(room_world_editor,buffer_read(buff1,buffer_u32));
-    room_set_width(room_world_editor,buffer_read(buff1,buffer_u32));
-    buffer_delete(buff1);
+    var file = file_text_open_read(m_str[6]);file_text_readln(file);file_text_readln(file);
+    room_set_width(room_world_editor,file_text_read_real(file));file_text_readln(file);
+    room_set_height(room_world_editor,file_text_read_real(file));file_text_readln(file);
+    file_text_close(file);
     room_goto(room_world_editor);
     break;
     }
@@ -101,10 +101,10 @@ switch(argument0)
     io_clear();
     global.save_loading = true;
     global.world_name = m_str[7];
-    var buff1 = buffer_load(m_str[7]);
-    room_set_width(room_world_editor,buffer_read(buff1,buffer_u32));
-    room_set_width(room_world_editor,buffer_read(buff1,buffer_u32));
-    buffer_delete(buff1);
+    var file = file_text_open_read(m_str[7]);file_text_readln(file);file_text_readln(file);
+    room_set_width(room_world_editor,file_text_read_real(file));file_text_readln(file);
+    room_set_height(room_world_editor,file_text_read_real(file));file_text_readln(file);
+    file_text_close(file);
     room_goto(room_world_editor);
     break;
     }
@@ -115,10 +115,10 @@ switch(argument0)
     io_clear();
     global.save_loading = true;
     global.world_name = m_str[8];
-    var buff1 = buffer_load(m_str[8]);
-    room_set_width(room_world_editor,buffer_read(buff1,buffer_u32));
-    room_set_width(room_world_editor,buffer_read(buff1,buffer_u32));
-    buffer_delete(buff1);
+    var file = file_text_open_read(m_str[8]);file_text_readln(file);file_text_readln(file);
+    room_set_width(room_world_editor,file_text_read_real(file));file_text_readln(file);
+    room_set_height(room_world_editor,file_text_read_real(file));file_text_readln(file);
+    file_text_close(file);
     room_goto(room_world_editor);
     break;
     }
@@ -129,10 +129,10 @@ switch(argument0)
     io_clear();
     global.save_loading = true;
     global.world_name = m_str[9];
-    var buff1 = buffer_load(m_str[9]);
-    room_set_width(room_world_editor,buffer_read(buff1,buffer_u32));
-    room_set_width(room_world_editor,buffer_read(buff1,buffer_u32));
-    buffer_delete(buff1);
+    var file = file_text_open_read(m_str[9]);file_text_readln(file);file_text_readln(file);
+    room_set_width(room_world_editor,file_text_read_real(file));file_text_readln(file);
+    room_set_height(room_world_editor,file_text_read_real(file));file_text_readln(file);
+    file_text_close(file);
     room_goto(room_world_editor);
     break;
     }
@@ -143,10 +143,10 @@ switch(argument0)
     io_clear();
     global.save_loading = true;
     global.world_name = m_str[10];
-    var buff1 = buffer_load(m_str[10]);
-    room_set_width(room_world_editor,buffer_read(buff1,buffer_u32));
-    room_set_width(room_world_editor,buffer_read(buff1,buffer_u32));
-    buffer_delete(buff1);
+    var file = file_text_open_read(m_str[10]);file_text_readln(file);file_text_readln(file);
+    room_set_width(room_world_editor,file_text_read_real(file));file_text_readln(file);
+    room_set_height(room_world_editor,file_text_read_real(file));file_text_readln(file);
+    file_text_close(file);
     room_goto(room_world_editor);
     break;
     }

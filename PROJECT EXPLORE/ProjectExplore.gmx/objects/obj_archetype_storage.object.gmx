@@ -29,7 +29,6 @@
 active = true;
 selected = false;
 str1 = "";str2 = "";
-destroy_obj = false;
 mouse_frames = 0;
 obj_name = "";
 texture = 0;

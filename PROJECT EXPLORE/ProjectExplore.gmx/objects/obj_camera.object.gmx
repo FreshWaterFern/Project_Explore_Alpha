@@ -294,7 +294,7 @@ case 180:{for(i=0;i&lt;ds_list_size(data_x);i++)
 case 270:{for(i=0;i&lt;ds_list_size(data_x);i++)
 {w3d_draw_cube_ext(texture,texture,x+data_x[|i],y-data_y[|i],data_z1[|i],data_z2[|i],data_ysize[|i],data_xsize[|i]);}break;}}}
 }else
-{w3d_draw_sprite(sprite_index,0,x,y,0);}
+{w3d_draw_sprite_ext(sprite_index,0,x,y,0,1,1,angle,c_white,1);}
 }}
 
 // obj_archetype_storage
@@ -323,7 +323,7 @@ case 180:{for(i=0;i&lt;ds_list_size(data_x);i++)
 case 270:{for(i=0;i&lt;ds_list_size(data_x);i++)
 {w3d_draw_cube_ext(texture,texture,x+data_x[|i],y-data_y[|i],data_z1[|i],data_z2[|i],data_ysize[|i],data_xsize[|i]);}break;}}}
 }else
-{w3d_draw_sprite(sprite_index,0,x,y,0);}
+{w3d_draw_sprite_ext(sprite_index,0,x,y,0,1,1,angle,c_white,1);}
 }}
 
 // obj_archetype_cooking
@@ -352,7 +352,7 @@ case 180:{for(i=0;i&lt;ds_list_size(data_x);i++)
 case 270:{for(i=0;i&lt;ds_list_size(data_x);i++)
 {w3d_draw_cube_ext(texture,texture,x+data_x[|i],y-data_y[|i],data_z1[|i],data_z2[|i],data_ysize[|i],data_xsize[|i]);}break;}}}
 }else
-{w3d_draw_sprite(sprite_index,0,x,y,0);}
+{w3d_draw_sprite_ext(sprite_index,0,x,y,0,1,1,angle,c_white,1);}
 }}
 
 /// Items On The Ground

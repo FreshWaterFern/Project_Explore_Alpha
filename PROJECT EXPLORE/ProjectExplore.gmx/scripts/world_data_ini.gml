@@ -5,6 +5,10 @@ This will initialize all of the data structures
 and variables needed for the world
 */
 
+// World data \\
+global.world_obj_data = ds_list_create();
+global.world_obj_ind = ds_list_create();
+
 // Chunk, biome, and temperature data \\
 global.world_chunks = ds_grid_create(floor(room_width/1280)+15,floor(room_height/1280)+15);
 global.world_biomes = ds_grid_create(floor(room_width/1280)+15,floor(room_height/1280)+15);

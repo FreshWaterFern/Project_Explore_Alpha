@@ -1,103 +1,71 @@
 /// world_data_load(File)
 
-// -- -- -- -- Open .ini File -- -- -- -- \\
-var buff1 = buffer_load(string(argument0));
-buffer_seek(buff1,buffer_seek_start,8);
+var time_track = get_timer();
+file_log_write("Game load initiated| file: "+string(argument0)+" |"); // Log File Usage
 
-// -- -- -- -- Load Game Version -- -- -- -- \\
-var version = buffer_read(buff1,buffer_string);
-
-// -- -- -- -- Load Player Data -- -- -- -- \\
-global.char_hair_style = buffer_read(buff1,buffer_s16);
-global.char_hair_color = buffer_read(buff1,buffer_s16);
-global.char_shirt = buffer_read(buff1,buffer_s16);
-global.char_skin = buffer_read(buff1,buffer_s16);
-global.char_legs = buffer_read(buff1,buffer_s16);
-global.clothing_body = buffer_read(buff1,buffer_string);
-global.clothing_head = buffer_read(buff1,buffer_string);
-
-
-obj_game.v_hotbar_set = buffer_read(buff1,buffer_s8);
-obj_player.x = buffer_read(buff1,buffer_f32);
-obj_player.y = buffer_read(buff1,buffer_f32);
-obj_game.x = obj_player.x;
-obj_game.y = obj_player.y;
-view_xview[0] = obj_player.x-640;
-view_yview[0] = obj_player.y-360;
-obj_camera.x = obj_player.x;
-obj_camera.y = obj_player.y;
-global.pl_bleeding = buffer_read(buff1,buffer_f32);
-obj_game.c_food = buffer_read(buff1,buffer_f32);
-obj_game.c_thirst = buffer_read(buff1,buffer_f32);
-obj_game.c_health = buffer_read(buff1,buffer_f32);
-obj_game.c_sanity = buffer_read(buff1,buffer_f32);
-global.fishing_multiplier = buffer_read(buff1,buffer_f32);
-global.distance_travelled = buffer_read(buff1,buffer_f32);
-global.wolves_killed = buffer_read(buff1,buffer_u32);
-global.bears_killed = buffer_read(buff1,buffer_u32);
-global.bucks_killed = buffer_read(buff1,buffer_u32);
-global.stalkers_killed = buffer_read(buff1,buffer_u32);
-global.rippers_killed = buffer_read(buff1,buffer_u32);
-global.fish_caught = buffer_read(buff1,buffer_u32);
-global.trees_cut = buffer_read(buff1,buffer_u32);
-global.rocks_cut = buffer_read(buff1,buffer_u32);
-global.world_time = buffer_read(buff1,buffer_f32);
-global.world_days = buffer_read(buff1,buffer_u32);
-obj_game_weather.rain_active = buffer_read(buff1,buffer_bool);
-obj_game_weather.rain_ini = buffer_read(buff1,buffer_s32);
-obj_game_weather.rain_time = buffer_read(buff1,buffer_s32);
-obj_game_weather.previous_temperature = buffer_read(buff1,buffer_f32);
-global.weather_mode = buffer_read(buff1,buffer_u8);
-global.world_temperature_base = buffer_read(buff1,buffer_f32);
-global.waypoint_x = buffer_read(buff1,buffer_f32);
-global.waypoint_y = buffer_read(buff1,buffer_f32);
-ds_list_read(global.equip_list,buffer_read(buff1,buffer_string));
-ds_list_read(global.waypoint_data_x,buffer_read(buff1,buffer_string));
-ds_list_read(global.waypoint_data_y,buffer_read(buff1,buffer_string));
-ds_list_read(global.waypoint_data_name,buffer_read(buff1,buffer_string));
-ds_grid_read(global.c_inventory_pack,buffer_read(buff1,buffer_string));
-ds_grid_read(global.c_stack_pack,buffer_read(buff1,buffer_string));
-
-// Play audio for weather
-if ( global.weather_mode == 1 )
-{
-if ( audio_is_playing(snd_rain_loop1) == false )
-{
-audio_play_sound(snd_rain_loop1,3,true);
-}
-}
-
-// -- -- -- -- Load World Data -- -- -- -- \\
-ds_grid_read(global.world_chunks,buffer_read(buff1,buffer_string));
-ds_grid_read(global.world_biomes,buffer_read(buff1,buffer_string));
-ds_list_read(global.w_obj_index,buffer_read(buff1,buffer_string));
-ds_list_read(global.w_obj_x,buffer_read(buff1,buffer_string));
-ds_list_read(global.w_obj_y,buffer_read(buff1,buffer_string));
-ds_list_read(global.w_obj_var1,buffer_read(buff1,buffer_string));
-ds_list_read(global.w_obj_var2,buffer_read(buff1,buffer_string));
-ds_list_read(global.w_obj_var3,buffer_read(buff1,buffer_string));
-ds_list_read(global.w_obj_var4,buffer_read(buff1,buffer_string));
-ds_list_read(global.w_obj_angle,buffer_read(buff1,buffer_string));
-//ds_grid_read(global.world_tiles,buffer_read(buff1,buffer_string));
-global.world_tiles=world_read_compressed(string_delete(argument0,string_length(argument0)-3,5)+".world");
-ds_list_read(global.ai_xdecal,buffer_read(buff1,buffer_string));
-ds_list_read(global.ai_ydecal,buffer_read(buff1,buffer_string));
-ds_list_read(global.ai_sdecal,buffer_read(buff1,buffer_string));
-
-// -- -- -- -- Close .ini File -- -- -- -- \\
-buffer_delete(buff1);
-
-// Place objects based on data structures
-
-i = 0;
-r = 0;
+var i = 0;var r = 0;
 var temp_list = ds_list_create();
-var scale = 0;
-var obj_name = "";
-var inst = 0;//show_message(string(ds_list_find_value(global.w_obj_index,i)));
-for(i=0;i<ds_list_size(global.w_obj_index);i++)
+var list_copy = ds_list_create();
+var list_size = 0;var scale = 0;
+var obj_name = "";var inst = 0;
+var list_cache = 0;
+
+var file = file_text_open_read(argument0);
+
+// -- Build Version [BEGIN] -- \\
+var get_version = file_text_read_string(file);file_text_readln(file);
+if ( get_version != GAME_VERSION ){
+file_log_write("Save file is from version ("+string(get_version)+"), out-of-date, build version is "+string(GAME_VERSION));} // Log File Usage
+// -- Build Version [END] -- \\
+
+// -- World Size [BEGIN] -- \\
+repeat(3){file_text_readln(file);} // Skip this part, we don't need it right now
+// -- World Size [END] -- \\
+
+// -- Player Variables [BEGIN] -- \\
+file_text_readln(file);
+global.clothing_body = file_text_read_string(file);file_text_readln(file);
+global.clothing_head = file_text_read_string(file);file_text_readln(file);
+global.char_hair_style = file_text_read_real(file);file_text_readln(file);
+global.char_hair_color = file_text_read_real(file);file_text_readln(file);
+global.char_hair_shirt = file_text_read_real(file);file_text_readln(file);
+global.char_hair_skin = file_text_read_real(file);file_text_readln(file);
+global.char_hair_legs = file_text_read_real(file);file_text_readln(file);
+obj_game.v_hotbar_set = file_text_read_real(file);file_text_readln(file);
+obj_game.x = file_text_read_real(file);file_text_readln(file);
+obj_game.y = file_text_read_real(file);file_text_readln(file);
+global.pl_bleeding = file_text_read_real(file);file_text_readln(file);
+obj_game.c_food = file_text_read_real(file);file_text_readln(file);
+obj_game.c_thirst = file_text_read_real(file);file_text_readln(file);
+obj_game.c_health = file_text_read_real(file);file_text_readln(file);
+obj_game.c_sanity = file_text_read_real(file);file_text_readln(file);
+global.waypoint_x = file_text_read_real(file);file_text_readln(file);
+global.waypoint_y = file_text_read_real(file);file_text_readln(file);
+file_text_readln(file); // Equip list size goes here, size = 2
+global.equip_list[|0] = file_text_read_real(file);file_text_readln(file);
+global.equip_list[|1] = file_text_read_real(file);file_text_readln(file);
+
+list_cache = convert_string_to_list(file_text_read_string(file),",");file_text_readln(file);
+global.c_inventory_pack = convert_list_to_grid_real(list_cache,7,5);ds_list_destroy(list_cache);
+
+list_cache = convert_string_to_list(file_text_read_string(file),",");file_text_readln(file);
+global.c_stack_pack = convert_list_to_grid_real(list_cache,7,5);ds_list_destroy(list_cache);
+// -- Player Variables [END] -- \\
+/*
+list_size = file_text_read_real(file);file_text_readln(file);
+
+var i = 0;
+for(i=0;i<list_size;i++){
+ds_list_add(list_copy,file_text_read_string(file));file_text_readln(file);}*/
+
+file_text_close(file);
+/*
+//ds_list_copy(list_copy,global.world_obj_data);
+for(i=0;i<list_size;i++)
 {
-    inst = instance_create(ds_list_find_value(global.w_obj_x,i),ds_list_find_value(global.w_obj_y,i),objind(asset_get_index(string(ds_list_find_value(global.w_obj_index,i)))));
+    temp_list = convert_string_to_list(list_copy[|i],","); // Write our object data into a list
+    inst = instance_create(real(temp_list[|1]),real(temp_list[|2]),objind(asset_get_index(temp_list[|0])));
+    /*
     if ( instance_exists(inst) )
     {
     ds_list_add(global.w_obj_id,inst);
@@ -300,7 +268,10 @@ for(i=0;i<ds_list_size(global.w_obj_index);i++)
         break;
         }
     }
-    }
-}
+    }*/
+//}
 
 ds_list_destroy(temp_list);
+
+if ( file != -1 ){file_log_write("Game loaded successfully| file: "+string(argument0)+" |Time spent: "+string(get_timer()-time_track));} // Log File Usage
+else{file_log_write("Game load failed| file: "+string(argument0)+" |Time spent: "+string(get_timer()-time_track));} // Log File Usage

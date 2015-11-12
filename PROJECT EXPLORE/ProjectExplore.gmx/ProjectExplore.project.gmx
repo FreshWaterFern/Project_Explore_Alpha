@@ -4217,6 +4217,13 @@
   </backgrounds>
   <paths name="paths"/>
   <scripts name="scripts">
+    <scripts name="conversion">
+      <script>scripts\convert_string_to_list.gml</script>
+      <script>scripts\convert_string_to_list_real.gml</script>
+      <script>scripts\convert_list_to_string.gml</script>
+      <script>scripts\convert_grid_to_list.gml</script>
+      <script>scripts\convert_list_to_grid_real.gml</script>
+    </scripts>
     <scripts name="Inventory">
       <scripts name="handling">
         <script>scripts\inventory_initiate.gml</script>
@@ -4319,6 +4326,7 @@
       <script>scripts\world_data_load.gml</script>
       <script>scripts\world_obj_update.gml</script>
       <script>scripts\world_obj_delete.gml</script>
+      <script>scripts\world_object_list_create.gml</script>
     </scripts>
     <scripts name="chunks">
       <script>scripts\world_get_item.gml</script>
@@ -4327,7 +4335,6 @@
       <script>scripts\instance_reload.gml</script>
       <script>scripts\chunk_reload_section.gml</script>
       <script>scripts\objind.gml</script>
-      <script>scripts\world_write_compressed.gml</script>
       <script>scripts\world_read_compressed.gml</script>
       <scripts name="generate">
         <scripts name="base">
@@ -4370,9 +4377,6 @@
         <script>scripts\mod_item_ini.gml</script>
         <script>scripts\mod_crafting_ini.gml</script>
         <script>scripts\mod_object_ini.gml</script>
-      </scripts>
-      <scripts name="strings">
-        <script>scripts\convert_string_to_list.gml</script>
       </scripts>
       <scripts name="external">
         <script>scripts\draw_external_sprite.gml</script>
@@ -4659,12 +4663,10 @@
     <room>rooms\room_mplay</room>
     <room>rooms\room_deathscreen</room>
   </rooms>
-  <constants number="19">
+  <constants number="17">
     <constant name="DEV_MODE">1</constant>
     <constant name="TABLET_TEST">0</constant>
-    <constant name="crafting_anim_slow_spd">0.025</constant>
-    <constant name="crafting_anim_start_spd">8</constant>
-    <constant name="GAME_VERSION">"Preview Build 0.2.2.9"</constant>
+    <constant name="GAME_VERSION">"Preview Build 0.3.0.0"</constant>
     <constant name="wolf_armor">0.10</constant>
     <constant name="wolf_kb_resist">0.05</constant>
     <constant name="bear_armor">0.25</constant>

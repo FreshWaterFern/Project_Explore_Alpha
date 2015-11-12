@@ -59,4 +59,5 @@ if ( rot ){
 for(i=0;i<ds_list_size(data_x);i++)
 {px = (data_x[|i]*cos(theta))-(data_y[|i]*sin(theta));py = (data_x[|i]*sin(theta))+(data_y[|i]*cos(theta));data_x[|i]=px;data_y[|i]=py;}}
 }
+world_obj_add(id);
 }

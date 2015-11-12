@@ -1,6 +1,191 @@
 /// world_data_save(string)
 
+var time_track = get_timer();
+file_log_write("Game save initiated| file: "+string(argument0)+" |"); // Log File Usage
+
+var list_size = 0;
+var width = 0;var height = 0;
+var i = 0;var r = 0;
+var list_cache = 0;
+var str = "";
+var next_id = 0;var first_id = 0;var index_add = 0;var consec_tiles = 0;
+
+var file = file_text_open_write(argument0);
+
+
+
+// -- Build Version [BEGIN] -- \\
+file_text_write_string(file,string(GAME_VERSION));file_text_writeln(file);
+// -- Build Version [END] -- \\
+
+
+// -- World Size [BEGIN] -- \\
+file_text_write_string(file,"//--|World Size|--\\");file_text_writeln(file);
+file_text_write_real(file,room_width);file_text_writeln(file);
+file_text_write_real(file,room_height);file_text_writeln(file);
+// -- World Size [END] -- \\
+
+// -- Player Variables [BEGIN] -- \\
+file_text_write_string(file,"//--|Player Variables|--\\");file_text_writeln(file);
+file_text_write_string(file,global.clothing_body);file_text_writeln(file);
+file_text_write_string(file,global.clothing_head);file_text_writeln(file);
+file_text_write_real(file,global.char_hair_style);file_text_writeln(file);
+file_text_write_real(file,global.char_hair_color);file_text_writeln(file);
+file_text_write_real(file,global.char_shirt);file_text_writeln(file);
+file_text_write_real(file,global.char_skin);file_text_writeln(file);
+file_text_write_real(file,global.char_legs);file_text_writeln(file);
+file_text_write_real(file,obj_game.v_hotbar_set);file_text_writeln(file);
+file_text_write_real(file,obj_game.x);file_text_writeln(file);
+file_text_write_real(file,obj_game.y);file_text_writeln(file);
+file_text_write_real(file,global.pl_bleeding);file_text_writeln(file);
+file_text_write_real(file,obj_game.c_food);file_text_writeln(file);
+file_text_write_real(file,obj_game.c_thirst);file_text_writeln(file);
+file_text_write_real(file,obj_game.c_health);file_text_writeln(file);
+file_text_write_real(file,obj_game.c_sanity);file_text_writeln(file);
+file_text_write_real(file,global.waypoint_x);file_text_writeln(file);
+file_text_write_real(file,global.waypoint_y);file_text_writeln(file);
+
+list_size = ds_list_size(global.equip_list);
+file_text_write_real(file,list_size);file_text_writeln(file); // How big is global.equip_list?
+for(i=0;i<2;i++){
+file_text_write_real(file,global.equip_list[|i]);file_text_writeln(file);}
+
+list_cache = convert_grid_to_list(global.c_inventory_pack);
+str = convert_list_to_string(list_cache,",");
+file_text_write_string(file,str);file_text_writeln(file);
+ds_list_destroy(list_cache);
+
+list_cache = convert_grid_to_list(global.c_stack_pack);
+str = convert_list_to_string(list_cache,",");
+file_text_write_string(file,str);file_text_writeln(file);
+ds_list_destroy(list_cache);
+// -- Player Variables [END] -- \\
+
+// -- Player Statistics [BEGIN] -- \\
+file_text_write_string(file,"//--|Player Statistics|--\\");file_text_writeln(file);
+file_text_write_real(file,global.fishing_multiplier);file_text_writeln(file);
+file_text_write_real(file,global.distance_travelled);file_text_writeln(file);
+file_text_write_real(file,global.wolves_killed);file_text_writeln(file);
+file_text_write_real(file,global.bucks_killed);file_text_writeln(file);
+file_text_write_real(file,global.stalkers_killed);file_text_writeln(file);
+file_text_write_real(file,global.rippers_killed);file_text_writeln(file);
+file_text_write_real(file,global.fish_caught);file_text_writeln(file);
+file_text_write_real(file,global.trees_cut);file_text_writeln(file);
+file_text_write_real(file,global.rocks_cut);file_text_writeln(file);
+// -- Player Statistics [END] -- \\
+
+// -- World Data [BEGIN] -- \\
+file_text_write_string(file,"//--|World Data|--\\");file_text_writeln(file);
+file_text_write_real(file,global.world_time);file_text_writeln(file);
+file_text_write_real(file,global.world_days);file_text_writeln(file);
+file_text_write_real(file,obj_game_weather.rain_active);file_text_writeln(file);
+file_text_write_real(file,obj_game_weather.rain_ini);file_text_writeln(file);
+file_text_write_real(file,obj_game_weather.rain_time);file_text_writeln(file);
+file_text_write_real(file,obj_game_weather.previous_temperature);file_text_writeln(file);
+file_text_write_real(file,global.weather_mode);file_text_writeln(file);
+file_text_write_real(file,global.world_temperature_base);file_text_writeln(file);
+
+list_size = ds_list_size(global.waypoint_data_x);
+file_text_write_real(file,list_size);file_text_writeln(file); // How big is the waypoint data list?
+for(i=0;i<list_size;i++){
+file_text_write_real(file,global.waypoint_data_x[|i]);file_text_write_string(file,",");
+file_text_write_real(file,global.waypoint_data_y[|i]);file_text_write_string(file,",");
+file_text_write_string(file,global.waypoint_data_name[|i]);file_text_writeln(file);}
+
+/* World Decals */
+file_text_write_string(file,"//--|World Decals|--\\");file_text_writeln(file);
+list_size = ds_list_size(global.ai_xdecal);
+file_text_write_real(file,list_size);file_text_writeln(file);
+for(i=0;i<list_size;i++){
+file_text_write_real(file,global.ai_xdecal[|i]);file_text_writeln(file);
+file_text_write_real(file,global.ai_ydecal[|i]);file_text_writeln(file);
+file_text_write_string(file,global.ai_sdecal[|i]);file_text_writeln(file);}
+
+/* World Chunks */
+file_text_write_string(file,"//--|World Chunks|--\\");file_text_writeln(file);
+width = ds_grid_width(global.world_chunks);height = ds_grid_height(global.world_chunks);
+file_text_write_real(file,width);file_text_writeln(file);
+file_text_write_real(file,height);file_text_writeln(file);
+
+list_cache = convert_grid_to_list(global.world_chunks);
+// We are compressing the grid a bit for file storage
+list_size = ds_list_size(list_cache);
+for(i=0;i<list_size;i++){
+    consec_tiles = 1;
+    first_id = list_cache[|i];
+    next_id = list_cache[|i+1];
+    while (first_id == next_id){
+        consec_tiles++; i++;
+        next_id = list_cache[|i+1];
+    }
+    file_text_write_real(file,first_id);file_text_writeln(file);
+    file_text_write_real(file,consec_tiles);file_text_writeln(file);
+}
+ds_list_destroy(list_cache);
+
+/* World Biomes */
+file_text_write_string(file,"//--|World Biomes|--\\");file_text_writeln(file);
+width = ds_grid_width(global.world_biomes);height = ds_grid_height(global.world_biomes);
+file_text_write_real(file,width);file_text_writeln(file);
+file_text_write_real(file,height);file_text_writeln(file);
+
+list_cache = convert_grid_to_list(global.world_biomes);
+// We are compressing the grid a bit for file storage
+list_size = ds_list_size(list_cache);
+for(i=0;i<list_size;i++){
+    consec_tiles = 1;
+    first_id = list_cache[|i];
+    next_id = list_cache[|i+1];
+    while (first_id == next_id){
+        consec_tiles++; i++;
+        next_id = list_cache[|i+1];
+    }
+    file_text_write_real(file,first_id);file_text_writeln(file);
+    file_text_write_real(file,consec_tiles);file_text_writeln(file);
+}
+ds_list_destroy(list_cache);
+
+/* World Tiles */
+file_text_write_string(file,"//--|World Tiles|--\\");file_text_writeln(file);
+width = ds_grid_width(global.world_tiles);height = ds_grid_height(global.world_tiles);
+file_text_write_real(file,width);file_text_writeln(file);
+file_text_write_real(file,height);file_text_writeln(file);
+
+list_cache = convert_grid_to_list(global.world_tiles);
+// We are compressing the grid a bit for file storage
+list_size = ds_list_size(list_cache);
+for(i=0;i<list_size;i++){
+    consec_tiles = 1;
+    first_id = list_cache[|i];
+    next_id = list_cache[|i+1];
+    while (first_id == next_id){
+        consec_tiles++; i++;
+        next_id = list_cache[|i+1];
+    }
+    file_text_write_real(file,first_id);file_text_writeln(file);
+    file_text_write_real(file,consec_tiles);file_text_writeln(file);
+}
+ds_list_destroy(list_cache);
+// -- World Data [END] -- \\
+
+
+// -- Object Data [BEGIN] -- \\
+list_size = ds_list_size(global.world_obj_data);
+file_text_write_real(file,list_size);file_text_writeln(file); // How big is the object data list?
+
+for(i=0;i<list_size;i++){
+file_text_write_string(file,global.world_obj_data[|i]);file_text_writeln(file);}
+// -- Object Data [END] -- \\
+
+
+
+file_text_close(file);
+
+if ( file != -1 ){file_log_write("Game saved successfully| file: "+string(argument0)+" |Time spent: "+string(get_timer()-time_track)+"ms");} // Log File Usage
+else{file_log_write("Game save failed| file: "+string(argument0)+" |Time spent: "+string(get_timer()-time_track)+"ms");} // Log File Usage
+
 // Save Data Structures
+/*
 if ( os_type == os_windows )
 {
 var add_save = "";
@@ -43,76 +228,4 @@ if ( ini_read_string("data","save9","") != "" && slot_found == false or ini_read
 {ini_write_string("data","save9",argument0+add_save);slot_found = true;}else{ini_write_string("data","save9","");}
 ini_write_string("data","save1",argument0+add_save);
 ini_close();
-}
-
-var buff1 = buffer_create(64,buffer_grow,1);
-
-// -- -- -- -- Save Game Version -- -- -- -- \\
-
-buffer_write(buff1,buffer_u32,real(room_width));
-buffer_write(buff1,buffer_u32,real(room_height));
-buffer_write(buff1,buffer_string,"Version: 0.2.1.2");
-buffer_write(buff1,buffer_s16,global.char_hair_style);
-buffer_write(buff1,buffer_s16,global.char_hair_color);
-buffer_write(buff1,buffer_s16,global.char_shirt);
-buffer_write(buff1,buffer_s16,global.char_skin);
-buffer_write(buff1,buffer_s16,global.char_legs);
-buffer_write(buff1,buffer_string,string(global.clothing_body));
-buffer_write(buff1,buffer_string,string(global.clothing_head));
-buffer_write(buff1,buffer_s8,obj_game.v_hotbar_set);
-buffer_write(buff1,buffer_f32,obj_game.x); // Player Position X
-buffer_write(buff1,buffer_f32,obj_game.y); // Player Position Y
-buffer_write(buff1,buffer_f32,global.pl_bleeding);
-buffer_write(buff1,buffer_f32,obj_game.c_food); // Food
-buffer_write(buff1,buffer_f32,obj_game.c_thirst); // Thirst
-buffer_write(buff1,buffer_f32,obj_game.c_health); // Health
-buffer_write(buff1,buffer_f32,obj_game.c_sanity); // Sanity
-buffer_write(buff1,buffer_f32,global.fishing_multiplier);
-buffer_write(buff1,buffer_f32,global.distance_travelled);
-buffer_write(buff1,buffer_u32,global.wolves_killed);
-buffer_write(buff1,buffer_u32,global.bears_killed);
-buffer_write(buff1,buffer_u32,global.bucks_killed);
-buffer_write(buff1,buffer_u32,global.stalkers_killed);
-buffer_write(buff1,buffer_u32,global.rippers_killed);
-buffer_write(buff1,buffer_u32,global.fish_caught);
-buffer_write(buff1,buffer_u32,global.trees_cut);
-buffer_write(buff1,buffer_u32,global.rocks_cut);
-buffer_write(buff1,buffer_f32,global.world_time); // Time Of Day
-buffer_write(buff1,buffer_u32,global.world_days); // Days Passed
-buffer_write(buff1,buffer_bool,obj_game_weather.rain_active); // Rain Active
-buffer_write(buff1,buffer_s32,obj_game_weather.rain_ini);
-buffer_write(buff1,buffer_s32,obj_game_weather.rain_time);
-buffer_write(buff1,buffer_f32,obj_game_weather.previous_temperature);
-buffer_write(buff1,buffer_u8,global.weather_mode);
-buffer_write(buff1,buffer_f32,global.world_temperature_base);
-buffer_write(buff1,buffer_f32,global.waypoint_x);
-buffer_write(buff1,buffer_f32,global.waypoint_y);
-buffer_write(buff1,buffer_string,ds_list_write(global.equip_list));
-buffer_write(buff1,buffer_string,ds_list_write(global.waypoint_data_x));
-buffer_write(buff1,buffer_string,ds_list_write(global.waypoint_data_y));
-buffer_write(buff1,buffer_string,ds_list_write(global.waypoint_data_name));
-buffer_write(buff1,buffer_string,ds_grid_write(global.c_inventory_pack));
-buffer_write(buff1,buffer_string,ds_grid_write(global.c_stack_pack));
-buffer_write(buff1,buffer_string,ds_grid_write(global.world_chunks));
-buffer_write(buff1,buffer_string,ds_grid_write(global.world_biomes));
-buffer_write(buff1,buffer_string,ds_list_write(global.w_obj_index));
-buffer_write(buff1,buffer_string,ds_list_write(global.w_obj_x));
-buffer_write(buff1,buffer_string,ds_list_write(global.w_obj_y));
-buffer_write(buff1,buffer_string,ds_list_write(global.w_obj_var1));
-buffer_write(buff1,buffer_string,ds_list_write(global.w_obj_var2));
-buffer_write(buff1,buffer_string,ds_list_write(global.w_obj_var3));
-buffer_write(buff1,buffer_string,ds_list_write(global.w_obj_var4));
-buffer_write(buff1,buffer_string,ds_list_write(global.w_obj_angle));
-//buffer_write(buff1,buffer_string,ds_grid_write(global.world_tiles));
-buffer_write(buff1,buffer_string,ds_list_write(global.ai_xdecal));
-buffer_write(buff1,buffer_string,ds_list_write(global.ai_ydecal));
-buffer_write(buff1,buffer_string,ds_list_write(global.ai_sdecal));
-if ( obj_game.autosave_time != 0 ){
-file_delete(string(argument0+add_save));
-buffer_save(buff1,argument0+add_save);}else{
-file_delete(argument0+add_save);
-buffer_save(buff1,argument0+add_save);}
-buffer_delete(buff1);
-var str2 = string_replace(argument0+add_save,".sav",".world");
-world_write_compressed(global.world_tiles,str2);
-//show_message(string(str2));
+}*/

@@ -232,7 +232,7 @@ var sound = audio_play_sound_at(snd_wood_chop,x,y,0,300,900,1,false,5);
 audio_sound_gain(sound,0.25,0);
 instance_create(x,y,obj_woodcut_effect1);
 if ( tree_stack &gt; 0 ){
-var gain = clamp(other.resource_count-tree_stack,1,tree_stack);
+var gain = floor(clamp(other.resource_count-tree_stack,1,tree_stack));
 inventory_add(db_item_get_name(tree_item),gain,false);
 other.resource_count -= gain;
 var inst = instance_create(obj_player.x,obj_player.y,obj_popup_resourcegain);

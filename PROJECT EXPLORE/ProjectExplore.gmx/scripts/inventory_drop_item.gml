@@ -10,8 +10,8 @@ switch(argument2)
     global.c_inventory_pack[#argument0,argument1] = 0;
     global.c_stack_pack[#argument0,argument1] = 0;
     inst = instance_create(obj_player.x,obj_player.y,obj_item_dropped);
-    inst.item_id = item;
-    inst.item_stack = stack;
+    inst.item_id = item;inst.item_stack = stack;
+    world_obj_add(inst);
     break;
     }
     case 3:
@@ -22,8 +22,8 @@ switch(argument2)
     storage_id.c_inv[#argument0,argument1] = 0;
     storage_id.c_stack[#argument0,argument1] = 0;
     inst = instance_create(obj_player.x,obj_player.y,obj_item_dropped);
-    inst.item_id = item;
-    inst.item_stack = stack;
+    inst.item_id = item;inst.item_stack = stack;
+    world_obj_add(inst);
     break;
     }
 }

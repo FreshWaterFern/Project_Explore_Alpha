@@ -1170,22 +1170,24 @@ break;}
 case 2:{
 global.new_game = false;
 global.world_loading = true;
-global.map_loaded = true;
+if ( !global.map_loaded ){
 world_data_load(global.world_name);
+global.map_loaded = true;}
 global.world_name = string_replace(global.world_name,".sav","");
 global.world_name = string_replace(global.world_name,"_autosave","");
 loading_step = 3;
 break;}
 
 case 3:{
+loading_step = 4;
+global.world_loading = false;
+
 with(all){if ( object_index != obj_game_render &amp;&amp; object_index != obj_game_weather &amp;&amp; object_index != obj_game &amp;&amp; object_index != obj_vignette_noise &amp;&amp; object_index != obj_volume &amp;&amp; object_index != obj_player &amp;&amp; object_index != obj_camera )
 {instance_deactivate_object(id);}}
 instance_activate_region((global.chunk_x-1)*1280,(global.chunk_y-1)*1280,3840,3840,true);
 
 obj_player.previous_chunk_x = global.chunk_x;
 obj_player.previous_chunk_y = global.chunk_y;
-global.world_loading = false;
-loading_step = 4;
 break;}
 
 case 4:{
