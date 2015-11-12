@@ -4,11 +4,15 @@ var time_track = get_timer();
 file_log_write("Game load initiated| file: "+string(argument0)+" |"); // Log File Usage
 
 var i = 0;var r = 0;
-var temp_list = ds_list_create();
+var temp_list = 0;
 var list_copy = ds_list_create();
 var list_size = 0;var scale = 0;
 var obj_name = "";var inst = 0;
-var list_cache = 0;
+var list_cache = 0;var str = "";
+var width = 0;var height = 0;
+
+var current_tiles = 0;var total_tiles = 0;var end_read = 0;
+var tile_id = 0;var tile_count = 0;var rep_count = 0;
 
 var file = file_text_open_read(argument0);
 
@@ -34,6 +38,10 @@ global.char_hair_legs = file_text_read_real(file);file_text_readln(file);
 obj_game.v_hotbar_set = file_text_read_real(file);file_text_readln(file);
 obj_game.x = file_text_read_real(file);file_text_readln(file);
 obj_game.y = file_text_read_real(file);file_text_readln(file);
+obj_player.x = obj_game.x;
+obj_player.y = obj_game.y;
+obj_camera.x = obj_game.x;
+obj_camera.y = obj_game.y;
 global.pl_bleeding = file_text_read_real(file);file_text_readln(file);
 obj_game.c_food = file_text_read_real(file);file_text_readln(file);
 obj_game.c_thirst = file_text_read_real(file);file_text_readln(file);
@@ -51,227 +59,232 @@ global.c_inventory_pack = convert_list_to_grid_real(list_cache,7,5);ds_list_dest
 list_cache = convert_string_to_list(file_text_read_string(file),",");file_text_readln(file);
 global.c_stack_pack = convert_list_to_grid_real(list_cache,7,5);ds_list_destroy(list_cache);
 // -- Player Variables [END] -- \\
-/*
-list_size = file_text_read_real(file);file_text_readln(file);
 
-var i = 0;
+// -- Player Statistics [BEGIN] -- \\
+file_text_readln(file);
+global.fishing_multiplier = file_text_read_real(file);file_text_readln(file);
+global.distance_travelled = file_text_read_real(file);file_text_readln(file);
+global.wolves_killed = file_text_read_real(file);file_text_readln(file);
+global.bucks_killed = file_text_read_real(file);file_text_readln(file);
+global.stalkers_killed = file_text_read_real(file);file_text_readln(file);
+global.rippers_killed = file_text_read_real(file);file_text_readln(file);
+global.fish_caught = file_text_read_real(file);file_text_readln(file);
+global.trees_cut = file_text_read_real(file);file_text_readln(file);
+global.rocks_cut = file_text_read_real(file);file_text_readln(file);
+// -- Player Statistics [END] -- \\
+
+// -- World Data [BEGIN] -- \\
+file_text_readln(file);
+global.world_time = file_text_read_real(file);file_text_readln(file);
+global.world_days = file_text_read_real(file);file_text_readln(file);
+obj_game_weather.rain_active = file_text_read_real(file);file_text_readln(file);
+obj_game_weather.rain_ini = file_text_read_real(file);file_text_readln(file);
+obj_game_weather.rain_time = file_text_read_real(file);file_text_readln(file);
+obj_game_weather.previous_temperature = file_text_read_real(file);file_text_readln(file);
+global.weather_mode = file_text_read_real(file);file_text_readln(file);
+global.world_temperature_base = file_text_read_real(file);file_text_readln(file);
+
+/* Waypoint Data */
+list_size = file_text_read_real(file);file_text_readln(file);
 for(i=0;i<list_size;i++){
-ds_list_add(list_copy,file_text_read_string(file));file_text_readln(file);}*/
+ds_list_add(global.waypoint_data_x,file_text_read_real(file));file_text_readln(file);
+ds_list_add(global.waypoint_data_y,file_text_read_real(file));file_text_readln(file);
+ds_list_add(global.waypoint_data_name,file_text_read_string(file));file_text_readln(file);}
+
+/* World Decals */
+file_text_readln(file);
+list_size = file_text_read_real(file);file_text_readln(file);
+for(i=0;i<list_size;i++){
+ds_list_add(global.ai_xdecal,file_text_read_real(file));file_text_readln(file);
+ds_list_add(global.ai_ydecal,file_text_read_real(file));file_text_readln(file);
+ds_list_add(global.ai_sdecal,file_text_read_string(file));file_text_readln(file);}
+
+/* World Chunks */
+file_text_readln(file);
+width = file_text_read_real(file);file_text_readln(file);
+height = file_text_read_real(file);file_text_readln(file);
+
+file_text_readln(file); // -- Compression Begin -- //
+
+total_tiles = width*height;
+temp_list = ds_list_create();
+while(end_read == 0 ){
+tile_id = file_text_read_real(file);file_text_readln(file);
+tile_count = file_text_read_real(file);file_text_readln(file);
+current_tiles += tile_count;
+for(i=0;i<tile_count;i++){
+    ds_list_add(temp_list,tile_id);
+}
+if (current_tiles >= total_tiles){
+end_read = 1;
+}
+
+}
+
+for (i =0;i<width;i++) {
+    for (r=0; r<height;r++) {
+        global.world_chunks[#i,r] = temp_list[|i*height+r];
+    }
+}
+ds_list_destroy(temp_list);end_read = 0;current_tiles = 0;
+file_text_readln(file); // -- Compression End -- //
+
+/* World Biomes */
+file_text_readln(file);
+width = file_text_read_real(file);file_text_readln(file);
+height = file_text_read_real(file);file_text_readln(file);
+
+file_text_readln(file); // -- Compression Begin -- //
+
+total_tiles = width*height;
+temp_list = ds_list_create();
+while(end_read == 0 ){
+tile_id = file_text_read_real(file);file_text_readln(file);
+tile_count = file_text_read_real(file);file_text_readln(file);
+current_tiles += tile_count;
+for(i=0;i<tile_count;i++){
+    ds_list_add(temp_list,tile_id);
+}
+if (current_tiles >= total_tiles){
+end_read = 1;
+}
+
+}
+
+for (i =0;i<width;i++) {
+    for (r=0; r<height;r++) {
+        global.world_biomes[#i,r] = temp_list[|i*height+r];
+    }
+}
+ds_list_destroy(temp_list);end_read = 0;current_tiles = 0;
+file_text_readln(file); // -- Compression End -- //
+
+/* World Tiles */
+file_text_readln(file);
+width = file_text_read_real(file);file_text_readln(file);
+height = file_text_read_real(file);file_text_readln(file);
+
+file_text_readln(file); // -- Compression Begin -- //
+
+total_tiles = width*height;
+temp_list = ds_list_create();
+while(end_read == 0 ){
+tile_id = file_text_read_real(file);file_text_readln(file);
+tile_count = file_text_read_real(file);file_text_readln(file);
+current_tiles += tile_count;
+for(i=0;i<tile_count;i++){
+    ds_list_add(temp_list,tile_id);
+}
+if (current_tiles >= total_tiles){
+end_read = 1;
+}
+
+}
+
+for (i =0;i<width;i++) {
+    for (r=0; r<height;r++) {
+        global.world_tiles[#i,r] = temp_list[|i*height+r];
+    }
+}
+ds_list_destroy(temp_list);end_read = 0;current_tiles = 0;
+file_text_readln(file); // -- Compression End -- //
+// -- World Data [END] -- \\
+
+// -- Object Data [BEGIN] -- \\
+list_size = file_text_read_real(file);file_text_readln(file);
+for(i=0;i<list_size;i++){
+ds_list_add(list_copy,file_text_read_string(file));file_text_readln(file);}
+// -- Object Data [END] -- \\
 
 file_text_close(file);
-/*
-//ds_list_copy(list_copy,global.world_obj_data);
-for(i=0;i<list_size;i++)
+
+var loop_step = 0;
+for(loop_step=0;loop_step<list_size;loop_step++)
 {
-    temp_list = convert_string_to_list(list_copy[|i],","); // Write our object data into a list
-    inst = instance_create(real(temp_list[|1]),real(temp_list[|2]),objind(asset_get_index(temp_list[|0])));
-    /*
-    if ( instance_exists(inst) )
-    {
-    ds_list_add(global.w_obj_id,inst);
-    inst.image_angle = real(ds_list_find_value(global.w_obj_angle,i)); // image_angle
-    obj_name = object_get_name(inst.object_index);
+    temp_list = convert_string_to_list(list_copy[|loop_step],","); // Write our object data into a list
+    
+    obj_name = object_get_name(objind(asset_get_index(temp_list[|0])));
     switch(obj_name)
     {
         case "obj_world_tree_1":{
-        inst.resource_count = real(ds_list_find_value(global.w_obj_var1,i)); // resource_count
-        inst.height = real(ds_list_find_value(global.w_obj_var2,i)); // height
-        inst.tree_top_sub = real(ds_list_find_value(global.w_obj_var3,i)); // tree_top_sub
-        inst.tree_top_rot = real(ds_list_find_value(global.w_obj_var4,i)); // tree_top_rot
-        break;
-        }
+        inst = instance_create(real(temp_list[|1]),real(temp_list[|2]),objind(asset_get_index(temp_list[|0])));
+        inst.resource_id = temp_list[|4];
+        inst.resource_count = temp_list[|5];
+        inst.resource_max = temp_list[|6];
+        inst.tree_top_sub = temp_list[|7];
+        inst.tree_top_rot = temp_list[|8];
+        break;}
+        
         case "obj_world_rock_1":{
-        inst.sprite_index = asset_get_index(string(ds_list_find_value(global.w_obj_var1,i))); // sprite_index
-        inst.direction = real(ds_list_find_value(global.w_obj_var2,i)); // direction
-        scale = real(ds_list_find_value(global.w_obj_var3,i)); // scale
-        inst.scale_x = scale;inst.scale_y = scale;
-        inst.resource_count = real(ds_list_find_value(global.w_obj_var4,i)); // resource_count
-        break;
-        }
+        inst.resource_id = temp_list[|4];
+        inst.resource_count = temp_list[|5];
+        inst.scale_x = temp_list[|6];
+        inst.scale_y = temp_list[|7];
+        inst.direction = temp_list[|8];
+        break;}
+        
         case "obj_world_rock_2":{
-        inst.sprite_index = asset_get_index(string(ds_list_find_value(global.w_obj_var1,i))); // sprite_index
-        inst.direction = real(ds_list_find_value(global.w_obj_var2,i)); // direction
-        scale = real(ds_list_find_value(global.w_obj_var3,i)); // scale
-        inst.scale_x = scale;inst.scale_y = scale;
-        inst.resource_count = real(ds_list_find_value(global.w_obj_var4,i)); // resource_count
-        break;
-        }
-        case "obj_construct_wall":{
-        inst.construct_health = real(ds_list_find_value(global.w_obj_var1,i)); // resource_count
-        break;
-        }
-        case "obj_construct_pillar":{
-        inst.construct_health = real(ds_list_find_value(global.w_obj_var1,i)); // resource_count
-        break;
-        }
-        case "obj_construct_doorway":{
-        inst.construct_health = real(ds_list_find_value(global.w_obj_var1,i)); // resource_count
-        break;
-        }
-        case "obj_construct_door":{
-        inst.construct_health = real(ds_list_find_value(global.w_obj_var1,i)); // resource_count
-        inst.door_locked = real(ds_list_find_value(global.w_obj_var2,i)); // door_locked
-        inst.door_construct = real(ds_list_find_value(global.w_obj_var3,i)); // door_construct
-        break;
-        }
-        case "obj_construct_fence":{
-        inst.construct_health = real(ds_list_find_value(global.w_obj_var1,i)); // resource_count
-        break;
-        }
-        case "obj_construct_flag":{
-        inst.waypoint_name = string(ds_list_find_value(global.w_obj_var1,i));// waypoint_name
-        inst.waypoint_index = string(ds_list_find_value(global.w_obj_var2,i));// waypoint_index
-        inst.flag_color = real(ds_list_find_value(global.w_obj_var3,i)); // flag_color
-        break;
-        }
-        case "obj_npc_wolf":{
-        ds_list_read(temp_list,string(ds_list_find_value(global.w_obj_var1,i)));
-        inst.npc_food=temp_list[| 0];inst.npc_thirst=temp_list[| 1];
-        inst.npc_health=temp_list[| 2];inst.npc_anger=temp_list[| 3];
-        inst.npc_fear=temp_list[| 4];inst.npc_heat=temp_list[| 5];
-        inst.ai_dead=temp_list[| 6];inst.death_frames=temp_list[| 7];
-        ds_list_clear(temp_list);
-        break;
-        }
-        case "obj_npc_bear":{
-        ds_list_read(temp_list,string(ds_list_find_value(global.w_obj_var1,i)));
-        inst.npc_food=temp_list[| 0];inst.npc_thirst=temp_list[| 1];
-        inst.npc_health=temp_list[| 2];inst.npc_anger=temp_list[| 3];
-        inst.npc_fear=temp_list[| 4];inst.npc_heat=temp_list[| 5];
-        inst.ai_dead=temp_list[| 6];inst.death_frames=temp_list[| 7];
-        ds_list_clear(temp_list);
-        break;
-        }
-        case "obj_ai_nomadstalker":{
-        inst.npc_health = real(ds_list_find_value(global.w_obj_var1,i)); // npc_health
-        inst.ai_spawn_resource = real(ds_list_find_value(global.w_obj_var2,i)); // ai_spawn_resource
-        break;
-        }
-        case "obj_ai_nomadripper":{
-        inst.npc_health = string(ds_list_find_value(global.w_obj_var1,i)); // npc_health
-        inst.ai_spawn_resource = real(ds_list_find_value(global.w_obj_var2,i)); // ai_spawn_resource
-        break;
-        }
-        case "obj_npc_buck":{
-        ds_list_read(temp_list,string(ds_list_find_value(global.w_obj_var1,i)));
-        inst.npc_food=temp_list[| 0];inst.npc_thirst=temp_list[| 1];
-        inst.npc_health=temp_list[| 2];inst.npc_anger=temp_list[| 3];
-        inst.npc_fear=temp_list[| 4];inst.npc_heat=temp_list[| 5];
-        inst.ai_dead=temp_list[| 6];inst.death_frames=temp_list[| 7];
-        ds_list_clear(temp_list);
-        break;
-        }
-        case "obj_plant":{
-        inst.plant_type = real(ds_list_find_value(global.w_obj_var1,i)); // plant_type
-        inst.plant_state = real(ds_list_find_value(global.w_obj_var2,i)); // plant_state
-        break;
-        }
-        case "obj_smallcrate":{
-        with(inst)
-        {
-        ds_grid_read(c_inv,string(ds_list_find_value(global.w_obj_var1,other.i))); // c_inv
-        ds_grid_read(c_stack,string(ds_list_find_value(global.w_obj_var2,other.i))); // c_stack
-        }
-        break;
-        }
-        case "obj_largecrate":{
-        with(inst)
-        {
-        ds_grid_read(c_inv,string(ds_list_find_value(global.w_obj_var1,other.i))); // c_inv
-        ds_grid_read(c_stack,string(ds_list_find_value(global.w_obj_var2,other.i))); // c_stack
-        }
-        break;
-        }
-        case "obj_dead_skeleton1":{
-        with(inst)
-        {
-        ds_grid_read(c_inv,string(ds_list_find_value(global.w_obj_var1,other.i))); // c_inv
-        ds_grid_read(c_stack,string(ds_list_find_value(global.w_obj_var2,other.i))); // c_stack
-        }
-        break;
-        }
-        case "obj_furn_table1":{
-        with(inst)
-        {
-        ds_grid_read(c_inv,string(ds_list_find_value(global.w_obj_var1,other.i))); // c_inv
-        ds_grid_read(c_stack,string(ds_list_find_value(global.w_obj_var2,other.i))); // c_stack
-        }
-        break;
-        }
-        case "obj_furn_forgetable":{
-        with(inst)
-        {
-        ds_grid_read(c_inv,string(ds_list_find_value(global.w_obj_var1,other.i))); // c_inv
-        ds_grid_read(c_stack,string(ds_list_find_value(global.w_obj_var2,other.i))); // c_stack
-        }
-        break;
-        }
-        case "obj_furn_deconstructtable":{
-        with(inst)
-        {
-        ds_grid_read(c_inv,string(ds_list_find_value(global.w_obj_var1,other.i))); // c_inv
-        ds_grid_read(c_stack,string(ds_list_find_value(global.w_obj_var2,other.i))); // c_stack
-        }
-        break;
-        }
-        case "obj_furn_woodchest1":{
-        with(inst)
-        {
-        ds_grid_read(c_inv,string(ds_list_find_value(global.w_obj_var1,other.i))); // c_inv
-        ds_grid_read(c_stack,string(ds_list_find_value(global.w_obj_var2,other.i))); // c_stack
-        }
-        break;
-        }
-        case "obj_item_dropped":{
-        inst.item_id = real(ds_list_find_value(global.w_obj_var1,other.i)); // item_id
-        inst.item_stack = real(ds_list_find_value(global.w_obj_var2,other.i)); // item_stack
-        break;
-        }
-        case "obj_campfire":{
-        inst.is_enabled = real(ds_list_find_value(global.w_obj_var1,i)); // is_enabled
-        with(inst)
-        {
-        ds_grid_read(c_inv,string(ds_list_find_value(global.w_obj_var2,other.i))); // c_inv
-        ds_grid_read(c_stack,string(ds_list_find_value(global.w_obj_var3,other.i))); // c_stack
-        }
-        inst.burn_time = real(ds_list_find_value(global.w_obj_var4,i)); // burn_time
-        break;
-        }
-        case "obj_bigfire":{
-        inst.is_enabled = real(ds_list_find_value(global.w_obj_var1,i)); // is_enabled
-        with(inst)
-        {
-        ds_grid_read(c_inv,string(ds_list_find_value(global.w_obj_var2,other.i))); // c_inv
-        ds_grid_read(c_stack,string(ds_list_find_value(global.w_obj_var3,other.i))); // c_stack
-        }
-        inst.burn_time = real(ds_list_find_value(global.w_obj_var4,i)); // burn_time
-        break;
-        }
-        case "obj_lantern":{
-        inst.is_enabled = real(ds_list_find_value(global.w_obj_var1,i)); // is_enabled
-        break;
-        }
+        inst.resource_id = temp_list[|4];
+        inst.resource_count = temp_list[|5];
+        inst.scale_x = temp_list[|6];
+        inst.scale_y = temp_list[|7];
+        inst.direction = temp_list[|8];
+        break;}
+        
         case "obj_env_plant1":{
-        inst.leaf_status = real(ds_list_find_value(global.w_obj_var1,i)); // leaf_status
-        break;
-        }
+        inst.image_angle = temp_list[|4];
+        inst.leaf_status = temp_list[|5];
+        inst.leaf_growth= temp_list[|6];
+        inst.max_leaves = temp_list[|7];
+        break;}
+        
         case "obj_env_plant2":{
-        inst.leaf_status = real(ds_list_find_value(global.w_obj_var1,i)); // leaf_status
-        break;
-        }
+        inst.image_angle = temp_list[|4];
+        inst.leaf_status = temp_list[|5];
+        inst.leaf_growth= temp_list[|6];
+        inst.max_leaves = temp_list[|7];
+        break;}
+        
         case "obj_env_plant3":{
-        inst.leaf_status = real(ds_list_find_value(global.w_obj_var1,i)); // leaf_status
-        break;
-        }
+        inst.image_angle = temp_list[|4];
+        inst.leaf_status = temp_list[|5];
+        inst.leaf_growth= temp_list[|6];
+        inst.max_leaves = temp_list[|7];
+        break;}
+        
         case "obj_env_bush1":{
-        inst.leaf_status = real(ds_list_find_value(global.w_obj_var1,i)); // leaf_status
-        break;
-        }
+        inst.image_angle = temp_list[|4];
+        inst.leaf_status = temp_list[|5];
+        inst.leaf_growth= temp_list[|6];
+        inst.max_leaves = temp_list[|7];
+        break;}
+        
+        case "obj_wolf_grave":{
+        inst.fade_time = temp_list[|4];
+        break;}
+        
+        case "obj_archetype_storage":{
+        inst = world_create_instance(real(temp_list[|1]),real(temp_list[|2]),objind(asset_get_index(temp_list[|0])),temp_list[|ds_list_size(temp_list)-1],real(temp_list[|3]))
+        inst.index = real(temp_list[|3]);
+        width = real(temp_list[|4]);height = real(temp_list[|5]);
+        list_cache = ds_list_create();
+        for(i=6;i<(6+(width*height));i++){
+        ds_list_add(list_cache,real(temp_list[|i]));}
+        inst.c_inv = convert_list_to_grid_real(list_cache,width,height);
+        ds_list_destroy(list_cache);
+        list_cache = ds_list_create();
+        for(r=i;r<(i+(width*height));r++){
+        ds_list_add(list_cache,real(temp_list[|r]));}
+        inst.c_stack = convert_list_to_grid_real(list_cache,width,height);
+        ds_list_destroy(list_cache);
+        world_obj_add(inst.id);
+        break;}
     }
-    }*/
-//}
+ds_list_destroy(temp_list);
+}
 
 ds_list_destroy(temp_list);
+ds_list_destroy(list_copy);
 
 if ( file != -1 ){file_log_write("Game loaded successfully| file: "+string(argument0)+" |Time spent: "+string(get_timer()-time_track));} // Log File Usage
 else{file_log_write("Game load failed| file: "+string(argument0)+" |Time spent: "+string(get_timer()-time_track));} // Log File Usage

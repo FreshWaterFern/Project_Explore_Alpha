@@ -4222,6 +4222,7 @@
       <script>scripts\convert_string_to_list_real.gml</script>
       <script>scripts\convert_list_to_string.gml</script>
       <script>scripts\convert_grid_to_list.gml</script>
+      <script>scripts\convert_grid_to_list_string.gml</script>
       <script>scripts\convert_list_to_grid_real.gml</script>
     </scripts>
     <scripts name="Inventory">
@@ -4326,6 +4327,7 @@
       <script>scripts\world_data_load.gml</script>
       <script>scripts\world_obj_update.gml</script>
       <script>scripts\world_obj_delete.gml</script>
+      <script>scripts\world_create_instance.gml</script>
       <script>scripts\world_object_list_create.gml</script>
     </scripts>
     <scripts name="chunks">

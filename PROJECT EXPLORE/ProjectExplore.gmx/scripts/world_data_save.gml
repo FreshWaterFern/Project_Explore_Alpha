@@ -85,6 +85,7 @@ file_text_write_real(file,obj_game_weather.previous_temperature);file_text_write
 file_text_write_real(file,global.weather_mode);file_text_writeln(file);
 file_text_write_real(file,global.world_temperature_base);file_text_writeln(file);
 
+/* Waypoint Data */
 list_size = ds_list_size(global.waypoint_data_x);
 file_text_write_real(file,list_size);file_text_writeln(file); // How big is the waypoint data list?
 for(i=0;i<list_size;i++){
@@ -107,6 +108,7 @@ width = ds_grid_width(global.world_chunks);height = ds_grid_height(global.world_
 file_text_write_real(file,width);file_text_writeln(file);
 file_text_write_real(file,height);file_text_writeln(file);
 
+file_text_write_string(file,"--Compression Begin--");file_text_writeln(file);
 list_cache = convert_grid_to_list(global.world_chunks);
 // We are compressing the grid a bit for file storage
 list_size = ds_list_size(list_cache);
@@ -123,12 +125,15 @@ for(i=0;i<list_size;i++){
 }
 ds_list_destroy(list_cache);
 
+file_text_write_string(file,"--Compression End--");file_text_writeln(file);
+
 /* World Biomes */
 file_text_write_string(file,"//--|World Biomes|--\\");file_text_writeln(file);
 width = ds_grid_width(global.world_biomes);height = ds_grid_height(global.world_biomes);
 file_text_write_real(file,width);file_text_writeln(file);
 file_text_write_real(file,height);file_text_writeln(file);
 
+file_text_write_string(file,"--Compression Begin--");file_text_writeln(file);
 list_cache = convert_grid_to_list(global.world_biomes);
 // We are compressing the grid a bit for file storage
 list_size = ds_list_size(list_cache);
@@ -145,12 +150,15 @@ for(i=0;i<list_size;i++){
 }
 ds_list_destroy(list_cache);
 
+file_text_write_string(file,"--Compression End--");file_text_writeln(file);
+
 /* World Tiles */
 file_text_write_string(file,"//--|World Tiles|--\\");file_text_writeln(file);
 width = ds_grid_width(global.world_tiles);height = ds_grid_height(global.world_tiles);
 file_text_write_real(file,width);file_text_writeln(file);
 file_text_write_real(file,height);file_text_writeln(file);
 
+file_text_write_string(file,"--Compression Begin--");file_text_writeln(file);
 list_cache = convert_grid_to_list(global.world_tiles);
 // We are compressing the grid a bit for file storage
 list_size = ds_list_size(list_cache);
@@ -166,6 +174,8 @@ for(i=0;i<list_size;i++){
     file_text_write_real(file,consec_tiles);file_text_writeln(file);
 }
 ds_list_destroy(list_cache);
+
+file_text_write_string(file,"--Compression End--");file_text_writeln(file);
 // -- World Data [END] -- \\
 
 

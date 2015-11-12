@@ -1,13 +1,13 @@
-/// player_create_object(x,y,object,rotation)
+/// player_create_object(x,y,object,rotation,index)
 
-var inst = instance_create(floor(argument0),floor(argument1),floor(argument2));
+var inst = instance_create(argument0,argument1,argument2);
 
-inst.angle = floor(argument3);
+inst.angle = argument3;
 with(inst){ // Parse mod information into the instance
-var list = ds_list_create();var i = 0;var object_id = db_object_get_name(global.item_data[#other.v_item_equipped,0]);
+var list = ds_list_create();var i = 0;var object_id = db_object_get_name(global.item_data[#argument4,0]);
 list = object_mod_inherit(object_id);
 obj_name=list[|0];
-index=other.v_item_equipped;
+index=argument4;
 texture=background_get_texture(real(list[|1]));
 sprite_index=real(list[|2]);
 type=real(list[|3]);
@@ -61,3 +61,5 @@ for(i=0;i<ds_list_size(data_x);i++)
 }
 world_obj_add(id);
 }
+
+return inst;

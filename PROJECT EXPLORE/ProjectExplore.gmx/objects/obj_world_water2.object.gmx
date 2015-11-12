@@ -36,7 +36,6 @@ if ( global.save_loading == false )
 x -= 64;
 y -= 64;
 }
-world_obj_add(id);
 
 bobber_x = x;
 bobber_y = y;

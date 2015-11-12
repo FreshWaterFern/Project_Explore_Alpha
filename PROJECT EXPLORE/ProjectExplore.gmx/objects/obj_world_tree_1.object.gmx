@@ -34,6 +34,7 @@ resource_count = 8;
 resource_max = 8;
 height = 96;
 height_depth = 96;
+index = 0;
 
 tree_top_sub = choose(0,1,2);
 tree_top_rot = round(random_range(0,360));

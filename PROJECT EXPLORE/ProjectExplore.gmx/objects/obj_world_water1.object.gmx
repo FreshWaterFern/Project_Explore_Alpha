@@ -31,7 +31,6 @@ destroy_obj = false;
 active = false;
 fishing = false;
 alarm[1]=1;
-world_obj_add(id);
 
 bobber_x = x;
 bobber_y = y;

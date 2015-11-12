@@ -13,6 +13,7 @@ var str = "";
 ds_list_add(list,string(argument0));
 ds_list_add(list,inst_id.x);
 ds_list_add(list,inst_id.y);
+ds_list_add(list,inst_id.index);
 
 switch(argument0)
 {
@@ -42,28 +43,28 @@ case "obj_world_rock_2":{
 break;}
 
 case "obj_env_plant1":{
-    ds_list_add(list,inst.image_angle);
+    ds_list_add(list,inst_id.image_angle);
     ds_list_add(list,inst_id.leaf_status);
     ds_list_add(list,inst_id.leaf_growth);
     ds_list_add(list,inst_id.max_leaves);
 break;}
 
 case "obj_env_plant2":{
-    ds_list_add(list,inst.image_angle);
+    ds_list_add(list,inst_id.image_angle);
     ds_list_add(list,inst_id.leaf_status);
     ds_list_add(list,inst_id.leaf_growth);
     ds_list_add(list,inst_id.max_leaves);
 break;}
 
 case "obj_env_plant3":{
-    ds_list_add(list,inst.image_angle);
+    ds_list_add(list,inst_id.image_angle);
     ds_list_add(list,inst_id.leaf_status);
     ds_list_add(list,inst_id.leaf_growth);
     ds_list_add(list,inst_id.max_leaves);
 break;}
 
 case "obj_env_bush1":{
-    ds_list_add(list,inst.image_angle);
+    ds_list_add(list,inst_id.image_angle);
     ds_list_add(list,inst_id.leaf_status);
     ds_list_add(list,inst_id.leaf_growth);
     ds_list_add(list,inst_id.max_leaves);
@@ -83,6 +84,8 @@ case "obj_archetype_basic":{
 break;}
 
 case "obj_archetype_storage":{
+    ds_list_add(list,string(ds_grid_width(inst_id.c_inv)));
+    ds_list_add(list,string(ds_grid_height(inst_id.c_inv)));
     list_cache = convert_grid_to_list(inst_id.c_inv);
     str = convert_list_to_string(list_cache,",");
     ds_list_add(list,str);ds_list_destroy(list_cache);
