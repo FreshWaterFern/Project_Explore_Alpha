@@ -2738,23 +2738,6 @@
             <filename>items.txt</filename>
           </datafile>
           <datafile>
-            <name>items_super_nymph.txt</name>
-            <exists>-1</exists>
-            <size>201</size>
-            <exportAction>2</exportAction>
-            <exportDir></exportDir>
-            <overwrite>0</overwrite>
-            <freeData>-1</freeData>
-            <removeEnd>0</removeEnd>
-            <store>0</store>
-            <ConfigOptions>
-              <Config name="Default">
-                <CopyToMask>9223372036854775807</CopyToMask>
-              </Config>
-            </ConfigOptions>
-            <filename>items_super_nymph.txt</filename>
-          </datafile>
-          <datafile>
             <name>weapons.txt</name>
             <exists>-1</exists>
             <size>3137</size>
@@ -4118,7 +4101,6 @@
       <sprite>sprites\spr_lightglow_1</sprite>
     </sprites>
     <sprites name="text input">
-      <sprite>sprites\spr_input_text_cursor_default</sprite>
       <sprite>sprites\spr_input_1</sprite>
     </sprites>
     <sprites name="effects">
@@ -4344,22 +4326,6 @@
         </scripts>
       </scripts>
     </scripts>
-    <scripts name="Text Inputs">
-      <script>scripts\input_text_create_singleline.gml</script>
-      <script>scripts\input_text_create_singleline_ext.gml</script>
-      <script>scripts\input_text_create_multiline.gml</script>
-      <script>scripts\input_text_create_multiline_ext.gml</script>
-      <script>scripts\input_text_create.gml</script>
-      <script>scripts\input_text_set_enabled.gml</script>
-      <script>scripts\input_text_get_text.gml</script>
-      <script>scripts\input_text_get_text_width.gml</script>
-      <script>scripts\input_text_get_text_height.gml</script>
-      <script>scripts\input_text_set_text.gml</script>
-      <script>scripts\input_text_set_transformation.gml</script>
-      <script>scripts\input_text_set_misc.gml</script>
-      <script>scripts\string_lettersdigits_universal.gml</script>
-      <script>scripts\clamp2.gml</script>
-    </scripts>
     <scripts name="attack scripts">
       <script>scripts\npc_attack_player.gml</script>
       <script>scripts\scr_attack_handle.gml</script>
@@ -4420,11 +4386,14 @@
         <script>scripts\unload_world_data.gml</script>
       </scripts>
     </scripts>
+    <scripts name="rendering">
+      <script>scripts\draw_sprite_motionblur.gml</script>
+    </scripts>
   </scripts>
   <shaders name="shaders">
     <shader type="GLSLES">shaders\shd_vignette_noise.shader</shader>
-    <shader type="GLSLES">shaders\sh_input_text_selection.shader</shader>
     <shader type="GLSLES">shaders\shd_bright_contrast.shader</shader>
+    <shader type="GLSLES">shaders\shd_overlay.shader</shader>
   </shaders>
   <fonts name="fonts">
     <font>fonts\font_gulim_8</font>
@@ -4455,7 +4424,6 @@
     </objects>
     <objects name="logic">
       <object>objects\obj_game</object>
-      <object>objects\obj_input_text</object>
       <objects name="gui">
         <object>objects\obj_waypoint_gui</object>
       </objects>
@@ -4488,7 +4456,6 @@
         <object>objects\obj_rockhit_effect1</object>
         <object>objects\obj_blood_hit1</object>
         <object>objects\obj_muzzleflash_1</object>
-        <object>objects\obj_vignette_noise</object>
       </objects>
       <objects name="collision">
         <objects name="hitbox">

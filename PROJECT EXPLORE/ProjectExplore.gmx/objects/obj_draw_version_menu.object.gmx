@@ -76,15 +76,20 @@ background_delete(bg_main);
             <string>draw_set_font(font_verdana_12);
 draw_set_color(c_black);
 draw_set_alpha(0.5);
-draw_rectangle(4,702,string_width(GAME_VERSION)+10,718,false);
+draw_rectangle(628-(string_width(global.mod_version)/2),696,652+(string_width(global.mod_version)/2),720,false);
+draw_rectangle(0,696,20+string_width(GAME_VERSION),720,false);
+draw_rectangle(view_wview[0]-20-string_width("Hello "+string(name)+"!"),696,view_wview[0],720,false);
 draw_set_color(c_white);
 draw_set_alpha(1);
 draw_set_halign(fa_left);
 draw_set_valign(fa_middle);
-draw_text(8,710,GAME_VERSION);
+draw_text(8,708,GAME_VERSION);
+
+draw_set_halign(fa_center);
+draw_text(640,708,global.mod_version);
 
 draw_set_halign(fa_right);
-draw_text(view_wview[0]-8,710,"Hello "+string(name)+"!");
+draw_text(view_wview[0]-8,708,"Hello "+string(name)+"!");
 </string>
           </argument>
         </arguments>

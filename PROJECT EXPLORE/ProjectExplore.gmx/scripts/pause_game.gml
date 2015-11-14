@@ -12,7 +12,7 @@ instance_activate_object(obj_game);
 instance_activate_object(obj_volume);*/
 with(all)
 {
-if ( object_index != obj_game_render && object_index != obj_game_weather && object_index != obj_game && object_index != obj_volume )
+if ( object_index != obj_game_render && object_index != obj_camera && object_index != obj_game_weather && object_index != obj_game && object_index != obj_volume )
 {
 instance_deactivate_object(self);
 }
@@ -27,13 +27,7 @@ else
 audio_resume_all();
 with(obj_pause_menu){instance_destroy();}
 global.game_pause = false;
-//instance_activate_object(obj_game_render);
-//instance_activate_object(obj_game_weather);
-//instance_activate_object(obj_game);
-instance_activate_object(obj_vignette_noise);
-//instance_activate_object(obj_volume);
 instance_activate_object(obj_player);
-instance_activate_object(obj_camera);
 instance_activate_region((global.chunk_x-1)*1280,(global.chunk_y-1)*1280,3840,3840,true);
 obj_game.render_gui_1 = true;
 obj_game.render_world_tiles = true;

@@ -38,7 +38,7 @@ m_str[0] = "Create World";
 global.world_size = "Small";
 
 text_inst = instance_create(x+242,y+143,obj_menu_name_world);
-input_text_set_text(text_inst.instance,"Default_World");
+text_inst.str = "Default World";
 </string>
           </argument>
         </arguments>

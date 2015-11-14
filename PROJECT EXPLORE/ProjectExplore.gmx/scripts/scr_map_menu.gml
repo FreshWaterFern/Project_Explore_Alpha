@@ -6,7 +6,7 @@ switch(argument0)
     global.save_loading = false;
     m_control = false;
     audio_play_sound(snd_click01,4,false);
-    with(text_inst){global.world_name = input_text_get_text(instance);}
+    with(text_inst){global.world_name = str;}
     if ( os_type != os_windows )
     {global.world_name = global.world_name + ".sav";}
     room_goto(room_character_editor);

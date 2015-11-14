@@ -8,6 +8,46 @@
   <parentName>&lt;undefined&gt;</parentName>
   <maskName>&lt;undefined&gt;</maskName>
   <events>
+    <event eventtype="0" enumb="0">
+      <action>
+        <libid>1</libid>
+        <id>603</id>
+        <kind>7</kind>
+        <userelative>0</userelative>
+        <isquestion>0</isquestion>
+        <useapplyto>-1</useapplyto>
+        <exetype>2</exetype>
+        <functionname></functionname>
+        <codestring></codestring>
+        <whoName>self</whoName>
+        <relative>0</relative>
+        <isnot>0</isnot>
+        <arguments>
+          <argument>
+            <kind>1</kind>
+            <string>/// Initialize Post Processing Effects
+render_surface = surface_create(view_wview,view_hview);
+color_surface = surface_create(4,4);
+tex_overlay = shader_get_sampler_index(shd_overlay,"texOverlay");
+
+
+// Brightness/Contrast
+uni_brightness_amount = shader_get_uniform(shd_bright_contrast,"brightness_amount");
+var_brightness_amount = -0.1;
+
+uni_contrast_amount = shader_get_uniform(shd_bright_contrast,"contrast_amount");
+var_contrast_amount = 0.15;
+
+
+// Vignette Noise
+uni_settings = shader_get_uniform(shd_vignette_noise, "u_settings");
+uni_vignette_colour = shader_get_uniform(shd_vignette_noise, "u_vignette_colour");
+
+</string>
+          </argument>
+        </arguments>
+      </action>
+    </event>
     <event eventtype="3" enumb="2">
       <action>
         <libid>1</libid>
@@ -25,8 +65,14 @@
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>x+= (obj_player.x-x)/14; //10 is faster, 40 slower
+            <string>// Camera Movement &amp; Surface Fix
+
+if ( !global.game_pause ){
+
+x+= (obj_player.x-x)/14; //10 is faster, 40 slower
 y+= (obj_player.y-y)/14;
+
+}
 </string>
           </argument>
         </arguments>
@@ -50,6 +96,8 @@ y+= (obj_player.y-y)/14;
           <argument>
             <kind>1</kind>
             <string>/// Render World Objects ( Batches )
+
+if ( !global.game_pause ){
 
 draw_set_color(c_white);draw_set_alpha(1);
 
@@ -80,6 +128,18 @@ if ( active == true ){
 if ( resource_count &gt;= resource_max ){
 w3d_draw_sprite_ext(spr_tree_top1,tree_top_sub,x,y,height,1,1,tree_top_rot,c_white,tree_top_alpha);}
 }}}
+
+// Birds
+if (instance_exists(obj_bird1)){
+with(obj_bird1){
+direction = image_angle;
+if ( obj_game.m_motionblur ){
+draw_sprite_motionblur(point_distance(x,y,xprevious,yprevious),point_direction(x,y,xprevious,yprevious),x,y,0);}
+else{
+draw_sprite_ext(sprite_index,image_index,x,y,1,1,image_angle,c_white,0.1);}
+}}
+
+}
 </string>
           </argument>
         </arguments>
@@ -103,6 +163,8 @@ w3d_draw_sprite_ext(spr_tree_top1,tree_top_sub,x,y,height,1,1,tree_top_rot,c_whi
           <argument>
             <kind>1</kind>
             <string>/// Render GUIs
+
+if ( !global.game_pause ){
 
 // Basic Objects
 if (instance_exists(obj_archetype_basic)){
@@ -216,6 +278,100 @@ if ( mouse_frames &lt; 1 )
 {draw_text_outline(string(keyboard_get_str(obj_player.key_walk_main)),x_draw,y_draw,c_white,c_black);}
 else
 {draw_text_outline(string(keyboard_get_str(obj_player.key_walk_main)),x_draw,y_draw,c_dkgray,c_black);}}}}}}
+
+}
+</string>
+          </argument>
+        </arguments>
+      </action>
+      <action>
+        <libid>1</libid>
+        <id>603</id>
+        <kind>7</kind>
+        <userelative>0</userelative>
+        <isquestion>0</isquestion>
+        <useapplyto>-1</useapplyto>
+        <exetype>2</exetype>
+        <functionname></functionname>
+        <codestring></codestring>
+        <whoName>self</whoName>
+        <relative>0</relative>
+        <isnot>0</isnot>
+        <arguments>
+          <argument>
+            <kind>1</kind>
+            <string>/// Shaders
+
+if ( !global.game_pause ){
+
+if ( !surface_exists(render_surface) ){
+render_surface = surface_create(view_wview,view_hview);}
+
+if ( !surface_exists(color_surface) ){
+color_surface = surface_create(4,4);}
+
+draw_set_color(c_white);draw_set_alpha(1);
+
+var time = global.world_time;
+var env_color = make_colour_rgb(obj_game_render.color_red_blend,obj_game_render.color_green_blend,obj_game_render.color_blue_blend)
+
+surface_set_target(color_surface);
+draw_clear_alpha(0,0);
+draw_set_color(env_color);
+draw_set_alpha(obj_game_render.alpha);
+draw_rectangle(0,0,4,4,0);
+surface_reset_target();
+
+draw_set_color(c_white);draw_set_alpha(1);
+
+surface_set_target(render_surface);
+draw_clear_alpha(0,0);
+shader_set(shd_overlay);
+texture_set_stage(tex_overlay,surface_get_texture(color_surface));
+draw_surface(application_surface,0,0);
+shader_reset();
+surface_reset_target();
+
+surface_set_target(render_surface);
+shader_set(shd_bright_contrast);
+var var_brightness_amount = -0.35;
+var var_contrast_amount = 0.2;
+shader_set_uniform_f(uni_brightness_amount, var_brightness_amount);
+shader_set_uniform_f(uni_contrast_amount, var_contrast_amount );
+draw_surface(application_surface,0,0);
+shader_reset();
+surface_reset_target();
+
+// Vignette changes based on various parts of day
+
+var vig_alpha = 0.75;
+if ( global.world_time &gt;= 1 &amp;&amp; global.world_time &lt;= 4 ){
+vig_alpha = clamp(0.75-((global.world_time-1)/6),0,1);}
+
+if ( global.world_time &gt; 4 &amp;&amp; global.world_time &lt;= 9 ){
+vig_alpha = clamp(0.25-((global.world_time-4)/40),0,1);}
+
+if ( global.world_time &gt; 9 &amp;&amp; global.world_time &lt;= 14 ){
+vig_alpha = clamp(0.125+((global.world_time-9)/72.5),0,1);}
+
+if ( global.world_time &gt; 14 &amp;&amp; global.world_time &lt;= 20 ){
+vig_alpha = clamp(0.25+((global.world_time-14)/12),0,1);}
+
+show_debug_message(string(vig_alpha));
+
+surface_set_target(render_surface);
+shader_set(shd_vignette_noise);
+shader_set_uniform_f(uni_settings,(0.8*(vig_alpha+1)),(0.7*(vig_alpha+1))/2,0.03,1); //vignette inner circle size, vignette outter circle size, noise strength, noise enable (1 or 0 only).
+shader_set_uniform_f(uni_vignette_colour,obj_game_render.color_red,obj_game_render.color_green,obj_game_render.color_blue); //R,G,B - 0 to 255
+draw_surface_ext(application_surface,0,0,1,1,0,c_white,vig_alpha+0.5);
+shader_reset();
+surface_reset_target();
+
+draw_surface(render_surface,0,0);
+
+draw_set_color(c_white);draw_set_alpha(1);
+
+}
 </string>
           </argument>
         </arguments>
@@ -239,6 +395,8 @@ else
           <argument>
             <kind>1</kind>
             <string>/// Render World Objects ( Batches )
+
+if ( !global.game_pause ){
 
 draw_set_color(c_white);draw_set_alpha(1);
 
@@ -353,6 +511,9 @@ case 270:{for(i=0;i&lt;ds_list_size(data_x);i++)
 {w3d_draw_cube_ext(texture,texture,x+data_x[|i],y-data_y[|i],data_z1[|i],data_z2[|i],data_ysize[|i],data_xsize[|i]);}break;}}}
 }else
 {w3d_draw_sprite_ext(sprite_index,0,x,y,0,1,1,angle,c_white,1);}
+
+if ( global.sv_tick_step == global.sv_tick_rate ){world_obj_update(id);}
+
 }}
 
 /// Items On The Ground
@@ -393,6 +554,8 @@ with(obj_archetype_cooking){
 if ( global.render_gui_page == "none" &amp;&amp; is_enabled &amp;&amp; active ){
 if(glow_effect){draw_sprite_ext(spr_lightglow_1,0,x,y,random(1),random(1),0,col_orange,0.5);}
 }}}
+
+}
 </string>
           </argument>
         </arguments>

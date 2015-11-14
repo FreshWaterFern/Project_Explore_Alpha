@@ -251,7 +251,7 @@ global.textures_loaded = true;
           <argument>
             <kind>1</kind>
             <string>/// Graphics Initialize
-/// Graphics System
+
 display_reset(0,obj_game.m_vsync);
 ini_open("settings.ini");
 global.m_vsync = real(ini_read_string("graphics","vsync","0"));
@@ -941,7 +941,7 @@ if ( floor((time/20)*416) &lt;! 380 ){light_blend=false;}
 else
 {if ( floor((time/20)*416) &gt; 250 &amp;&amp; floor((time/20)*416) &lt; 400 ){light_blend=true;}}
 
-draw_set_alpha(1);
+draw_set_alpha(1);draw_set_color(c_white);
 </string>
           </argument>
         </arguments>

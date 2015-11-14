@@ -31,6 +31,7 @@ item_stack = 0;
 pl_inrange = false;
 mouse_over = false;
 active = false;
+index = 0;
 z = 1;
 motion = 0;
 v_indoors = false;

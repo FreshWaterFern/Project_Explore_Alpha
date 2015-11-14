@@ -49,6 +49,82 @@ ds_list_add(global.equip_list,0);
         <arguments>
           <argument>
             <kind>1</kind>
+            <string>/// World Modifiable Data
+global.sv_item_remove_time = 300; // Enter second value
+global.sv_tree_growth_time = 0.000375; // Enter tick value (64 * value)
+global.sv_tick_rate = 3; // Enter tick value ( 20 * value )
+
+global.sv_tick_step = 0;
+</string>
+          </argument>
+        </arguments>
+      </action>
+      <action>
+        <libid>1</libid>
+        <id>603</id>
+        <kind>7</kind>
+        <userelative>0</userelative>
+        <isquestion>0</isquestion>
+        <useapplyto>-1</useapplyto>
+        <exetype>2</exetype>
+        <functionname></functionname>
+        <codestring></codestring>
+        <whoName>self</whoName>
+        <relative>0</relative>
+        <isnot>0</isnot>
+        <arguments>
+          <argument>
+            <kind>1</kind>
+            <string>/// Debug Initiate
+debug_set = "";
+</string>
+          </argument>
+        </arguments>
+      </action>
+      <action>
+        <libid>1</libid>
+        <id>603</id>
+        <kind>7</kind>
+        <userelative>0</userelative>
+        <isquestion>0</isquestion>
+        <useapplyto>-1</useapplyto>
+        <exetype>2</exetype>
+        <functionname></functionname>
+        <codestring></codestring>
+        <whoName>self</whoName>
+        <relative>0</relative>
+        <isnot>0</isnot>
+        <arguments>
+          <argument>
+            <kind>1</kind>
+            <string>/// Music data
+music_track = 0;
+music_list = ds_list_create();
+ds_list_add(music_list,audio_create_stream("music\02 Vastness.oga"));
+ds_list_add(music_list,audio_create_stream("music\03 Freedom.oga"));
+ds_list_add(music_list,audio_create_stream("music\04 Circumnavigation.oga"));
+ds_list_add(music_list,audio_create_stream("music\05 Entropy.oga"));
+ds_list_add(music_list,audio_create_stream("music\06 Ostracization.oga"));
+</string>
+          </argument>
+        </arguments>
+      </action>
+      <action>
+        <libid>1</libid>
+        <id>603</id>
+        <kind>7</kind>
+        <userelative>0</userelative>
+        <isquestion>0</isquestion>
+        <useapplyto>-1</useapplyto>
+        <exetype>2</exetype>
+        <functionname></functionname>
+        <codestring></codestring>
+        <whoName>self</whoName>
+        <relative>0</relative>
+        <isnot>0</isnot>
+        <arguments>
+          <argument>
+            <kind>1</kind>
             <string>/// Initialize
 //if ( instance_number(obj_game) &lt; 2 )
 {
@@ -145,79 +221,6 @@ hotbar_alpha = 5;
 
 temperature_grid_ini();
 }
-</string>
-          </argument>
-        </arguments>
-      </action>
-      <action>
-        <libid>1</libid>
-        <id>603</id>
-        <kind>7</kind>
-        <userelative>0</userelative>
-        <isquestion>0</isquestion>
-        <useapplyto>-1</useapplyto>
-        <exetype>2</exetype>
-        <functionname></functionname>
-        <codestring></codestring>
-        <whoName>self</whoName>
-        <relative>0</relative>
-        <isnot>0</isnot>
-        <arguments>
-          <argument>
-            <kind>1</kind>
-            <string>/// World Modifiable Data
-global.sv_item_remove_time = 300; // Enter second value
-global.sv_tree_growth_time = 0.000375; // Enter tick value (64 * value)
-</string>
-          </argument>
-        </arguments>
-      </action>
-      <action>
-        <libid>1</libid>
-        <id>603</id>
-        <kind>7</kind>
-        <userelative>0</userelative>
-        <isquestion>0</isquestion>
-        <useapplyto>-1</useapplyto>
-        <exetype>2</exetype>
-        <functionname></functionname>
-        <codestring></codestring>
-        <whoName>self</whoName>
-        <relative>0</relative>
-        <isnot>0</isnot>
-        <arguments>
-          <argument>
-            <kind>1</kind>
-            <string>/// Debug Initiate
-debug_set = "";
-</string>
-          </argument>
-        </arguments>
-      </action>
-      <action>
-        <libid>1</libid>
-        <id>603</id>
-        <kind>7</kind>
-        <userelative>0</userelative>
-        <isquestion>0</isquestion>
-        <useapplyto>-1</useapplyto>
-        <exetype>2</exetype>
-        <functionname></functionname>
-        <codestring></codestring>
-        <whoName>self</whoName>
-        <relative>0</relative>
-        <isnot>0</isnot>
-        <arguments>
-          <argument>
-            <kind>1</kind>
-            <string>/// Music data
-music_track = 0;
-music_list = ds_list_create();
-ds_list_add(music_list,audio_create_stream("music\02 Vastness.oga"));
-ds_list_add(music_list,audio_create_stream("music\03 Freedom.oga"));
-ds_list_add(music_list,audio_create_stream("music\04 Circumnavigation.oga"));
-ds_list_add(music_list,audio_create_stream("music\05 Entropy.oga"));
-ds_list_add(music_list,audio_create_stream("music\06 Ostracization.oga"));
 </string>
           </argument>
         </arguments>
@@ -898,7 +901,13 @@ if (!audio_group_is_loaded(Ambience_Track1)){audio_group_load(Ambience_Track1);}
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>/// Reset Variables
+            <string>/// Tick Rate
+
+global.sv_tick_step ++;
+if ( global.sv_tick_step &gt; global.sv_tick_rate ){
+global.sv_tick_step -= global.sv_tick_rate;}
+
+
 v_lightlevel = 1;
 </string>
           </argument>
@@ -1182,7 +1191,7 @@ case 3:{
 loading_step = 4;
 global.world_loading = false;
 
-with(all){if ( object_index != obj_game_render &amp;&amp; object_index != obj_game_weather &amp;&amp; object_index != obj_game &amp;&amp; object_index != obj_vignette_noise &amp;&amp; object_index != obj_volume &amp;&amp; object_index != obj_player &amp;&amp; object_index != obj_camera )
+with(all){if ( object_index != obj_game_render &amp;&amp; object_index != obj_game_weather &amp;&amp; object_index != obj_game &amp;&amp; object_index != obj_volume &amp;&amp; object_index != obj_player &amp;&amp; object_index != obj_camera )
 {instance_deactivate_object(id);}}
 instance_activate_region((global.chunk_x-1)*1280,(global.chunk_y-1)*1280,3840,3840,true);
 

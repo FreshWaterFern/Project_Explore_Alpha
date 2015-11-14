@@ -55,7 +55,6 @@
     <instance objName="obj_game_render" x="14592" y="16384" name="inst_DB09A2AF" locked="0" code="" scaleX="1" scaleY="1" colour="4294967295" rotation="0"/>
     <instance objName="obj_player" x="14592" y="16384" name="inst_B035612C" locked="0" code="" scaleX="1" scaleY="1" colour="4294967295" rotation="0"/>
     <instance objName="obj_camera" x="14592" y="16384" name="inst_439EE49A" locked="0" code="" scaleX="1" scaleY="1" colour="4294967295" rotation="0"/>
-    <instance objName="obj_vignette_noise" x="14592" y="16384" name="inst_73B66583" locked="0" code="" scaleX="1" scaleY="1" colour="4294967295" rotation="0"/>
     <instance objName="obj_game_weather" x="14592" y="16384" name="inst_CF83FCC0" locked="0" code="" scaleX="1" scaleY="1" colour="4294967295" rotation="0"/>
   </instances>
   <tiles/>

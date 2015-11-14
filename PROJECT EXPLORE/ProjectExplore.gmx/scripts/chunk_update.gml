@@ -9,7 +9,7 @@ chunk_step_y = global.chunk_y;
 
 with(all)
 {
-if ( object_index != obj_game_render && object_index != obj_game_weather && object_index != obj_game && object_index != obj_vignette_noise && object_index != obj_volume && object_index != obj_player && object_index != obj_camera )
+if ( object_index != obj_game_render && object_index != obj_game_weather && object_index != obj_game && object_index != obj_volume && object_index != obj_player && object_index != obj_camera )
 {
 instance_deactivate_object(self);
 }

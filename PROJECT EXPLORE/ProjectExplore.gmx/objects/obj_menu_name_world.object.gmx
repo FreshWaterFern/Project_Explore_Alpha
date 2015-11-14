@@ -25,32 +25,13 @@
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>instance = input_text_create_singleline_ext(x,y,384,font_gulim_28,c_dkgray,1,16,fa_center,fa_middle,true,0);
-input_text_set_enabled(instance,true);
-msg = 0;
-</string>
-          </argument>
-        </arguments>
-      </action>
-    </event>
-    <event eventtype="1" enumb="0">
-      <action>
-        <libid>1</libid>
-        <id>603</id>
-        <kind>7</kind>
-        <userelative>0</userelative>
-        <isquestion>0</isquestion>
-        <useapplyto>-1</useapplyto>
-        <exetype>2</exetype>
-        <functionname></functionname>
-        <codestring></codestring>
-        <whoName>self</whoName>
-        <relative>0</relative>
-        <isnot>0</isnot>
-        <arguments>
-          <argument>
-            <kind>1</kind>
-            <string>with(instance){instance_destroy();}
+            <string>/// initialize
+
+str = "";
+select = true;
+char_delete_wait = 3;
+cursor_blink = 45;
+cursor_time = 0;
 </string>
           </argument>
         </arguments>
@@ -73,45 +54,29 @@ msg = 0;
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>if ( os_type == os_android )
-if ( device_mouse_check_button_pressed(0,mb_left) &amp;&amp; device_mouse_x(0) &gt; x-64 &amp;&amp; device_mouse_x(0) &lt; x+64 &amp;&amp; device_mouse_y(0) &gt; y-16 &amp;&amp; device_mouse_y(0) &lt; y+16 )
-{msg=get_string_async("Enter map name","")}
-</string>
-          </argument>
-        </arguments>
-      </action>
-    </event>
-    <event eventtype="7" enumb="63">
-      <action>
-        <libid>1</libid>
-        <id>603</id>
-        <kind>7</kind>
-        <userelative>0</userelative>
-        <isquestion>0</isquestion>
-        <useapplyto>-1</useapplyto>
-        <exetype>2</exetype>
-        <functionname></functionname>
-        <codestring></codestring>
-        <whoName>self</whoName>
-        <relative>0</relative>
-        <isnot>0</isnot>
-        <arguments>
-          <argument>
-            <kind>1</kind>
-            <string>var i_d = ds_map_find_value(async_load, "id");
-if i_d == msg
-   {
-   if ds_map_find_value(async_load, "status")
-      {
-      if ds_map_find_value(async_load, "result") != ""
-         {;
-         with(obj_menu_map){input_text_set_text(text_inst.instance,ds_map_find_value(async_load, "result"))}
-         }
-      }
-   }
+            <string>/// Mouse Click &amp;&amp; Keyboard Input
+if ( mouse_check_button_pressed(mb_left) )
+{
+if ( mouse_check_area(x-192,y-24,x+192,y+24) )
+{select = true;} // Select the text field
+else
+{select = false;} // Deselect the text field
+}
+
+if ( select == true ){
+if ( keyboard_check_pressed(vk_backspace) ) // Check if backspace is pressed once
+{str = string_delete(str,string_length(str),1);char_delete_wait=-20;}else{
+if ( keyboard_check(vk_backspace) &amp;&amp; char_delete_wait == 3 ) // Check if backspace is pressed once
+{str = string_delete(str,string_length(str),1);char_delete_wait=0;}}
 
 
+if ( keyboard_check_pressed(vk_anykey) &amp;&amp; string_length(str) &lt; 32 &amp;&amp; keyboard_lastchar != "#" &amp;&amp; !keyboard_check_pressed(vk_backspace) &amp;&amp; !keyboard_check_pressed(vk_shift) &amp;&amp; !keyboard_check_pressed(vk_tab) ) // Get Keyboard Input
+{str = str+string(keyboard_lastchar);}
+if ( string_length(str) &gt; 32 ){str = string_delete(str,string_length(str),1);} // Make sure the user doesn't type more than 32 characters
+}
 
+// Update backspace wait time
+if ( char_delete_wait != 3 ){char_delete_wait++;}
 </string>
           </argument>
         </arguments>
@@ -134,7 +99,29 @@ if i_d == msg
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>draw_sprite(spr_input_1,0,x,y);
+            <string>/// Render
+
+draw_set_color(c_white);draw_set_alpha(1);
+
+// Sprite
+draw_sprite(spr_input_1,0,x,y);
+
+// Text
+draw_set_color(c_black);
+draw_set_font(font_gulim_18);draw_set_halign(fa_center);draw_set_valign(fa_middle); // Set up our font
+var scale1 = 1;
+while((string_width(str)*scale1)&gt;375){scale1-=0.025;}
+draw_text_transformed(x,y,string(str),scale1,scale1,0);
+
+// Cursor
+cursor_time++;
+if ( cursor_time &gt; cursor_blink-(cursor_blink/2) &amp;&amp; cursor_time &lt;= cursor_blink ){draw_set_alpha(1);}else{draw_set_alpha(0);}
+if ( cursor_time &gt;= cursor_blink ){cursor_time=0;}
+if( select == true ){
+if ( scale1 == 1 ){draw_rectangle(x+(string_width(string(str))/2)+3,y-(16*scale1),x+(string_width(string(str))/2)+5,y+(16*scale1),false);}
+else{draw_rectangle(x+179-(1*scale1),y-(16*scale1),x+179+(1*scale1),y+(16*scale1),false);}}
+
+draw_set_color(c_white);
 </string>
           </argument>
         </arguments>

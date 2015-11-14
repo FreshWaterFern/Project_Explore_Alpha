@@ -96,6 +96,8 @@ case "obj_archetype_storage":{
 break;}
 
 case "obj_archetype_cooking":{
+    ds_list_add(list,string(ds_grid_width(inst_id.c_inv)));
+    ds_list_add(list,string(ds_grid_height(inst_id.c_inv)));
     list_cache = convert_grid_to_list(inst_id.c_inv);
     str = convert_list_to_string(list_cache,",");
     ds_list_add(list,str);ds_list_destroy(list_cache);
@@ -106,8 +108,8 @@ case "obj_archetype_cooking":{
     str = convert_list_to_string(list_cache,",");
     ds_list_add(list,str);ds_list_destroy(list_cache);
     ds_list_add(list,inst_id.is_enabled);
-    ds_list_add(list,inst_id.angle);
     ds_list_add(list,inst_id.fuel_count);
+    ds_list_add(list,inst_id.angle);
 break;}
 
 case "obj_archetype_plant":{
@@ -116,21 +118,6 @@ case "obj_archetype_plant":{
 break;}
 
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 return list;
 

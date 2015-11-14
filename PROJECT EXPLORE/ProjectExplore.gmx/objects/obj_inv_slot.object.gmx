@@ -222,8 +222,15 @@ if ( mouse_check_button_released(mb_left) )
     {
         global.v_item_moving = false;
         inventory_move_item();
-        if ( storage_id != 0 ){if(storage_id.object_index==obj_archetype_cooking){storage_id.cooking_grid[#grid_x,grid_y]=0;}}
-        if ( global.v_slot_inst.storage_id != 0 ){if(global.v_slot_inst.storage_id.object_index==obj_archetype_cooking){global.v_slot_inst.storage_id.cooking_grid[#grid_x,grid_y]=0;}}
+        if ( storage_id != 0 ){
+        world_obj_update(storage_id);
+        if(storage_id.object_index==obj_archetype_cooking){
+        storage_id.cooking_grid[#grid_x,grid_y]=0;}}
+        
+        if ( global.v_slot_inst.storage_id != 0 ){
+        world_obj_update(global.v_slot_inst.storage_id);
+        if(global.v_slot_inst.storage_id.object_index==obj_archetype_cooking){
+        global.v_slot_inst.storage_id.cooking_grid[#grid_x,grid_y]=0;}}
         with(obj_inv_slot){event_user(0)}
         exit;
     }

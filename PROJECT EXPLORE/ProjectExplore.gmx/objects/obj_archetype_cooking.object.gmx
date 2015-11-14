@@ -338,13 +338,6 @@ if ( active == true )
     }else
     {selected = false;}
     }
-    else
-    {
-    if ( global.storage_id == id )
-    {world_obj_update(id);}
-    else
-    {selected = false;}
-    }
 }
 </string>
           </argument>

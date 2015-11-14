@@ -13,7 +13,6 @@ ds_grid_destroy(global.c_stack_pack);
 ds_grid_destroy(global.world_temperature);
 ds_grid_destroy(global.world_biomes);
 ds_grid_destroy(global.ambient_light);
-ds_grid_destroy(global.ambient_shader);
 ds_list_destroy(global.ai_xdecal);
 ds_list_destroy(global.ai_ydecal);
 ds_list_destroy(global.ai_sdecal);
@@ -24,12 +23,17 @@ ds_list_destroy(global.waypoint_data_name);
 ds_list_destroy(global.roof_list);
 ds_list_destroy(global.status_list);
 ds_map_destroy(global.status_map);
-if !surface_exists(obj_game_render.surface_terrain)
-{
-surface_free(obj_game_render.surface_terrain)
-}
-if ( !surface_exists(global.vignette_surface) )
-{surface_free(global.vignette_surface)}
+
+// Free Surfaces From Memory, "GO, FLY MY BIRDIES"
+if ( surface_exists(obj_game_render.surface_terrain) )
+{surface_free(obj_game_render.surface_terrain);}
+
+if ( surface_exists(obj_camera.render_surface) )
+{surface_free(obj_camera.render_surface);}
+
+if ( surface_exists(obj_camera.color_surface) )
+{surface_free(obj_camera.color_surface);}
+
 
 // Stop Playing All Sounds
 audio_stop_sound(ambience_morning);

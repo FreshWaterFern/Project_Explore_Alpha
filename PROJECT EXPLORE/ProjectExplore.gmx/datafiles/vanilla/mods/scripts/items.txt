@@ -22,7 +22,7 @@ name: Wood
 desc: This can be used when building and crafting.
 spr: mods\sprites\items\spr_item_wood.png
 stack: 16
-type: 2
+type: 100
 stat1: 1
 stat2: 0
 stat3: 0
@@ -82,7 +82,7 @@ name: Broken Clock
 desc: A small golden clock. Not worn down but definitely broken.
 spr: mods\sprites\items\spr_item_broken_clock.png
 stack: 4
-type: 2
+type: 100
 stat1: 0
 stat2: 0
 stat3: 0
@@ -92,7 +92,7 @@ name: Gear
 desc: Tiny metal gear. Useful when crafting various devices.
 spr: mods\sprites\items\spr_item_gear.png
 stack: 8
-type: 2
+type: 100
 stat1: 0
 stat2: 0
 stat3: 0
@@ -132,7 +132,7 @@ name: Stick
 desc: This can be used when building and crafting.
 spr: mods\sprites\items\spr_item_stick.png
 stack: 16
-type: 2
+type: 0
 stat1: 1
 stat2: 0.5
 stat3: 0
@@ -202,7 +202,7 @@ name: Torch
 desc: This can be used to find your way in the dark.
 spr: mods\sprites\items\spr_item_torch.png
 stack: 1
-type: 2
+type: 100
 stat1: 0
 stat2: 0
 stat3: 0
@@ -222,7 +222,7 @@ name: Cloth
 desc: This can be used when crafting!
 spr: mods\sprites\items\spr_item_cloth.png
 stack: 8
-type: 2
+type: 100
 stat1: 0
 stat2: 0
 stat3: 0
@@ -232,7 +232,7 @@ name: Animal Fat
 desc: This can be used when crafting!
 spr: mods\sprites\items\spr_item_fat.png
 stack: 8
-type: 2
+type: 100
 stat1: 0
 stat2: 0
 stat3: 0
@@ -522,7 +522,7 @@ name: Arrow
 desc: Arrows used by the wood bow.
 spr: mods\sprites\items\spr_item_arrow.png
 stack: 16
-type: 2
+type: 100
 stat1: 0
 stat2: 0
 stat3: 0
@@ -552,7 +552,7 @@ name: 9mm Bullet
 desc: A 9mm bullet for any weapon that takes this type of ammo.
 spr: mods\sprites\items\spr_item_9mmbullet.png
 stack: 48
-type: 2
+type: 100
 stat1: 0
 stat2: 0
 stat3: 0
@@ -562,7 +562,7 @@ name: Metal
 desc: This can be used to craft metal objects.
 spr: mods\sprites\items\spr_item_metal.png
 stack: 16
-type: 2
+type: 100
 stat1: 0
 stat2: 0
 stat3: 0
@@ -572,7 +572,7 @@ name: Screw
 desc: This can be used when crafting.
 spr: mods\sprites\items\spr_item_screw.png
 stack: 16
-type: 2
+type: 100
 stat1: 0
 stat2: 0
 stat3: 0
@@ -582,7 +582,7 @@ name: Spring
 desc: This can be used when crafting.
 spr: mods\sprites\items\spr_item_spring.png
 stack: 16
-type: 2
+type: 100
 stat1: 0
 stat2: 0
 stat3: 0
@@ -592,7 +592,7 @@ name: 9mm Pistol Magazine
 desc: This can be used when crafting a 9mm pistol.
 spr: mods\sprites\items\spr_item_9mmpistolmag.png
 stack: 1
-type: 2
+type: 100
 stat1: 0
 stat2: 0
 stat3: 0
@@ -628,21 +628,11 @@ stat2: 0
 stat3: 0
 stat4: 0
 cook: 1.25
-name: Sturdy backpack
-desc: Keep this in your (perks section) to gain 7 more storage slots.
-spr: mods\sprites\items\spr_item_backpack1.png
-stack: 1
-type: 99
-stat1: 0
-stat2: 0
-stat3: 0
-stat4: 0
-cook: 0,0
 name: String
 desc: This an be used when crafting.
 spr: mods\sprites\items\spr_item_string.png
 stack: 16
-type: 2
+type: 100
 stat1: 0
 stat2: 0
 stat3: 0
@@ -712,7 +702,7 @@ name: Carrying Lantern
 desc: Keep this in your (perks section) to put a lantern on your hip.
 spr: mods\sprites\items\spr_item_carryinglantern.png
 stack: 1
-type: 2
+type: 100
 stat1: 0
 stat2: 0
 stat3: 0
@@ -732,7 +722,7 @@ name: Compass
 desc: This item will assist you when navigating the world.
 spr: mods\sprites\items\spr_item_compass.png
 stack: 1
-type: 2
+type: 100
 stat1: 0
 stat2: 0
 stat3: 0
@@ -1212,7 +1202,7 @@ name: Wallet
 desc: A quaint and somewhat worn out wallet.
 spr: mods\sprites\items\spr_item_wallet.png
 stack: 8
-type: 2
+type: 10
 stat1: 1
 stat2: 0
 stat3: 0
@@ -1222,7 +1212,7 @@ name: Rag
 desc: A dirty and used rag.
 spr: mods\sprites\items\spr_item_rag.png
 stack: 8
-type: 2
+type: 10
 stat1: 1
 stat2: 0
 stat3: 0
@@ -1272,7 +1262,7 @@ name: Pencil
 desc: A cheap and flimsy pencil.
 spr: mods\sprites\items\spr_item_pencil.png
 stack: 8
-type: 2
+type: 100
 stat1: 1
 stat2: 0
 stat3: 0
@@ -1282,7 +1272,7 @@ name: Wood Photo Frame
 desc: An old style photo frame made from thin wood.
 spr: mods\sprites\items\spr_item_woodphotoframe.png
 stack: 8
-type: 2
+type: 100
 stat1: 1
 stat2: 0
 stat3: 0
@@ -1292,7 +1282,7 @@ name: Wood Wash Board
 desc: Used to clean dirty cloth and rags.
 spr: mods\sprites\items\spr_item_woodwashboard.png
 stack: 4
-type: 2
+type: 100
 stat1: 1
 stat2: 0
 stat3: 0
@@ -1302,7 +1292,7 @@ name: Towel
 desc: Used to dry surfaces.
 spr: mods\sprites\items\spr_item_towel.png
 stack: 8
-type: 2
+type: 100
 stat1: 1
 stat2: 0
 stat3: 0
@@ -1312,7 +1302,7 @@ name: Small Bag
 desc: Used to carry small objects. Not very useful to a real adventurer.
 spr: mods\sprites\items\spr_item_smallbag.png
 stack: 8
-type: 2
+type: 100
 stat1: 1
 stat2: 0
 stat3: 0
@@ -1322,7 +1312,7 @@ name: Blue Sock
 desc: Worn by a similar creature.
 spr: mods\sprites\items\spr_item_bluesock.png
 stack: 8
-type: 2
+type: 100
 stat1: 1
 stat2: 0
 stat3: 0
@@ -1332,8 +1322,8 @@ name: Red Sock
 desc: Worn by a similar creature.
 spr: mods\sprites\items\spr_item_redsock.png
 stack: 8
-type: 2
-stat1: 1
+type: 0
+stat1: 100
 stat2: 0
 stat3: 0
 stat4: 0
@@ -1362,7 +1352,7 @@ name: Rice Milk
 desc: Bland but healthy rice milk.
 spr: mods\sprites\items\spr_item_ricemilk.png
 stack: 4
-type: 0
+type: 100
 stat1: 2.5,2.5,6.5,0
 stat2: 0
 stat3: 0
@@ -1372,7 +1362,7 @@ name: Leaf
 desc: Can be used to fuel fires.
 spr: mods\sprites\items\spr_item_leaf.png
 stack: 8
-type: 2
+type: 100
 stat1: 1
 stat2: 0
 stat3: 0

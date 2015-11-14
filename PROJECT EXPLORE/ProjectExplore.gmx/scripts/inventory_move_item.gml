@@ -3,6 +3,12 @@ var get_stack0 = 0;var get_id0 = 0;var get_stack1 = 0;var get_id1 = 0;
 var did_stack = false;
 var inst = global.v_slot_inst;
 
+if ( other.storage_id != 0 ){
+world_obj_update(other.storage_id);}
+
+if ( global.v_slot_inst.storage_id != 0 ){
+world_obj_update(global.v_slot_inst.storage_id);}
+
 if( other.storage_id != 0 ){var inv_access = other.storage_id;var stack_access = other.storage_id;inv_access = inv_access.c_inv;stack_access = stack_access.c_stack;}
 if( inst.storage_id != 0 ){var inv_access = inst.storage_id;var stack_access = inst.storage_id;inv_access = inv_access.c_inv;stack_access = stack_access.c_stack;}
 
