@@ -227,9 +227,14 @@ for(i=(10*item_page)-10;i&lt;(10*item_page)-1 &amp;&amp; i&lt;ds_list_size(craft
 {
 inst = instance_create(48,y+r,obj_inv_craftlist);
 num=db_item_get_name(crafting_list[|i]);
+if ( num != undefined ){
 inst.item_sprite=global.item_data[#num,2];
 inst.item_id = num;
-inst.item_name = crafting_list[|i];
+inst.item_name = crafting_list[|i];}
+else{
+show_message(string(crafting_list[|i])+" does not match any item names!");
+file_log_write(string(crafting_list[|i])+" does not match any item names!");
+}
 r+=48;
 }}}
 </string>

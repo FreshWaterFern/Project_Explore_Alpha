@@ -213,7 +213,7 @@
     <option_audioGroupCount>4</option_audioGroupCount>
     <option_author>Sebastian Nigro</option_author>
     <option_backimage>nil</option_backimage>
-    <option_borderless>False</option_borderless>
+    <option_borderless>True</option_borderless>
     <option_changed>false</option_changed>
     <option_changeresolution>false</option_changeresolution>
     <option_closeesc>true</option_closeesc>
@@ -585,7 +585,7 @@
     <option_windows_copyright_info></option_windows_copyright_info>
     <option_windows_create_textures_on_demand>False</option_windows_create_textures_on_demand>
     <option_windows_description_info>Project Explore is a survival game. It's a game about learning the environment, discovering hundreds of items, and your ability to adapt to any situation. Not just build a house and bunker down. A house provides you with shelter but you'll need to eat and maintain your sanity as well.</option_windows_description_info>
-    <option_windows_enable_steam>-1</option_windows_enable_steam>
+    <option_windows_enable_steam>0</option_windows_enable_steam>
     <option_windows_game_icon>Configs\Default\windows\runner_icon.ico</option_windows_game_icon>
     <option_windows_license>Configs\Default\windows\License.txt</option_windows_license>
     <option_windows_mainor_version>3</option_windows_mainor_version>

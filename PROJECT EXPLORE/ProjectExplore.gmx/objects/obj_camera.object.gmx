@@ -357,8 +357,6 @@ vig_alpha = clamp(0.125+((global.world_time-9)/72.5),0,1);}
 if ( global.world_time &gt; 14 &amp;&amp; global.world_time &lt;= 20 ){
 vig_alpha = clamp(0.25+((global.world_time-14)/12),0,1);}
 
-show_debug_message(string(vig_alpha));
-
 surface_set_target(render_surface);
 shader_set(shd_vignette_noise);
 shader_set_uniform_f(uni_settings,(0.8*(vig_alpha+1)),(0.7*(vig_alpha+1))/2,0.03,1); //vignette inner circle size, vignette outter circle size, noise strength, noise enable (1 or 0 only).
