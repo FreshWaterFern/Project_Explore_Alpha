@@ -258,46 +258,6 @@ stat2: 0
 stat3: 0
 stat4: 0
 cook: 0,0
-name: Grass Surface
-desc: Grass covered surface.
-spr: mods\sprites\items\spr_item_terrain_grass.png
-stack: 16
-type: 8
-stat1: 0
-stat2: 0
-stat3: 0
-stat4: 0
-cook: 0,0
-name: Wood Fine Surface
-desc: A smooth wood surface.
-spr: mods\sprites\items\spr_item_terrain_wood_nice.png
-stack: 16
-type: 8
-stat1: 0
-stat2: 0
-stat3: 0
-stat4: 0
-cook: 0,0
-name: Stone Tile Surface
-desc: Rustic stone tiles for the finest floors.
-spr: mods\sprites\items\spr_item_terrain_stonetile.png
-stack: 16
-type: 8
-stat1: 0
-stat2: 0
-stat3: 0
-stat4: 0
-cook: 0,0
-name: Wood Old Surface
-desc: An old wood surface.
-spr: mods\sprites\items\spr_item_terrain_wood_old.png
-stack: 16
-type: 8
-stat1: 0
-stat2: 0
-stat3: 0
-stat4: 0
-cook: 0,0
 name: 'Tale of Two Maidens and Thy Chalice'
 desc: A good read through and highly rated.
 spr: mods\sprites\items\spr_item_taleoftwogirlsandthychalice.png
@@ -374,16 +334,6 @@ spr: mods\sprites\items\spr_item_book_2.png
 stack: 1
 type: 0
 stat1: 0,0,0,10
-stat2: 0
-stat3: 0
-stat4: 0
-cook: 0,0
-name: Stone Surface
-desc: Rustic stone surface.
-spr: mods\sprites\items\spr_item_terrain_stone1.png
-stack: 16
-type: 8
-stat1: 0
 stat2: 0
 stat3: 0
 stat4: 0
@@ -534,16 +484,6 @@ spr: mods\sprites\items\spr_item_bigbook_3.png
 stack: 1
 type: 0
 stat1: 0,0,0,10
-stat2: 0
-stat3: 0
-stat4: 0
-cook: 0,0
-name: Pile of Dirt
-desc: A pile of dry dirt.
-spr: mods\sprites\items\spr_item_terrain_dirt1.png
-stack: 16
-type: 8
-stat1: 0
 stat2: 0
 stat3: 0
 stat4: 0
@@ -722,7 +662,7 @@ name: Compass
 desc: This item will assist you when navigating the world.
 spr: mods\sprites\items\spr_item_compass.png
 stack: 1
-type: 100
+type: 5
 stat1: 0
 stat2: 0
 stat3: 0
@@ -794,16 +734,6 @@ spr: mods\sprites\items\spr_item_book_1.png
 stack: 1
 type: 0
 stat1: 0,0,0,10
-stat2: 0
-stat3: 0
-stat4: 0
-cook: 0,0
-name: Pile of Sand
-desc: Dull sand surface.
-spr: mods\sprites\items\spr_item_terrain_sand1.png
-stack: 16
-type: 8
-stat1: 0
 stat2: 0
 stat3: 0
 stat4: 0
@@ -1415,6 +1345,16 @@ stack: 48
 type: 0
 stat1: 1,1.5,0,0
 stat2: 0
+stat3: 0
+stat4: 0
+cook: 0,0
+name: Shovel
+desc: This can be used to dig up terrain.
+spr: mods\sprites\items\spr_item_shovel.png
+stack: 1
+type: 6
+stat1: 15,18,16,16,0,0
+stat2: 20,25,4,15,60,32
 stat3: 0
 stat4: 0
 cook: 0,0

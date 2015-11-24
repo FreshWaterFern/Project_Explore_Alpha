@@ -27,8 +27,6 @@
             <kind>1</kind>
             <string>/// Destroy Outside Of View And Increment Image Index
 
-image_index+=0.1;
-
 if ( x &gt; view_xview[0]+view_wview[0]+32 )
 {
 instance_destroy();

@@ -13,7 +13,7 @@ global.world_obj_ind = ds_list_create();
 global.world_chunks = ds_grid_create(floor(room_width/1280)+15,floor(room_height/1280)+15);
 global.world_biomes = ds_grid_create(floor(room_width/1280)+15,floor(room_height/1280)+15);
 global.world_temperature = ds_grid_create(floor(room_width/512)+15,floor(room_height/512)+15);
-global.world_temperature_base = random_range(70,83);
+global.world_temperature_base = floor(random_range(70,83));
 
 // World time \\
 obj_game.time_speed = 0.0008;

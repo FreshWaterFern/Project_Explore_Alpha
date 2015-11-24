@@ -18,9 +18,27 @@ var file = file_text_open_read(argument0);
 
 // -- Build Version [BEGIN] -- \\
 var get_version = file_text_read_string(file);file_text_readln(file);
-if ( get_version != GAME_VERSION ){
-file_log_write("Save file is from version ("+string(get_version)+"), out-of-date, build version is "+string(GAME_VERSION));} // Log File Usage
+var get_version2 = get_version;
+get_version = string_delete(get_version,string_pos(", Mod: ",get_version),string_length(get_version));
+get_version = string_replace(get_version,"Build: ","");
+if ( get_version != string(GAME_VERSION) ){
+file_log_write("Save file is from build ("+string(get_version)+"), out-of-date, build version is "+string(GAME_VERSION));} // Log File Usage
+
+get_version2 = string_delete(get_version2,1,string_pos("Mod: ",get_version2)+4);
+if ( get_version2 != string(global.mod_version) ){
+file_log_write("Save file is from mod version ("+get_version2+"), out-of-date, mod version is "+global.mod_version);} // Log File Usage
+
 // -- Build Version [END] -- \\
+
+
+/*
+// -- Mod Version [BEGIN] -- \\
+var get_version2 = file_text_read_string(file);file_text_readln(file);
+if ( get_version2 != string(global.mod_version) ){
+file_log_write("Save file is from mod version ("+get_version2+"), out-of-date, mod version is "+global.mod_version);} // Log File Usage
+// -- Mod Version [END] -- \\
+*/
+
 
 // -- World Size [BEGIN] -- \\
 repeat(3){file_text_readln(file);} // Skip this part, we don't need it right now

@@ -61,6 +61,9 @@ chunk_step = 0;
 chunk_step_x = 0;
 chunk_step_y = 0;
 
+// Special Items
+compass_equip = false;
+
 // Frame Steps
 mouse_frames = 0;
 
@@ -166,6 +169,7 @@ instance_destroy();
           <argument>
             <kind>1</kind>
             <string>/// TEST
+/*
 global.contactX = 0;
 global.contactY = 0;
 </string>
@@ -3519,7 +3523,8 @@ pl_g_y = r*128;
 pl_surface_type = ds_grid_get(global.world_tiles,i,r);
 var update_plants = false;
 
-if ( v_shovel == true )
+if ( v_item_equipped &gt; -1 ){
+if ( global.item_data[#v_item_equipped,4] == 6 )
 {
     if ( mouse_check_button_pressed(mb_right) == true )
     {
@@ -3530,49 +3535,49 @@ if ( v_shovel == true )
             {
             ds_grid_set(global.world_tiles,i,r,4);
             inst = instance_create(obj_player.x,obj_player.y,obj_item_dropped);
-            inst.item_id=32;inst.item_stack=1;
+            inst.item_id=db_item_get_name("Grass Surface");inst.item_stack=1;
             break;
             }
             case 6:
             {
             ds_grid_set(global.world_tiles,i,r,4);
             inst = instance_create(obj_player.x,obj_player.y,obj_item_dropped);
-            inst.item_id=34;inst.item_stack=1;
+            inst.item_id=db_item_get_name("Stone Surface");inst.item_stack=1;
             break;
             }
             case 7:
             {
             ds_grid_set(global.world_tiles,i,r,4);
             inst = instance_create(obj_player.x,obj_player.y,obj_item_dropped);
-            inst.item_id=44;inst.item_stack=1;
+            inst.item_id=db_item_get_name("Stone Tile Surface");inst.item_stack=1;
             break;
             }
             case 8:
             {
             ds_grid_set(global.world_tiles,i,r,4);
             inst = instance_create(obj_player.x,obj_player.y,obj_item_dropped);
-            inst.item_id=33;inst.item_stack=1;
+            inst.item_id=db_item_get_name("Wood Fine Surface");inst.item_stack=1;
             break;
             }
             case 10:
             {
             ds_grid_set(global.world_tiles,i,r,9);
             inst = instance_create(obj_player.x,obj_player.y,obj_item_dropped);
-            inst.item_id=61;inst.item_stack=1;
+            inst.item_id=db_item_get_name("Pile of Dirt");inst.item_stack=1;
             break;
             }
             case 11:
             {
             ds_grid_set(global.world_tiles,i,r,4);
             inst = instance_create(obj_player.x,obj_player.y,obj_item_dropped);
-            inst.item_id=35;inst.item_stack=1;
+            inst.item_id=db_item_get_name("Wood Old Surface");inst.item_stack=1;
             break;
             }
             case 15:
             {
             ds_grid_set(global.world_tiles,i,r,17);
             inst = instance_create(obj_player.x,obj_player.y,obj_item_dropped);
-            inst.item_id=92;inst.item_stack=1;
+            inst.item_id=db_item_get_name("Pile of Sand");inst.item_stack=1;
             break;
             }
         }
@@ -3580,60 +3585,61 @@ if ( v_shovel == true )
 }
 else
 {
-if ( v_terrain == true )
+if ( global.item_data[#v_item_equipped,4] == 7 )
 {
     if ( mouse_check_button_pressed(mb_right) == true )
     {
         if ( pl_surface_type == 4 or pl_surface_type == 9 or pl_surface_type == 16 or pl_surface_type == 17 )
         {
         obj_game_render.surface_update = true;
-        switch(v_item_equipped)
+        switch(global.item_data[#v_item_equipped,0])
         {
-            case 32:
+            case "Grass Surface":
             {
             ds_grid_set(global.world_tiles,i,r,0);
-            inventory_get_item(32,1,1);
+            inventory_get_item(db_item_get_name("Grass Surface"),1,1);
             break;
             }
-            case 33:
-            {
-            ds_grid_set(global.world_tiles,i,r,8);
-            inventory_get_item(33,1,1);
-            break;
-            }
-            case 34:
+            case "Stone Surface":
             {
             ds_grid_set(global.world_tiles,i,r,6);
-            inventory_get_item(34,1,1);
+            inventory_get_item(db_item_get_name("Stone Surface"),1,1);
             break;
             }
-            case 35:
-            {
-            ds_grid_set(global.world_tiles,i,r,11);
-            inventory_get_item(35,1,1);
-            break;
-            }
-            case 44:
+            case "Stone Tile Surface":
             {
             ds_grid_set(global.world_tiles,i,r,7);
-            inventory_get_item(44,1,1);
+            inventory_get_item(db_item_get_name("Stone Tile Surface"),1,1);
             break;
             }
-            case 61:
+            case "Wood Old Surface":
+            {
+            ds_grid_set(global.world_tiles,i,r,11);
+            inventory_get_item(db_item_get_name("Wood Old Surface"),1,1);
+            break;
+            }
+            case "Wood Fine Surface":
+            {
+            ds_grid_set(global.world_tiles,i,r,8);
+            inventory_get_item(db_item_get_name("Wood Fine Surface"),1,1);
+            break;
+            }
+            case "Pile of Dirt":
             {
             ds_grid_set(global.world_tiles,i,r,10);
-            inventory_get_item(61,1,1);
+            inventory_get_item(db_item_get_name("Pile of Dirt"),1,1);
             break;
             }
-            case 92:
+             case "Pile of Sand":
             {
             ds_grid_set(global.world_tiles,i,r,15);
-            inventory_get_item(92,1,1);
+            inventory_get_item(db_item_get_name("Pile of Sand"),1,1);
             break;
             }
         }
         }
     }
+}
 }
 }
 </string>
@@ -4124,6 +4130,12 @@ if ( keyboard_check_pressed(ord('4')) )
     }
     v_terrain = false; // Reset Terrain State
     v_shovel = false; // Reset Shovel State
+    
+    // Right Click Use Hotbar Item
+    if ( mouse_check_button_pressed(mb_right) &amp;&amp; global.render_gui_page == "none" &amp;&amp; v_item_equipped &gt; -1 ){
+    db_item_use(v_item_equipped);
+    }
+    
     // Check if it is a constructive item
     if ( string(item_get_data(v_item_equipped,0)) == "" )
     {
@@ -5132,7 +5144,8 @@ image_speed = 0;
 }
 
 if ( v_item_equipped &gt; 0 ){
-if ( global.item_data[#v_item_equipped,4] == 1 ){ // If the item is a "Weapon" type
+var item_type = global.item_data[#v_item_equipped,4];
+if ( item_type == 1 or item_type == 6 ){ // If the item is the correct type to be drawn on the player
 var list = convert_string_to_list(global.item_data[#v_item_equipped,5],",");
 var spr_item = global.item_data[#v_item_equipped,2];
 if ( real(list[|4]) != 0 &amp;&amp; real(list[|5]) != 0 ){

@@ -15,9 +15,8 @@ var file = file_text_open_write(argument0);
 
 
 // -- Build Version [BEGIN] -- \\
-file_text_write_string(file,string(GAME_VERSION));file_text_writeln(file);
+file_text_write_string(file,"Build: "+string(GAME_VERSION)+", Mod: "+string(global.mod_version));file_text_writeln(file);
 // -- Build Version [END] -- \\
-
 
 // -- World Size [BEGIN] -- \\
 file_text_write_string(file,"//--|World Size|--\\");file_text_writeln(file);

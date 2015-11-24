@@ -108,16 +108,6 @@ stat2: 20,25,5,25,60,20
 stat3: 0
 stat4: 0,0,0,0,0,0
 cook: 0,0
-name: Shovel
-desc: This can be used as a tool of destruction.
-spr: mods\sprites\items\spr_weapon_shovel.png
-stack: 1
-type: 1
-stat1: 0
-stat2: 0
-stat3: 0
-stat4: 0
-cook: 0,0
 name: Wood Bow
 desc: This bow allows you to make ranged attacks.
 spr: mods\sprites\items\spr_weapon_woodbow.png

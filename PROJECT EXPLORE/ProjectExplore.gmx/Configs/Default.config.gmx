@@ -128,10 +128,10 @@
     <option_androidfire_min_sdk_version>9</option_androidfire_min_sdk_version>
     <option_androidfire_minor_version>0</option_androidfire_minor_version>
     <option_androidfire_moga>0</option_androidfire_moga>
-    <option_androidfire_orient_landscape>true</option_androidfire_orient_landscape>
-    <option_androidfire_orient_landscape_flipped>true</option_androidfire_orient_landscape_flipped>
-    <option_androidfire_orient_portrait>true</option_androidfire_orient_portrait>
-    <option_androidfire_orient_portrait_flipped>true</option_androidfire_orient_portrait_flipped>
+    <option_androidfire_orient_landscape>True</option_androidfire_orient_landscape>
+    <option_androidfire_orient_landscape_flipped>True</option_androidfire_orient_landscape_flipped>
+    <option_androidfire_orient_portrait>True</option_androidfire_orient_portrait>
+    <option_androidfire_orient_portrait_flipped>True</option_androidfire_orient_portrait_flipped>
     <option_androidfire_package_company>companyname</option_androidfire_package_company>
     <option_androidfire_package_domain>com</option_androidfire_package_domain>
     <option_androidfire_package_product>ProjectExplore</option_androidfire_package_product>
@@ -213,7 +213,7 @@
     <option_audioGroupCount>4</option_audioGroupCount>
     <option_author>Sebastian Nigro</option_author>
     <option_backimage>nil</option_backimage>
-    <option_borderless>True</option_borderless>
+    <option_borderless>False</option_borderless>
     <option_changed>false</option_changed>
     <option_changeresolution>false</option_changeresolution>
     <option_closeesc>true</option_closeesc>
@@ -596,6 +596,7 @@
     <option_windows_runner_finished>Configs\Default\windows\Runner_finish.bmp</option_windows_runner_finished>
     <option_windows_runner_header>Configs\Default\windows\Runner_header.bmp</option_windows_runner_header>
     <option_windows_save_location>0</option_windows_save_location>
+    <option_windows_sleep_margin>10</option_windows_sleep_margin>
     <option_windows_splash_background_colour>#000000</option_windows_splash_background_colour>
     <option_windows_splash_screen>Configs\Default\windows\splash.png</option_windows_splash_screen>
     <option_windows_steam_app_id>357650</option_windows_steam_app_id>

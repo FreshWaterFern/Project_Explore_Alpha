@@ -3,7 +3,8 @@ gml_pragma("forceinline");
 var grid = global.item_data;var check_destroy = false;
 
 if ( argument0 != 0 ){
-if ( global.item_data[#argument0,4] == 0 or global.item_data[#argument0,4] == 4 ){ // Type (0 = Consumable, 4 = Plantable)
+var item_type = global.item_data[#argument0,4];
+if ( item_type == 0 or item_type == 4 ){ // Type (0 = Consumable, 4 = Plantable)
 var list = convert_string_to_list(grid[#argument0,5],",");
 var str = "";var offset = 0;
 
@@ -55,13 +56,13 @@ if ( global.c_stack_pack[#obj_game.v_hotbar_set,4] == 0 )
 {global.c_inventory_pack[#obj_game.v_hotbar_set,4] = 0;}
 }}}
 
-if ( global.item_data[#argument0,4] == 3 ){ // Type (3 = Wearable)
+if ( item_type == 3 ){ // Type (3 = Wearable)
 var list1 = convert_string_to_list(global.item_data[#argument0,8],",");
 if ( real(list1[|0]) == 1 ){ // It's head wear
 if(global.equip_list[| 0]!=argument0){
 global.clothing_head=global.item_data[#argument0,0];global.equip_list[| 0]=argument0;
 if(instance_exists(obj_inv_slot)){inst=instance_create(x,y,obj_popup_text)}
-else{inst=instance_create(x,y,obj_popup_resourcegain);};inst.text="Equipped";inst.v_color=c_white;}
+else{inst=instance_create(x,y,obj_popup_resourcegain);}inst.text="Equipped";inst.v_color=c_white;}
 else{global.clothing_head="";global.equip_list[| 0]=0;if(instance_exists(obj_inv_slot)){inst=instance_create(x,y,obj_popup_text)}else{inst=instance_create(x,y,obj_popup_resourcegain);};inst.text="Unequipped";inst.v_color=c_white;}}
 if ( real(list1[|1]) == 1 ){ // It's body wear
 if(global.equip_list[| 1]!=argument0){
@@ -70,4 +71,19 @@ if(instance_exists(obj_inv_slot)){inst=instance_create(x,y,obj_popup_text)}
 else{inst=instance_create(x,y,obj_popup_resourcegain);};inst.text="Equipped";inst.v_color=c_white;}
 else{global.clothing_body="";global.equip_list[| 1]=0;if(instance_exists(obj_inv_slot)){inst=instance_create(x,y,obj_popup_text)}else{inst=instance_create(x,y,obj_popup_resourcegain);};inst.text="Unequipped";inst.v_color=c_white;}}
 ds_list_destroy(list1);
-}}
+}
+
+if ( item_type == 5 ){ // Type (5 = Compass)
+if ( obj_player.compass_equip ){obj_player.compass_equip = false;
+if(instance_exists(obj_inv_slot)){inst=instance_create(x,y,obj_popup_text)}
+else{inst=instance_create(x,y,obj_popup_resourcegain);}inst.text="Unequipped";inst.v_color=c_white;
+}
+else{obj_player.compass_equip = true;
+if(instance_exists(obj_inv_slot)){inst=instance_create(x,y,obj_popup_text)}
+else{inst=instance_create(x,y,obj_popup_resourcegain);}inst.text="Equipped";inst.v_color=c_white;
+}
+
+}
+
+
+}

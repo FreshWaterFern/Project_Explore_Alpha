@@ -450,58 +450,6 @@ global.ambient_light[#4,i] = alpha_blend;
           </argument>
         </arguments>
       </action>
-      <action>
-        <libid>1</libid>
-        <id>603</id>
-        <kind>7</kind>
-        <userelative>0</userelative>
-        <isquestion>0</isquestion>
-        <useapplyto>-1</useapplyto>
-        <exetype>2</exetype>
-        <functionname></functionname>
-        <codestring></codestring>
-        <whoName>self</whoName>
-        <relative>0</relative>
-        <isnot>0</isnot>
-        <arguments>
-          <argument>
-            <kind>1</kind>
-            <string>/// Initialize Tablet Use
-global.tablet_mode = 1;
-global.tablet_scaling = 1;
-if ( os_type != os_android ){
-ini_open("settings.ini");
-global.tablet_mode = real(ini_read_string("settings","tablet_mode",0));
-ini_close();}
-global.tablet_scaling = global.tablet_mode;
-global.inventory_push = 0;
-global.escape_push = 0;
-global.c_touch_up = false;
-global.c_touch_down = false;
-global.c_touch_left = false;
-global.c_touch_right = false;
-global.c_touch_walk = false;
-global.c_touch_movepad = false;
-global.c_touch_mousex = 0;
-global.c_touch_mousey = 0;
-global.c_touch_movepad2 = false;
-global.c_touch_mousex2 = 0;
-global.c_touch_mousey2 = 0;
-global.c_touch_movepad3 = false;
-global.c_touch_mousex3 = 0;
-global.c_touch_mousey3 = 0;
-global.c_touch_movepad4 = false;
-global.c_touch_mousex4 = 0;
-global.c_touch_mousey4 = 0;
-global.touch_cache[0]=0;
-global.touch_cache[1]=0;
-global.touch_cache[2]=0;
-global.c_touch_dc = 0;
-global.c_touch_count = 0;
-</string>
-          </argument>
-        </arguments>
-      </action>
     </event>
     <event eventtype="3" enumb="1">
       <action>
@@ -1257,7 +1205,8 @@ if ( global.render_gui_1 == true ){
     draw_set_alpha(1);
     
     // Draw Compass
-    if ( obj_player.v_item_equipped == 82 )
+    
+    if ( obj_player.compass_equip )
     {
         compass_alpha += 0.07;
     }
@@ -1273,6 +1222,7 @@ if ( global.render_gui_1 == true ){
     {
         compass_alpha = 1;
     }
+    if ( obj_player.compass_equip &amp;&amp; compass_alpha &gt; 0 ){
     // Get image_angle for arrow
     draw_set_alpha(compass_alpha);
     if ( global.waypoint_x == 0 &amp;&amp; global.waypoint_y == 0 )
@@ -1281,6 +1231,7 @@ if ( global.render_gui_1 == true ){
     draw_sprite(spr_compass,0,view_wview[0]-104,34);
     draw_sprite_ext(spr_compass_arrow,0,view_wview[0]-104,34,1,1,compass_arrow_angle,c_white,compass_alpha);
     draw_set_alpha(1);
+    }
     
     // Draw all the text at once
     draw_sprite(spr_hud_base,0,view_wview[0]-256,view_hview[0]-81);draw_sprite(spr_hud_base,0,view_wview[0]-128,view_hview[0]-81);
@@ -1390,195 +1341,6 @@ if ( global.render_gui_page == "stats" )
 }
 
 }
-</string>
-          </argument>
-        </arguments>
-      </action>
-      <action>
-        <libid>1</libid>
-        <id>603</id>
-        <kind>7</kind>
-        <userelative>0</userelative>
-        <isquestion>0</isquestion>
-        <useapplyto>-1</useapplyto>
-        <exetype>2</exetype>
-        <functionname></functionname>
-        <codestring></codestring>
-        <whoName>self</whoName>
-        <relative>0</relative>
-        <isnot>0</isnot>
-        <arguments>
-          <argument>
-            <kind>1</kind>
-            <string>/// Tablet GUI &amp;&amp; Logic
-/*
-if ( global.tablet_mode == 1 ){
-// Logic
-
-global.c_touch_count = 0;
-global.c_touch_dc = 0;
-
-global.inventory_push = 0;
-global.escape_push = 0;
-
-global.c_touch_left=false;global.c_touch_up=false;
-global.c_touch_down=false;global.c_touch_right=false;
-
-var pass_touch_check = false;
-var count_press = -1;
-
-var arrow_key_left = 0;
-
-if (device_mouse_check_button(count_press+1,mb_right)){count_press++}
-if (device_mouse_check_button(count_press+1,mb_left)){count_press++}
-if (device_mouse_check_button(count_press+1,mb_left)){count_press++}
-if (device_mouse_check_button(count_press+1,mb_left)){count_press++}
-if (device_mouse_check_button(count_press+1,mb_left)){count_press++}
-
-
-if ( count_press &gt; -1 ){
-for(var i=-1;i&lt;count_press;i++){
-
-if ( global.render_gui_1 == true ){
-if ( global.c_touch_dc != 1 ){
-if (device_mouse_check_button(global.c_touch_count,mb_right)){global.c_touch_dc++;global.touch_cache[0]=device_mouse_x(global.c_touch_count);global.touch_cache[1]=device_mouse_y(global.c_touch_count);global.touch_cache[2]=global.c_touch_count;global.c_touch_count++;}}
-
-if ( !global.c_touch_left &amp;&amp; device_mouse_check_button(global.c_touch_count,mb_left) ){
-// Left Arrow \\
-var mouse_x1 = device_mouse_x_to_gui(global.c_touch_count);var mouse_y1 = device_mouse_y_to_gui(global.c_touch_count);
-
-var center_s_x = (sprite_get_width(spr_gui_tablet_arrowup)/2)+8;
-var center_s_y = view_hview[0]-(sprite_get_height(spr_gui_tablet_arrowup)*1.5)-8;
-
-if ( mouse_x1 &gt; center_s_x-69 &amp;&amp; mouse_x1 &lt; center_s_x+69 &amp;&amp; mouse_y1 &gt; center_s_y-69 &amp;&amp; mouse_y1 &lt; center_s_y+69 )
-{global.c_touch_left=true;global.c_touch_count ++;}}
-
-if ( !global.c_touch_right &amp;&amp; device_mouse_check_button(global.c_touch_count,mb_left) ){
-// Right Arrow \\
-var mouse_x1 = device_mouse_x_to_gui(global.c_touch_count);var mouse_y1 = device_mouse_y_to_gui(global.c_touch_count);
-
-var center_s_x = (sprite_get_width(spr_gui_tablet_arrowup)*2.5)+8;
-var center_s_y = view_hview[0]-(sprite_get_height(spr_gui_tablet_arrowup)*1.5)-8;
-
-if ( mouse_x1 &gt; center_s_x-69 &amp;&amp; mouse_x1 &lt; center_s_x+69 &amp;&amp; mouse_y1 &gt; center_s_y-69 &amp;&amp; mouse_y1 &lt; center_s_y+69 )
-{global.c_touch_right=true;global.c_touch_count ++;}}
-
-if ( !global.c_touch_down &amp;&amp; device_mouse_check_button(global.c_touch_count,mb_left) ){
-// Down Arrow \\
-mouse_x1 = device_mouse_x_to_gui(global.c_touch_count);mouse_y1 = device_mouse_y_to_gui(global.c_touch_count);
-
-center_s_x = (sprite_get_width(spr_gui_tablet_arrowup)*1.5)+8;
-center_s_y = view_hview[0]-(sprite_get_height(spr_gui_tablet_arrowup)/2)-8;
-
-if ( mouse_x1 &gt; center_s_x-69 &amp;&amp; mouse_x1 &lt; center_s_x+69 &amp;&amp; mouse_y1 &gt; center_s_y-69 &amp;&amp; mouse_y1 &lt; center_s_y+69 )
-{global.c_touch_down=true;global.c_touch_count ++;}}
-
-if ( !global.c_touch_up &amp;&amp; device_mouse_check_button(global.c_touch_count,mb_left) ){
-// Up Arrow \\
-mouse_x1 = device_mouse_x_to_gui(global.c_touch_count);mouse_y1 = device_mouse_y_to_gui(global.c_touch_count);
-
-center_s_x = (sprite_get_width(spr_gui_tablet_arrowup)*1.5)+8;
-center_s_y = view_hview[0]-(sprite_get_height(spr_gui_tablet_arrowup)*2.5)-8;
-
-if ( mouse_x1 &gt; center_s_x-69 &amp;&amp; mouse_x1 &lt; center_s_x+69 &amp;&amp; mouse_y1 &gt; center_s_y-69 &amp;&amp; mouse_y1 &lt; center_s_y+69 )
-{global.c_touch_up=true;global.c_touch_count ++;}}
-
-}
-
-// Pausing &amp;&amp; Inventory \\
-if ( device_mouse_check_button_pressed(0,mb_left) ){
-mouse_x1 = device_mouse_x_to_gui(0);mouse_y1 = device_mouse_y_to_gui(0);
-
-center_s_x = 432;
-center_s_y = 17*1.5;
-
-if ( mouse_x1 &gt; center_s_x-(96*1.5) &amp;&amp; mouse_x1 &lt; center_s_x+(96*1.5) &amp;&amp; mouse_y1 &gt; center_s_y-(17*1.5) &amp;&amp; mouse_y1 &lt; center_s_y+(17*1.5) )
-{global.escape_push=1;global.c_touch_count ++;}
-
-center_s_x = 144;
-
-if ( mouse_x1 &gt; center_s_x-(96*1.5) &amp;&amp; mouse_x1 &lt; center_s_x+(96*1.5) &amp;&amp; mouse_y1 &gt; center_s_y-(17*1.5) &amp;&amp; mouse_y1 &lt; center_s_y+(17*1.5) )
-{global.inventory_push=1;global.c_touch_count ++;}
-}
-
-if ( global.render_gui_1 == true ){
-if ( global.c_touch_dc != 1 ){
-if (device_mouse_check_button(global.c_touch_count,mb_right)){global.c_touch_dc++;global.touch_cache[0]=device_mouse_x(global.c_touch_count);global.touch_cache[1]=device_mouse_y(global.c_touch_count);global.touch_cache[2]=global.c_touch_count;global.c_touch_count++;}}
-}
-
-}}
-// Render
-draw_set_alpha(1);draw_set_color(c_white);draw_set_font(font_gulim_28);draw_set_halign(fa_center);draw_set_valign(fa_middle);
-draw_sprite_ext(spr_craft_button,0,96*1.5,17*1.5,1.5,1.5,0,c_white,0.5);
-if ( global.render_gui_1 == true ){
-draw_sprite_ext(spr_craft_button,0,288*1.5,17*1.5,1.5,1.5,0,c_white,0.5);
-draw_sprite_ext(spr_gui_tablet_arrowleft,global.c_touch_left,(sprite_get_width(spr_gui_tablet_arrowup)/2)+8,view_hview[0]-(sprite_get_height(spr_gui_tablet_arrowup)*1.5)-8,1,1,0,c_white,0.5);
-draw_sprite_ext(spr_gui_tablet_arrowright,global.c_touch_right,(sprite_get_width(spr_gui_tablet_arrowup)*2.5)+8,view_hview[0]-(sprite_get_height(spr_gui_tablet_arrowup)*1.5)-8,1,1,0,c_white,0.5);
-draw_sprite_ext(spr_gui_tablet_arrowdown,global.c_touch_down,(sprite_get_width(spr_gui_tablet_arrowup)*1.5)+8,view_hview[0]-(sprite_get_height(spr_gui_tablet_arrowup)/2)-8,1,1,0,c_white,0.5);
-draw_sprite_ext(spr_gui_tablet_arrowup,global.c_touch_up,(sprite_get_width(spr_gui_tablet_arrowup)*1.5)+8,view_hview[0]-(sprite_get_height(spr_gui_tablet_arrowdown)*2.5)-8,1,1,0,c_white,0.5);
-draw_set_alpha(0.5);draw_text(96*1.5,17*1.5,"Inventory");draw_text(288*1.5,17*1.5,"Pause");draw_set_alpha(1);}else{draw_set_alpha(0.5);draw_text(96*1.5,17*1.5,"Back");draw_set_alpha(1);}}
-</string>
-          </argument>
-        </arguments>
-      </action>
-      <action>
-        <libid>1</libid>
-        <id>603</id>
-        <kind>7</kind>
-        <userelative>0</userelative>
-        <isquestion>0</isquestion>
-        <useapplyto>-1</useapplyto>
-        <exetype>2</exetype>
-        <functionname></functionname>
-        <codestring></codestring>
-        <whoName>self</whoName>
-        <relative>0</relative>
-        <isnot>0</isnot>
-        <arguments>
-          <argument>
-            <kind>1</kind>
-            <string>/// Tablet GUI &amp;&amp; Hot Bar
-/*
-if ( global.tablet_mode == 1 )
-{
-// Logic
-if ( global.render_gui_1 == true ){
-var pass_touch_check = false;
-
-// Touch Pad 1
-var view_xcenter = view_wview[0]/2;var view_ybottom = view_hview[0];
-var offset_x = 17;var offset_y = 17;
-var mouse_x1 = device_mouse_x_to_gui(global.c_touch_count);var mouse_y1 = device_mouse_y_to_gui(global.c_touch_count);
-
-var center_s_y = view_hview[0]-48;var center_s_x = view_wview[0]-208;var dead_zone = 12;
-if ( device_mouse_check_button_pressed(global.c_touch_count,mb_left) )
-{
-if ( mouse_check_area(view_xcenter-60-(offset_x*3)-35,view_ybottom-24-offset_y-27,view_xcenter-60-(offset_x*3)+35,view_ybottom-24-offset_y+35) ) // Slot 1
-{global.c_touch_movepad4 = true;if(obj_game.v_hotbar_set!=0){obj_game.v_hotbar_set = 0;}else{obj_game.v_hotbar_set=-1;obj_player.v_item_equipped=-1;}}else{
-if ( mouse_check_area(view_xcenter-20-offset_x-35,view_ybottom-24-offset_y-27,view_xcenter-20-offset_x+35,view_ybottom-24-offset_y+35) ) // Slot 2
-{global.c_touch_movepad4 = true;if(obj_game.v_hotbar_set!=1){obj_game.v_hotbar_set = 1;}else{obj_game.v_hotbar_set=-1;obj_player.v_item_equipped=-1;}}else{
-if ( mouse_check_area(view_xcenter+20+offset_x-35,view_ybottom-24-offset_y-27,view_xcenter+20+offset_x+35,view_ybottom-24-offset_y+35) ) // Slot 3
-{global.c_touch_movepad4 = true;if(obj_game.v_hotbar_set!=2){obj_game.v_hotbar_set = 2;}else{obj_game.v_hotbar_set=-1;obj_player.v_item_equipped=-1;}}else{
-if ( mouse_check_area(view_xcenter+60+(offset_x*3)-35,view_ybottom-24-offset_y-27,view_xcenter+60+(offset_x*3)+35,view_ybottom-24-offset_y+35) ) // Slot 4
-{global.c_touch_movepad4 = true;if(obj_game.v_hotbar_set!=3){obj_game.v_hotbar_set = 3;}else{obj_game.v_hotbar_set=-1;obj_player.v_item_equipped=-1;}}}}}
-if ( global.c_touch_movepad4 == true )
-{global.c_touch_mousex4=mouse_x1;global.c_touch_mousey4=mouse_y1;}
-
-// Directional Touch Pad Setup
-if ( global.c_touch_mousex4 != 0 or global.c_touch_mousey4 != 0 )
-{var pass_touch_check = true;}}
-else{global.c_touch_movepad4 = false;global.c_touch_mousex4=0;global.c_touch_mousey4=0;}
-
-if ( point_distance(mouse_x1,mouse_y1,center_s_x,center_s_y) &gt;= 64 )
-{
-global.c_touch_mousex4=0;global.c_touch_mousey4=0;global.c_touch_movepad4=false;
-}
-
-if ( pass_touch_check == false )
-{
-global.c_touch_count ++;
-}
-}}
 </string>
           </argument>
         </arguments>
