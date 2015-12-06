@@ -224,6 +224,21 @@ for(loop_step=0;loop_step<list_size;loop_step++)
     obj_name = object_get_name(objind(asset_get_index(temp_list[|0])));
     switch(obj_name)
     {
+        case "obj_npc_wolf":{
+        inst = instance_create(real(temp_list[|1]),real(temp_list[|2]),objind(asset_get_index(temp_list[|0])));
+        inst.ai_dead = real(temp_list[|4]);
+        inst.ai_attack = real(temp_list[|5]);
+        inst.ai_reproduce_cd = real(temp_list[|6]);
+        inst.death_frames = real(temp_list[|7]);
+        inst.npc_food = real(temp_list[|8]);
+        inst.npc_thirst = real(temp_list[|9]);
+        inst.npc_health = real(temp_list[|10]);
+        inst.npc_anger = real(temp_list[|11]);
+        inst.npc_fear = real(temp_list[|12]);
+        inst.npc_heat = real(temp_list[|13]);
+        inst.npc_state = real(temp_list[|14]);
+        break;}
+    
         case "obj_world_tree_1":{
         inst = instance_create(real(temp_list[|1]),real(temp_list[|2]),objind(asset_get_index(temp_list[|0])));
         inst.resource_id = real(temp_list[|4]);

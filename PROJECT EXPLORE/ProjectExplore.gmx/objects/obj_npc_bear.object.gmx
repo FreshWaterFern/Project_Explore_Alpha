@@ -37,6 +37,7 @@ ai_sprite = spr_bear_down;
 ai_dir = 0;
 ai_bleeding = 0;
 ai_hit = 0;
+index = 0;
 ai_dead = false;
 ai_attack_cd = 0;
 ai_damage_bite = 10;
@@ -730,9 +731,9 @@ world_obj_update(id);}
 }
 if ( ai_dead &amp;&amp; death_frames &lt; 3 ){
 if ( death_frames == 0 ){
-var inst = instance_create(x+random_range(-16,16),y+random_range(-16,16),obj_item_dropped);inst.item_id = 70;inst.item_stack = 1;
-var inst = instance_create(x+random_range(-16,16),y+random_range(-16,16),obj_item_dropped);inst.item_id = 26;inst.item_stack = 5;
-if(irandom(15)==5){var inst = instance_create(x+random_range(-16,16),y+random_range(-16,16),obj_item_dropped);inst.item_id = 105;inst.item_stack = 1;}
+var inst = instance_create(x+random_range(-16,16),y+random_range(-16,16),obj_item_dropped);inst.item_id = db_item_get_name("Raw Bear Meat");inst.item_stack = 1;
+var inst = instance_create(x+random_range(-16,16),y+random_range(-16,16),obj_item_dropped);inst.item_id = db_item_get_name("Cloth");inst.item_stack = 5;
+if(irandom(15)==5){var inst = instance_create(x+random_range(-16,16),y+random_range(-16,16),obj_item_dropped);inst.item_id = db_item_get_name("Bear Hide Mantle");inst.item_stack = 1;}
 }death_frames += 0.01;}
 if ( !ai_dead ){
 npc_anger=clamp(npc_anger,0,100);

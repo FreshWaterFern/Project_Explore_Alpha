@@ -26,7 +26,6 @@
           <argument>
             <kind>1</kind>
             <string>/// Initialize
-file_log_ini("logs/log");
 sprite_external_init();
 randomize();
 start_time = current_time;

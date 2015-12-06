@@ -3,7 +3,7 @@
   <spriteName>&lt;undefined&gt;</spriteName>
   <solid>0</solid>
   <visible>-1</visible>
-  <depth>-1</depth>
+  <depth>-1410065407</depth>
   <persistent>0</persistent>
   <parentName>&lt;undefined&gt;</parentName>
   <maskName>&lt;undefined&gt;</maskName>
@@ -66,7 +66,7 @@ instance_destroy();
         </arguments>
       </action>
     </event>
-    <event eventtype="8" enumb="64">
+    <event eventtype="8" enumb="73">
       <action>
         <libid>1</libid>
         <id>603</id>
@@ -83,12 +83,14 @@ instance_destroy();
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>draw_set_alpha(alpha);
+            <string>surface_set_target(application_surface);
+draw_set_alpha(alpha);
 draw_set_color(v_color);
 
 draw_rectangle(0,0,view_wview[0],view_hview[0],false);
 
 draw_set_alpha(1);
+surface_reset_target();
 </string>
           </argument>
         </arguments>

@@ -445,11 +445,10 @@ switch(argument1)
 }
 if ( is_ok == true )
 {
-with(obj_custom_key)
-{key_pressed=false;alt_key_pressed=false;}
 return argument1;
 }
 else
 {
 return argument0;
 }
+

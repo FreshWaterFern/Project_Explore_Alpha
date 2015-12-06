@@ -3,11 +3,11 @@
   <Configs name="configs">
     <Config>Configs\Default</Config>
   </Configs>
-  <datafiles number="222" name="datafiles">
+  <datafiles number="227" name="datafiles">
     <datafile>
-      <name>Square.ttf</name>
+      <name>bg_menu.png</name>
       <exists>-1</exists>
-      <size>13652</size>
+      <size>1290884</size>
       <exportAction>2</exportAction>
       <exportDir></exportDir>
       <overwrite>0</overwrite>
@@ -19,109 +19,7 @@
           <CopyToMask>9223372036854775807</CopyToMask>
         </Config>
       </ConfigOptions>
-      <filename>Square.ttf</filename>
-    </datafile>
-    <datafile>
-      <name>menu_background.png</name>
-      <exists>-1</exists>
-      <size>944714</size>
-      <exportAction>2</exportAction>
-      <exportDir></exportDir>
-      <overwrite>0</overwrite>
-      <freeData>-1</freeData>
-      <removeEnd>0</removeEnd>
-      <store>0</store>
-      <ConfigOptions>
-        <Config name="Default">
-          <CopyToMask>9223372036854775807</CopyToMask>
-        </Config>
-      </ConfigOptions>
-      <filename>menu_background.png</filename>
-    </datafile>
-    <datafile>
-      <name>spr_main_menu_back.png</name>
-      <exists>-1</exists>
-      <size>144866</size>
-      <exportAction>2</exportAction>
-      <exportDir></exportDir>
-      <overwrite>0</overwrite>
-      <freeData>-1</freeData>
-      <removeEnd>0</removeEnd>
-      <store>0</store>
-      <ConfigOptions>
-        <Config name="Default">
-          <CopyToMask>9223372036854775807</CopyToMask>
-        </Config>
-      </ConfigOptions>
-      <filename>spr_main_menu_back.png</filename>
-    </datafile>
-    <datafile>
-      <name>spr_main_menu_controls.png</name>
-      <exists>-1</exists>
-      <size>212082</size>
-      <exportAction>2</exportAction>
-      <exportDir></exportDir>
-      <overwrite>0</overwrite>
-      <freeData>-1</freeData>
-      <removeEnd>0</removeEnd>
-      <store>0</store>
-      <ConfigOptions>
-        <Config name="Default">
-          <CopyToMask>9223372036854775807</CopyToMask>
-        </Config>
-      </ConfigOptions>
-      <filename>spr_main_menu_controls.png</filename>
-    </datafile>
-    <datafile>
-      <name>spr_main_menu_options_back.png</name>
-      <exists>-1</exists>
-      <size>50854</size>
-      <exportAction>2</exportAction>
-      <exportDir></exportDir>
-      <overwrite>0</overwrite>
-      <freeData>-1</freeData>
-      <removeEnd>0</removeEnd>
-      <store>0</store>
-      <ConfigOptions>
-        <Config name="Default">
-          <CopyToMask>9223372036854775807</CopyToMask>
-        </Config>
-      </ConfigOptions>
-      <filename>spr_main_menu_options_back.png</filename>
-    </datafile>
-    <datafile>
-      <name>spr_main_menu_button.png</name>
-      <exists>-1</exists>
-      <size>20719</size>
-      <exportAction>2</exportAction>
-      <exportDir></exportDir>
-      <overwrite>0</overwrite>
-      <freeData>-1</freeData>
-      <removeEnd>0</removeEnd>
-      <store>0</store>
-      <ConfigOptions>
-        <Config name="Default">
-          <CopyToMask>9223372036854775807</CopyToMask>
-        </Config>
-      </ConfigOptions>
-      <filename>spr_main_menu_button.png</filename>
-    </datafile>
-    <datafile>
-      <name>spr_main_menu_graphics_back.png</name>
-      <exists>-1</exists>
-      <size>74568</size>
-      <exportAction>2</exportAction>
-      <exportDir></exportDir>
-      <overwrite>0</overwrite>
-      <freeData>-1</freeData>
-      <removeEnd>0</removeEnd>
-      <store>0</store>
-      <ConfigOptions>
-        <Config name="Default">
-          <CopyToMask>9223372036854775807</CopyToMask>
-        </Config>
-      </ConfigOptions>
-      <filename>spr_main_menu_graphics_back.png</filename>
+      <filename>bg_menu.png</filename>
     </datafile>
     <datafile>
       <name>bg_screen1.png</name>
@@ -140,7 +38,7 @@
       </ConfigOptions>
       <filename>bg_screen1.png</filename>
     </datafile>
-    <datafiles number="222" name="vanilla">
+    <datafiles number="227" name="vanilla">
       <datafile>
         <name>file_list.txt</name>
         <exists>-1</exists>
@@ -175,9 +73,9 @@
         </ConfigOptions>
         <filename>version.txt</filename>
       </datafile>
-      <datafiles number="222" name="mods">
-        <datafiles number="222" name="sprites">
-          <datafiles number="222" name="items">
+      <datafiles number="227" name="mods">
+        <datafiles number="227" name="sprites">
+          <datafiles number="227" name="items">
             <datafile>
               <name>spr_item_9mmbullet.png</name>
               <exists>-1</exists>
@@ -2525,7 +2423,7 @@
               <filename>spr_weapon_woodsword.png</filename>
             </datafile>
           </datafiles>
-          <datafiles number="222" name="clothing">
+          <datafiles number="227" name="clothing">
             <datafile>
               <name>spr_clothing_bearhide_mantle.png</name>
               <exists>-1</exists>
@@ -2612,7 +2510,7 @@
               <filename>spr_clothing_wolfhood.png</filename>
             </datafile>
           </datafiles>
-          <datafiles number="222" name="2D_Objects">
+          <datafiles number="227" name="2D_Objects">
             <datafile>
               <name>sprite_smallfire.png</name>
               <exists>-1</exists>
@@ -2649,7 +2547,7 @@
             </datafile>
           </datafiles>
         </datafiles>
-        <datafiles number="222" name="textures">
+        <datafiles number="227" name="textures">
           <datafile>
             <name>texture_largecrate.png</name>
             <exists>-1</exists>
@@ -2702,7 +2600,7 @@
             <filename>texture_chair_1.png</filename>
           </datafile>
         </datafiles>
-        <datafiles number="222" name="scripts">
+        <datafiles number="227" name="scripts">
           <datafile>
             <name>crafting.txt</name>
             <exists>-1</exists>
@@ -2772,7 +2670,7 @@
             <filename>weapons.txt</filename>
           </datafile>
         </datafiles>
-        <datafiles number="222" name="objects">
+        <datafiles number="227" name="objects">
           <datafile>
             <name>objects.txt</name>
             <exists>-1</exists>
@@ -2791,7 +2689,7 @@
             <filename>objects.txt</filename>
           </datafile>
         </datafiles>
-        <datafiles number="222" name="hitbox">
+        <datafiles number="227" name="hitbox">
           <datafile>
             <name>hitbox_32x32.png</name>
             <exists>-1</exists>
@@ -2827,8 +2725,8 @@
             <filename>hitbox_20x20.png</filename>
           </datafile>
         </datafiles>
-        <datafiles number="222" name="plants">
-          <datafiles number="222" name="corn">
+        <datafiles number="227" name="plants">
+          <datafiles number="227" name="corn">
             <datafile>
               <name>spr_plant_corn_0.png</name>
               <exists>-1</exists>
@@ -3170,7 +3068,7 @@
               <filename>spr_plant_corn_19.png</filename>
             </datafile>
           </datafiles>
-          <datafiles number="222" name="potato">
+          <datafiles number="227" name="potato">
             <datafile>
               <name>spr_plant_potato_0.png</name>
               <exists>-1</exists>
@@ -3342,7 +3240,7 @@
               <filename>spr_plant_potato_9.png</filename>
             </datafile>
           </datafiles>
-          <datafiles number="222" name="tomato">
+          <datafiles number="227" name="tomato">
             <datafile>
               <name>spr_plant_tomato_0.png</name>
               <exists>-1</exists>
@@ -3551,7 +3449,7 @@
         </datafiles>
       </datafiles>
     </datafiles>
-    <datafiles number="222" name="music">
+    <datafiles number="227" name="music">
       <datafile>
         <name>01 Exploration.oga</name>
         <exists>-1</exists>
@@ -3660,6 +3558,7 @@
     <extension index="0">extensions\Vignette and Noise shader</extension>
     <extension index="1">extensions\Volume System</extension>
     <extension index="2">extensions\Text Inputs</extension>
+    <extension index="3">extensions\Better Scaling</extension>
   </NewExtensions>
   <sounds name="sound">
     <sounds name="clicks">
@@ -4049,6 +3948,9 @@
       <sprites name="main">
         <sprite>sprites\spr_main_menu_arrow</sprite>
         <sprite>sprites\spr_item_view_arrow</sprite>
+        <sprite>sprites\spr_menu_main</sprite>
+        <sprite>sprites\spr_menu_sub</sprite>
+        <sprite>sprites\spr_menu_small</sprite>
       </sprites>
       <sprites name="inventory">
         <sprite>sprites\spr_drag_bar</sprite>
@@ -4074,12 +3976,8 @@
         <sprite>sprites\spr_enter_key</sprite>
       </sprites>
       <sprites name="audio">
-        <sprite>sprites\sButton_mode</sprite>
-        <sprite>sprites\sBarra_Animada_01</sprite>
-        <sprite>sprites\sBars_borders</sprite>
-        <sprite>sprites\sBoton</sprite>
-        <sprite>sprites\sOn_Off</sprite>
-        <sprite>sprites\sOn_Off_Master</sprite>
+        <sprite>sprites\spr_menu_audio_bar</sprite>
+        <sprite>sprites\spr_menu_audio_slider</sprite>
       </sprites>
       <sprites name="character">
         <sprite>sprites\spr_menu_char_arrow</sprite>
@@ -4254,23 +4152,29 @@
       <script>scripts\get_temperature_effect.gml</script>
       <script>scripts\npc_get_temperature.gml</script>
     </scripts>
-    <scripts name="audio">
-      <script>scripts\scr_volume_control.gml</script>
-    </scripts>
     <scripts name="menu">
-      <script>scripts\scr_main_menu.gml</script>
-      <script>scripts\scr_new_menu.gml</script>
-      <script>scripts\scr_map_menu.gml</script>
-      <script>scripts\scr_graphics_menu.gml</script>
-      <script>scripts\scr_settings_menu.gml</script>
-      <script>scripts\scr_options_menu.gml</script>
-      <script>scripts\scr_loadgame_menu.gml</script>
-      <script>scripts\scr_controls_menu.gml</script>
       <script>scripts\keyboard_set_key.gml</script>
       <script>scripts\keyboard_get_str.gml</script>
       <script>scripts\keyboard_save_controls.gml</script>
       <script>scripts\mouse_check_area.gml</script>
       <script>scripts\draw_text_outline.gml</script>
+      <script>scripts\scr_button_handle.gml</script>
+      <script>scripts\draw_inputbox_render.gml</script>
+      <scripts name="main menu">
+        <script>scripts\Menu_MainMenu_Main.gml</script>
+        <script>scripts\Menu_MainMenu_SP.gml</script>
+        <script>scripts\Menu_MainMenu_NewGame.gml</script>
+        <script>scripts\Menu_MainMenu_MP.gml</script>
+        <script>scripts\Menu_MainMenu_Confirm_Video.gml</script>
+        <script>scripts\Menu_MainMenu_Confirm_Audio.gml</script>
+        <script>scripts\Menu_MainMenu_Confirm_Controls.gml</script>
+        <script>scripts\Menu_MainMenu_Mods.gml</script>
+        <script>scripts\Menu_MainMenu_Options.gml</script>
+        <script>scripts\Menu_MainMenu_Video.gml</script>
+        <script>scripts\Menu_MainMenu_Audio.gml</script>
+        <script>scripts\Menu_MainMenu_Controls.gml</script>
+        <script>scripts\Menu_MainMenu_ButtonSet.gml</script>
+      </scripts>
     </scripts>
     <scripts name="Project_Explore">
       <script>scripts\pause_game.gml</script>
@@ -4405,12 +4309,36 @@
     </scripts>
     <scripts name="rendering">
       <script>scripts\draw_sprite_motionblur.gml</script>
+      <script>scripts\decal_handle.gml</script>
+    </scripts>
+    <scripts name="misc">
+      <script>scripts\string_split.gml</script>
+      <script>scripts\resolution_update.gml</script>
+      <script>scripts\resolution_get.gml</script>
+      <script>scripts\ini_read_real_check.gml</script>
+      <script>scripts\ini_read_string_check.gml</script>
+      <script>scripts\shader_ini.gml</script>
+    </scripts>
+    <scripts name="file">
+      <script>scripts\Graphics_File_Update.gml</script>
+    </scripts>
+    <scripts name="Better Scaling">
+      <script>scripts\better_scaling_draw_sprite.gml</script>
+      <script>scripts\better_scaling_draw_surface.gml</script>
     </scripts>
   </scripts>
   <shaders name="shaders">
     <shader type="GLSLES">shaders\shd_vignette_noise.shader</shader>
     <shader type="GLSLES">shaders\shd_bright_contrast.shader</shader>
     <shader type="GLSLES">shaders\shd_overlay.shader</shader>
+    <shader type="GLSLES">shaders\sh_better_scaling_bicubic.shader</shader>
+    <shader type="GLSLES">shaders\sh_better_scaling_hq4x.shader</shader>
+    <shader type="GLSLES">shaders\sh_better_scaling_5xbra.shader</shader>
+    <shader type="GLSLES">shaders\sh_better_scaling_5xbrb.shader</shader>
+    <shader type="GLSLES">shaders\sh_better_scaling_5xbrc.shader</shader>
+    <shader type="GLSLES">shaders\sh_better_scaling_supersampling_2x2.shader</shader>
+    <shader type="GLSLES">shaders\sh_better_scaling_supersampling_3x3.shader</shader>
+    <shader type="GLSLES">shaders\sh_better_scaling_supersampling_4x4.shader</shader>
   </shaders>
   <fonts name="fonts">
     <font>fonts\font_gulim_8</font>
@@ -4441,6 +4369,7 @@
     </objects>
     <objects name="logic">
       <object>objects\obj_game</object>
+      <object>objects\obj_main_logic</object>
       <objects name="gui">
         <object>objects\obj_waypoint_gui</object>
       </objects>
@@ -4572,23 +4501,11 @@
     </objects>
     <objects name="menu">
       <objects name="main">
-        <object>objects\obj_menu_main</object>
-        <object>objects\obj_menu_graphics</object>
-        <object>objects\obj_menu_settings</object>
-        <object>objects\obj_menu_options</object>
+        <object>objects\obj_menu_mainmenu</object>
         <object>objects\obj_menu_loadgame</object>
-        <object>objects\obj_menu_start</object>
-        <object>objects\obj_menu_map</object>
-        <object>objects\obj_menu_controls</object>
-        <object>objects\obj_menu_audio</object>
-        <object>objects\obj_menu_itemdisplay</object>
-        <object>objects\obj_menu_itemlist</object>
-        <object>objects\obj_menu_wiki</object>
         <object>objects\obj_draw_ad</object>
-        <object>objects\obj_credits</object>
-        <object>objects\obj_menu_name_world</object>
+        <object>objects\obj_menu_inputbox</object>
         <object>objects\obj_draw_version_menu</object>
-        <object>objects\obj_prompt_delete</object>
       </objects>
       <objects name="controls">
         <object>objects\obj_custom_key</object>
@@ -4598,10 +4515,9 @@
       </objects>
       <objects name="audio">
         <object>objects\obj_volume</object>
-        <object>objects\oButton_mode</object>
       </objects>
       <objects name="steam">
-        <object>objects\obj_steam_logic</object>
+        <object>objects\obj_steam_ini</object>
       </objects>
       <objects name="character">
         <object>objects\obj_character_render_menu</object>
@@ -4643,6 +4559,7 @@
     <room>rooms\room_steam_check</room>
     <room>rooms\room_intro</room>
     <room>rooms\room_main_menu</room>
+    <room>rooms\rm_main_menu_backup</room>
     <room>rooms\room_character_editor</room>
     <room>rooms\room_world_editor</room>
     <room>rooms\room_credits</room>
@@ -4652,7 +4569,7 @@
   <constants number="17">
     <constant name="DEV_MODE">1</constant>
     <constant name="TABLET_TEST">0</constant>
-    <constant name="GAME_VERSION">"Preview Build 0.3.0.1"</constant>
+    <constant name="GAME_VERSION">"Preview Build 0.3.0.2"</constant>
     <constant name="wolf_armor">0.10</constant>
     <constant name="wolf_kb_resist">0.05</constant>
     <constant name="bear_armor">0.25</constant>

@@ -46,6 +46,7 @@ ai_knockback_cd = 0;
 ai_knockback_time = 0;
 ai_knockback_speed = 0;
 ai_knockback_dir = 0;
+index = 0;
 update_count = 0;
 image_speed = 0.2;
 path_point[0]=0;path_point[1]=0;
@@ -55,7 +56,6 @@ v_maxspeed = 5;
 path_try = 0;
 death_frames = 0;
 death_time = 0;
-destroy_obj = false;
 move_dir = 0;
 
 collision_adjust();
@@ -692,9 +692,9 @@ world_obj_update(id);
 }
 if ( ai_dead &amp;&amp; death_frames &lt; 3 ){
 if ( death_frames == 0 ){
-var inst = instance_create(x+random_range(-16,16),y+random_range(-16,16),obj_item_dropped);inst.item_id = 9;inst.item_stack = 1;
-var inst = instance_create(x+random_range(-16,16),y+random_range(-16,16),obj_item_dropped);inst.item_id = 26;inst.item_stack = 3;
-if(irandom(15)==5){var inst = instance_create(x+random_range(-16,16),y+random_range(-16,16),obj_item_dropped);inst.item_id = 108;inst.item_stack = 1;}
+var inst = instance_create(x+random_range(-16,16),y+random_range(-16,16),obj_item_dropped);inst.item_id = db_item_get_name("Raw Wolf Meat");inst.item_stack = 1;
+var inst = instance_create(x+random_range(-16,16),y+random_range(-16,16),obj_item_dropped);inst.item_id = db_item_get_name("Cloth");inst.item_stack = 3;
+if(irandom(15)==5){var inst = instance_create(x+random_range(-16,16),y+random_range(-16,16),obj_item_dropped);inst.item_id = db_item_get_name("Wolf Hood");inst.item_stack = 1;}
 }
 death_frames += 0.01;}
 if ( !ai_dead ){

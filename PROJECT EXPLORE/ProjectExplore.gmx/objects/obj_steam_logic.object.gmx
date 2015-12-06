@@ -84,51 +84,29 @@ if steam_initialised()
           <argument>
             <kind>1</kind>
             <string>/// Graphics System
-ini_open("settings.ini");
-global.m_vsync = real(ini_read_string("graphics","vsync","0"));
-if ( !ini_key_exists("graphics","vsync") ){ini_write_string("graphics","vsync","0");}
-global.m_vignette = real(ini_read_string("graphics","vignette","0"));
-if ( !ini_key_exists("graphics","vignette") ){ini_write_string("graphics","vignette","0");}
-global.m_blood = real(ini_read_string("graphics","blood","0"));
-if ( !ini_key_exists("graphics","blood") ){ini_write_string("graphics","blood","0");}
-global.m_particles = real(ini_read_string("graphics","particles","1"));
-if ( !ini_key_exists("graphics","particles") ){ini_write_string("graphics","particles","0");}
-global.m_res = ini_read_string("graphics","resolution","1280x720");
-if ( !ini_key_exists("graphics","resolution") ){ini_write_string("graphics","resolution","1280x720");global.m_res="1280x720";}
-global.m_fullscreen = real(ini_read_string("graphics","fullscreen","1"));
-if ( !ini_key_exists("graphics","fullscreen") ){ini_write_string("graphics","fullscreen","0");}
+
+math_set_epsilon(0.0001);
+
+if ( file_exists("graphics.ini") ){
+ini_open("graphics.ini");
+g_fxaa = ini_read_real("data","fxaa",0);
+g_vsync = ini_read_real("data","vsync",0);
+g_fs = ini_read_real("data","fullscreen",0);
+g_res = ini_read_real("data","resolution",0);
+}else{
+ini_open("graphics.ini");
+ini_write_real("data","fxaa",0);
+ini_write_real("data","vsync",0);
+ini_write_real("data","fullscreen",0);
+ini_write_real("data","resolution",0);
+g_fxaa = 0;g_vsync = 0;g_fs = 0;g_res = 0;}
 ini_close();
 
-    global.window_focus = true;
+res_count = 0;res_x=0;res_y=0;
 
-    var display_w = 0;var display_h = 0;
-    if ( global.m_res == "800x600" ){display_w=800;display_h=600;}
-    if ( global.m_res == "1024x600" ){display_w=1024;display_h=600;}
-    if ( global.m_res == "1024x768" ){display_w=1024;display_h=768;}
-    if ( global.m_res == "1152x864" ){display_w=1152;display_h=864;}
-    if ( global.m_res == "1280x720" ){display_w=1280;display_h=720;}
-    if ( global.m_res == "1280x768" ){display_w=1280;display_h=768;}
-    if ( global.m_res == "1280x800" ){display_w=1280;display_h=800;}
-    if ( global.m_res == "1280x960" ){display_w=1280;display_h=960;}
-    if ( global.m_res == "1280x1024" ){display_w=1280;display_h=1024;}
-    if ( global.m_res == "1360x768" ){display_w=1360;display_h=768;}
-    if ( global.m_res == "1366x768" ){display_w=1366;display_h=768;}
-    if ( global.m_res == "1400x1050" ){display_w=1400;display_h=1050;}
-    if ( global.m_res == "1440x900" ){display_w=1440;display_h=900;}
-    if ( global.m_res == "1600x900" ){display_w=1600;display_h=900;}
-    if ( global.m_res == "1600x1200" ){display_w=1600;display_h=1200;}
-    if ( global.m_res == "1680x1050" ){display_w=1680;display_h=1050;}
-    if ( global.m_res == "1920x1080" ){display_w=1920;display_h=1080;}
-    display_reset(0,global.m_vsync);
-    window_set_size(display_w,display_h);
-    if ( global.m_fullscreen == 1 )
-    {
-    window_set_fullscreen(true);
-    }
-    else
-    {
-    window_set_fullscreen(false);
-    }
+display_reset(0,g_vsync);
+
+resolution_update();
 </string>
           </argument>
         </arguments>

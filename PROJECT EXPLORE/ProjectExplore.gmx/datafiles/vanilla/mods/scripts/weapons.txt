@@ -112,7 +112,7 @@ name: Wood Bow
 desc: This bow allows you to make ranged attacks.
 spr: mods\sprites\items\spr_weapon_woodbow.png
 stack: 1
-type: 1
+type: 99
 stat1: 2
 stat2: 0
 stat3: 0
@@ -122,7 +122,7 @@ name: Pistol (9mm)
 desc: A low caliber pistol that takes 9mm ammo.
 spr: mods\sprites\items\spr_weapon_9mmpistol.png
 stack: 1
-type: 1
+type: 99
 stat1: 2
 stat2: 0
 stat3: 0
@@ -132,7 +132,7 @@ name: Warding Stick
 desc: An odd feeling of resistance emanates from it.
 spr: mods\sprites\items\spr_item_wardingstick.png
 stack: 1
-type: 1
+type: 99
 stat1: 2
 stat2: 0
 stat3: 0
@@ -143,8 +143,8 @@ desc: This can be used as a tool of destruction.
 spr: mods\sprites\items\spr_weapon_deerantler.png
 stack: 1
 type: 1
-stat1: 3
-stat2: 0
+stat1: 24,24,0,0,17,20
+stat2: 20,25,5,25,60,20
 stat3: 0
-stat4: 0
+stat4: 0,0,0,0,0,0
 cook: 0,0

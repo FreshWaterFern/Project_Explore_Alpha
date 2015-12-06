@@ -17,6 +17,47 @@ ds_list_add(list,inst_id.index);
 
 switch(argument0)
 {
+case "obj_npc_wolf":{
+    ds_list_add(list,inst_id.ai_dead);
+    ds_list_add(list,inst_id.ai_attack_cd);
+    ds_list_add(list,inst_id.ai_reproduce_cd);
+    ds_list_add(list,inst_id.death_frames);
+    ds_list_add(list,inst_id.npc_food);
+    ds_list_add(list,inst_id.npc_thirst);
+    ds_list_add(list,inst_id.npc_health);
+    ds_list_add(list,inst_id.npc_anger);
+    ds_list_add(list,inst_id.npc_fear);
+    ds_list_add(list,inst_id.npc_heat);
+    ds_list_add(list,inst_id.state);
+break;}
+
+case "obj_npc_bear":{
+    ds_list_add(list,inst_id.ai_dead);
+    ds_list_add(list,inst_id.ai_attack_cd);
+    ds_list_add(list,inst_id.ai_reproduce_cd);
+    ds_list_add(list,inst_id.death_frames);
+    ds_list_add(list,inst_id.npc_food);
+    ds_list_add(list,inst_id.npc_thirst);
+    ds_list_add(list,inst_id.npc_health);
+    ds_list_add(list,inst_id.npc_anger);
+    ds_list_add(list,inst_id.npc_fear);
+    ds_list_add(list,inst_id.npc_heat);
+    ds_list_add(list,inst_id.state);
+break;}
+
+case "obj_npc_buck":{
+    ds_list_add(list,inst_id.ai_dead);
+    ds_list_add(list,inst_id.ai_attack_cd);
+    ds_list_add(list,inst_id.ai_reproduce_cd);
+    ds_list_add(list,inst_id.death_frames);
+    ds_list_add(list,inst_id.npc_food);
+    ds_list_add(list,inst_id.npc_thirst);
+    ds_list_add(list,inst_id.npc_health);
+    ds_list_add(list,inst_id.npc_anger);
+    ds_list_add(list,inst_id.npc_fear);
+    ds_list_add(list,inst_id.npc_heat);
+    ds_list_add(list,inst_id.state);
+break;}
 
 case "obj_world_tree_1":{
     ds_list_add(list,inst_id.resource_id);

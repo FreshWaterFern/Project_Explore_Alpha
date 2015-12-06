@@ -3516,8 +3516,8 @@ pl_water_refill=0;}
             <kind>1</kind>
             <string>/// Shovel Script
 var inst = 0;
-var i = round((obj_player.x)/128);
-var r = round((obj_player.y)/128);
+var i = floor((obj_player.x)/128)-1;
+var r = floor((obj_player.y)/128)-1;
 pl_g_x = i*128;
 pl_g_y = r*128;
 pl_surface_type = ds_grid_get(global.world_tiles,i,r);
@@ -5150,7 +5150,10 @@ var list = convert_string_to_list(global.item_data[#v_item_equipped,5],",");
 var spr_item = global.item_data[#v_item_equipped,2];
 if ( real(list[|4]) != 0 &amp;&amp; real(list[|5]) != 0 ){
 sprite_external_set_offset(spr_item,real(list[|4]),real(list[|5]));}
-draw_external_sprite_ext(spr_item,1,x+lengthdir_x(real(list[|0]),direction+real(list[|2])),y+lengthdir_y(real(list[|1]),direction+real(list[|3])),0.8,0.8,image_angle,v_color,1);
+//draw_external_sprite(spr_item,0,x,y);
+var y_math = y+lengthdir_y(real(list[|1]),direction+real(list[|3]));
+var x_math = x+lengthdir_x(real(list[|0]),direction+real(list[|2]));
+draw_external_sprite_ext(spr_item,1,x_math,y_math,0.8,0.8,image_angle,c_white,1);
 spr = global.ds_char_skin_item[| global.char_skin];
 draw_sprite_ext(spr,image_index,x,y,1,1,image_angle,c_white,1);
 ds_list_destroy(list);

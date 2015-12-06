@@ -12,7 +12,7 @@ instance_activate_object(obj_game);
 instance_activate_object(obj_volume);*/
 with(all)
 {
-if ( object_index != obj_game_render && object_index != obj_camera && object_index != obj_game_weather && object_index != obj_game && object_index != obj_volume )
+if ( object_index != obj_game_render && object_index != obj_camera && object_index != obj_game_weather && object_index != obj_game && object_index != obj_volume && object_index != obj_main_logic )
 {
 instance_deactivate_object(self);
 }

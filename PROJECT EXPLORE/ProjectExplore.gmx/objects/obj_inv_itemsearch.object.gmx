@@ -242,7 +242,7 @@ r+=48;
         </arguments>
       </action>
     </event>
-    <event eventtype="8" enumb="64">
+    <event eventtype="8" enumb="73">
       <action>
         <libid>1</libid>
         <id>603</id>
@@ -262,6 +262,7 @@ r+=48;
             <string>/// Render Inventory Slot
 
 if ( !search_disable ){
+surface_set_target(application_surface);
 if ( global.render_gui_page == "inventory" ){
     draw_set_color(c_white);
     draw_set_alpha(1);
@@ -285,7 +286,7 @@ if ( global.render_gui_page == "inventory" ){
     if ( scale1 == 1 ){draw_rectangle(x+(string_width(string(item_search))/2)+3,y-(16*scale1),x+(string_width(string(item_search))/2)+5,y+(16*scale1),false);}
     else{draw_rectangle(x+179-(1*scale1),y-(16*scale1),x+179+(1*scale1),y+(16*scale1),false);}}
     draw_set_alpha(1);
-}}
+}surface_reset_target();}
 </string>
           </argument>
         </arguments>
@@ -310,6 +311,7 @@ if ( global.render_gui_page == "inventory" ){
 
 // This just renders the slot and the item in it
 if ( global.render_gui_page == "inventory" ){
+surface_set_target(application_surface);
 with(obj_inv_slot){draw_set_color(c_white);draw_set_halign(fa_left);draw_set_valign(fa_middle);draw_set_font(font_gulim_12);
 draw_sprite(sprite_index,image_index,x,y);}
 with(obj_inv_slot){
@@ -338,7 +340,7 @@ if ( storage_id.c_inv[#grid_x,grid_y] &gt; 0 ){list = convert_string_to_list(glo
 if ( list[|1] != "0" ){draw_set_alpha(0.2);draw_set_color(c_yellow);
 draw_rectangle(x-16,y+16,x+16,y+16-((storage_id.cooking_grid[#grid_x,grid_y]/real(list[|0]))*33),false);
 draw_set_color(c_white);draw_set_alpha(1);ds_list_destroy(list);}}}}
-
+surface_reset_target();
 }
 </string>
           </argument>
@@ -362,6 +364,7 @@ draw_set_color(c_white);draw_set_alpha(1);ds_list_destroy(list);}}}}
             <kind>1</kind>
             <string>/// Render Craftlist
 if ( !search_disable ){
+surface_set_target(application_surface);
 if ( instance_exists(obj_inv_craftlist) ){
 if ( global.render_gui_page == "inventory" ){
 draw_set_font(font_gulim_12);draw_set_halign(fa_left);draw_set_valign(fa_middle);draw_set_alpha(1);draw_set_color(c_white);
@@ -427,7 +430,41 @@ draw_set_color(c_black);draw_set_alpha(0.9);x_off = 0;
 if ( x-(string_width(req_grid[#3,0])/2) &lt; 0 ){x_off = point_distance(0,y,x-(string_width(req_grid[#3,0])/2),y);}
 draw_rectangle((x+192+x_off)-(string_width(req_grid[#3,0])/2),y-(string_height(req_grid[#3,0])/2),(x+192+x_off)+(string_width(req_grid[#3,0])/2),y+(string_height(req_grid[#3,0])/2),false);
 draw_set_alpha(1);draw_set_color(c_white);draw_text(x+192,y,req_grid[#3,0]);}}
-}}}
+}}
+surface_reset_target();}
+</string>
+          </argument>
+        </arguments>
+      </action>
+      <action>
+        <libid>1</libid>
+        <id>603</id>
+        <kind>7</kind>
+        <userelative>0</userelative>
+        <isquestion>0</isquestion>
+        <useapplyto>-1</useapplyto>
+        <exetype>2</exetype>
+        <functionname></functionname>
+        <codestring></codestring>
+        <whoName>self</whoName>
+        <relative>0</relative>
+        <isnot>0</isnot>
+        <arguments>
+          <argument>
+            <kind>1</kind>
+            <string>/// Render Item Moving
+if ( global.v_item_moving == true ){
+surface_set_target(application_surface);
+var m_x = mouse_x-view_xview[0];
+var m_y = mouse_y-view_yview[0];
+if(global.v_slot_inst!=0){
+if(global.v_slot_inst.item_id!=0){
+if ( global.item_data[#global.v_slot_inst.item_id,4] != 4 ){
+var i_sprite = global.item_data[#global.v_slot_inst.item_id,2];}
+else{
+var i_sprite = ds_list_find_value(global.item_data[#global.v_slot_inst.item_id,2],0);}
+draw_external_sprite_ext(i_sprite,0,m_x,m_y,1+global.tablet_scaling,1+global.tablet_scaling,0,c_white,0.5);}}
+surface_reset_target();}
 </string>
           </argument>
         </arguments>

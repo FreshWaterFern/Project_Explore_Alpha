@@ -232,7 +232,7 @@ m_str[10] = ds_list_find_value(file_list,list_index+9);
           <argument>
             <kind>1</kind>
             <string>/// Check For Mouse Input
-
+/*
 if ( m_control == true )
 {
 m_index = -1;

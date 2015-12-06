@@ -3,7 +3,7 @@
   <spriteName>&lt;undefined&gt;</spriteName>
   <solid>0</solid>
   <visible>-1</visible>
-  <depth>0</depth>
+  <depth>-5000001</depth>
   <persistent>0</persistent>
   <parentName>&lt;undefined&gt;</parentName>
   <maskName>&lt;undefined&gt;</maskName>
@@ -78,7 +78,7 @@ y+= (obj_player.y-y)/14;
         </arguments>
       </action>
     </event>
-    <event eventtype="8" enumb="73">
+    <event eventtype="8" enumb="75">
       <action>
         <libid>1</libid>
         <id>603</id>
@@ -95,59 +95,24 @@ y+= (obj_player.y-y)/14;
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>/// Render World Objects ( Batches )
+            <string>/// Render Application
 
-if ( !global.game_pause ){
+// DISABLE ALPHABLEND BECAUSE SURFACES //
+display_set_gui_maximise(-1,-1,0,0);
+draw_enable_alphablend(0);
 
-draw_set_color(c_white);draw_set_alpha(1);
+var offset = application_get_position();
 
+var res_x = window_get_width();var res_y = window_get_height();//show_message(string(offset[0])+","+string(offset[1]));
+better_scaling_draw_surface(application_surface,offset[0],offset[1],res_x/1280,res_y/720,0,c_white,1,obj_main_logic.g_sampling+1);
 
-// Cooking Object
-/*|| Smoke Effect ||*/
-if (instance_exists(obj_archetype_cooking)){
-with(obj_archetype_cooking){
-if ( global.render_gui_page == "none" &amp;&amp; active ){
-if(smoke_effect){part_system_drawit(ps_2);}}}}
-
-/*|| Fire Effect ||*/
-if (instance_exists(obj_archetype_cooking)){
-with(obj_archetype_cooking){
-if ( global.render_gui_page == "none" &amp;&amp; active ){
-draw_set_blend_mode(bm_add);
-if(fire_effect){part_system_drawit(ps_1);}
-}}}
-draw_set_blend_mode(bm_normal);
-
-// Trees
-if (instance_exists(obj_world_tree_1)){
-with(obj_world_tree_1){
-if ( active == true ){// Draw Transparently If Player Is Behind
-w3d_draw_cube_ext(global.texture_treetop1,global.texture_treebark1,x,y,0,(height*(resource_count/resource_max))+16,32,32);}}
-with(obj_world_tree_1){
-if ( active == true ){
-if ( resource_count &gt;= resource_max ){
-w3d_draw_sprite_ext(spr_tree_top1,tree_top_sub,x,y,height,1,1,tree_top_rot,c_white,tree_top_alpha);}
-}}}
-
-// Birds
-if (instance_exists(obj_bird1)){
-with(obj_bird1){
-direction = image_angle;
-image_index+=0.1;
-draw_sprite_ext(sprite_index,image_index,x,y,1,1,image_angle,c_white,0.85);
-//if ( obj_game.m_motionblur ){
-//draw_sprite_motionblur(point_distance(x,y,xprevious,yprevious),point_direction(x,y,xprevious,yprevious),x,y,0);}
-//else{
-//draw_sprite_ext(sprite_index,image_index,x,y,1,1,image_angle,c_white,0.1);}
-}}
-
-}
+draw_enable_alphablend(1);
 </string>
           </argument>
         </arguments>
       </action>
     </event>
-    <event eventtype="8" enumb="64">
+    <event eventtype="8" enumb="73">
       <action>
         <libid>1</libid>
         <id>603</id>
@@ -167,6 +132,9 @@ draw_sprite_ext(sprite_index,image_index,x,y,1,1,image_angle,c_white,0.85);
             <string>/// Render GUIs
 
 if ( !global.game_pause ){
+surface_set_target(application_surface);
+
+draw_set_alpha(1);
 
 // Basic Objects
 if (instance_exists(obj_archetype_basic)){
@@ -281,6 +249,8 @@ if ( mouse_frames &lt; 1 )
 else
 {draw_text_outline(string(keyboard_get_str(obj_player.key_walk_main)),x_draw,y_draw,c_dkgray,c_black);}}}}}}
 
+
+surface_reset_target();
 }
 </string>
           </argument>
@@ -361,7 +331,8 @@ vig_alpha = clamp(0.25+((global.world_time-14)/12),0,1);}
 
 surface_set_target(render_surface);
 shader_set(shd_vignette_noise);
-shader_set_uniform_f(uni_settings,(0.8*(vig_alpha+1)),(0.7*(vig_alpha+1))/2,0.03,1); //vignette inner circle size, vignette outter circle size, noise strength, noise enable (1 or 0 only).
+//shader_set_uniform_f(uni_settings,(0.8*(vig_alpha+1)),(0.7*(vig_alpha+1))/2,0.03,1); //vignette inner circle size, vignette outter circle size, noise strength, noise enable (1 or 0 only).
+shader_set_uniform_f(uni_settings,0.8,0.5,0.07,1);
 shader_set_uniform_f(uni_vignette_colour,obj_game_render.color_red,obj_game_render.color_green,obj_game_render.color_blue); //R,G,B - 0 to 255
 draw_surface_ext(application_surface,0,0,1,1,0,c_white,vig_alpha+0.5);
 shader_reset();
@@ -555,6 +526,70 @@ if ( global.render_gui_page == "none" &amp;&amp; is_enabled &amp;&amp; active ){
 if(glow_effect){draw_sprite_ext(spr_lightglow_1,0,x,y,random(1),random(1),0,col_orange,0.5);}
 }}}
 
+}
+</string>
+          </argument>
+        </arguments>
+      </action>
+      <action>
+        <libid>1</libid>
+        <id>603</id>
+        <kind>7</kind>
+        <userelative>0</userelative>
+        <isquestion>0</isquestion>
+        <useapplyto>-1</useapplyto>
+        <exetype>2</exetype>
+        <functionname></functionname>
+        <codestring></codestring>
+        <whoName>self</whoName>
+        <relative>0</relative>
+        <isnot>0</isnot>
+        <arguments>
+          <argument>
+            <kind>1</kind>
+            <string>/// Render World Objects Part II ( Batches )
+
+if ( !global.game_pause ){
+draw_set_color(c_white);draw_set_alpha(1);
+
+// Cooking Object
+/*|| Smoke Effect ||*/
+if (instance_exists(obj_archetype_cooking)){
+with(obj_archetype_cooking){
+if ( global.render_gui_page == "none" &amp;&amp; active ){
+if(smoke_effect){part_system_drawit(ps_2);}}}}
+
+/*|| Fire Effect ||*/
+if (instance_exists(obj_archetype_cooking)){
+with(obj_archetype_cooking){
+if ( global.render_gui_page == "none" &amp;&amp; active ){
+draw_set_blend_mode(bm_add);
+if(fire_effect){part_system_drawit(ps_1);}
+}}}
+draw_set_blend_mode(bm_normal);
+
+// Trees
+if (instance_exists(obj_world_tree_1)){
+with(obj_world_tree_1){
+if ( active == true ){// Draw Transparently If Player Is Behind
+w3d_draw_cube_ext(global.texture_treetop1,global.texture_treebark1,x,y,0,(height*(resource_count/resource_max))+16,32,32);}}
+with(obj_world_tree_1){
+if ( active == true ){
+if ( resource_count &gt;= resource_max ){
+w3d_draw_sprite_ext(spr_tree_top1,tree_top_sub,x,y,height,1,1,tree_top_rot,c_white,tree_top_alpha);}
+}}}
+
+// Birds
+if (instance_exists(obj_bird1)){
+with(obj_bird1){
+direction = image_angle;
+image_index+=0.1;
+draw_sprite_ext(sprite_index,image_index,x,y,1,1,image_angle,c_white,0.85);
+//if ( obj_game.m_motionblur ){
+//draw_sprite_motionblur(point_distance(x,y,xprevious,yprevious),point_direction(x,y,xprevious,yprevious),x,y,0);}
+//else{
+//draw_sprite_ext(sprite_index,image_index,x,y,1,1,image_angle,c_white,0.1);}
+}}
 }
 </string>
           </argument>

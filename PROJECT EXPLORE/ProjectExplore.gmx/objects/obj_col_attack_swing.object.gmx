@@ -196,9 +196,6 @@ if ( global.item_data[#obj_player.v_item_equipped,0] == "Rock" ){
 /// other = instance we collided with
 scr_attack_handle(other.id,id);
 
-var inst = instance_create(x,y,obj_npc_wolf);
-inst.hp = 0;
-
 audio_stop_sound(attack_audio);
 instance_destroy();}
 </string>

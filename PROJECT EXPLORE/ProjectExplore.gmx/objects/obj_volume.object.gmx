@@ -36,12 +36,6 @@ instance_destroy();
 else
 {
 
-mode = 1; //Mode normal
-
-//==============================================|Add fonts to use|================================================
-
-font_square = font_add(working_directory + "Square.ttf",27,0,0,48,57);
-
 //========================================|Slipped activation buttons|=========================================
 
 a0=false; //glide[MASTER Volume]
@@ -49,33 +43,11 @@ a1=false; //glide[Music]
 a2=false; //glide[Sound]
 a3=false; //glide[Ambience]
 
-//================================================|Animated Bars volume|=============================================
-
-/* (IN CASE OF USE VOLUME BAR ANIMATED): For each variable volume bar should be set up to control your animation)
-to stop the animation independently each bar when the bar is in "OFF" mode
-## AND ALSO: one variable (one for each animated bar columen) should be established to monitor their image_blend to put animated gray bars when they are in "OFF" mode
-WATCH AS USED IN THESE TWO VARIABLES ADD TO SHOW HOW GOOD PERFORMANCE BARS ANIMATED (AS TO CODE)
-BECAUSE YOU MUST ORDER OF DESIGN AND ENCOURAGE YOUR OWN BAR */
-
-animation_01 = 0; //Button Animation 01
-blend_01 = c_white; //Button 01 Image_blend
-
-
 //==============================================|Enabling buttons "ON-OFF"|===========================================
 
          // Ini opens with the Registered Values Variables Of The Buttons "On-Off" There is not, you will be assigned to each, the UN value "ON" / true
-         ini_open(working_directory + "volume.vol")
-            on_off0=ini_read_real("Volume","on_off0",true) //Button[MASTER Volume]
-            on_off1=ini_read_real("Volume","on_off1",true) //Button[Music]
-            on_off2=ini_read_real("Volume","on_off2",true) //Button[Sound]
-            on_off3=ini_read_real("Volume","on_off3",true) //Button[Ambience]
+         ini_open(working_directory + "audio.ini")
            
-           // If the "On-Off" button MASTER Volume is set to "Off" / false, others "On-Off" buttons are disabled
-           if(on_off0=false){   
-            on_off1=false;
-            on_off2=false;
-            on_off3=false; 
-           }
 
 
 //=================================|Button starting position of each volume bar on axis X|==========================
@@ -83,28 +55,11 @@ blend_01 = c_white; //Button 01 Image_blend
          /* An ini file is opened for reading the value of the last position of the button of each volume bar when the game is closed,
           and if there is set to a value of "x + 70", which represents the maximum volume */
          
-          xm=ini_read_real("Volume","xm",x+70) //Button[MASTER Volume]
-          x1=ini_read_real("Volume","x1",x-28) //Button[Music]
-          x2=ini_read_real("Volume","x2",x+70) //Button[Sound]
-          x3=ini_read_real("Volume","x3",x+70) //Button[Ambience]
+          xm=ini_read_real("Volume","xm",0.5) //Button[MASTER Volume]
+          x1=ini_read_real("Volume","x1",0.5) //Button[Music]
+          x2=ini_read_real("Volume","x2",0.5) //Button[Sound]
+          x3=ini_read_real("Volume","x3",0.5) //Button[Ambience]
          ini_close()
-
-         
-//============================================|Position of the buttons and percents|============================
- //Variable position "Y" buttons volume bars
-        ym = y-85 //|Button[MASTER]| 
-  
-        y1 = y-25 //|Button[Music]|
-        
-        y2 = y+34 //|Button[Sound]|
-        
-        y3 = y+94 //|Button[Ambience]|
- 
- // Variable position "X" in the "ON-OFF" button                
-        xof = x+140; 
- 
- // Variable position "X" of Percents
-        xpercent = x-160;
 
 //======================================================|Lists of audio|===================================================
 
@@ -173,53 +128,6 @@ ds_list_add(list_ambience,ambience_night);
         </arguments>
       </action>
     </event>
-    <event eventtype="1" enumb="0">
-      <action>
-        <libid>1</libid>
-        <id>603</id>
-        <kind>7</kind>
-        <userelative>0</userelative>
-        <isquestion>0</isquestion>
-        <useapplyto>-1</useapplyto>
-        <exetype>2</exetype>
-        <functionname></functionname>
-        <codestring></codestring>
-        <whoName>self</whoName>
-        <relative>0</relative>
-        <isnot>0</isnot>
-        <arguments>
-          <argument>
-            <kind>1</kind>
-            <string>//==============================================|Enabling buttons "ON-OFF"|===========================================
-/*
-         ini_open(working_directory + "volume.vol")
-          
-           ini_write_real("Volume","on_off0",on_off0) //Button[MASTER Volume]
-           
-          //Only save the value of the variables in the "On-Off" button, if the "On-Off" button MASTER Volume is equal to "ON" / true
-          if(on_off0==true){
-           ini_write_real("Volume","on_off1",on_off1) //Button[Music]
-           ini_write_real("Volume","on_off2",on_off2) //Button[Sound]
-           ini_write_real("Volume","on_off3",on_off3) //Button[Ambience]
-          }
-
-//==========================|Pin end position of each volume bar on axis X (before closing the game)|==========================
-
-          ini_write_real("Volume","xm",xm) //X MASTER start
-          ini_write_real("Volume","x1",x1) //X Music start
-          ini_write_real("Volume","x2",x2) //X Sound start
-          ini_write_real("Volume","x3",x3) //X Ambience start
-         ini_close()
-
-//Delete fonts of the memory
-if(font_exists(font_square)){font_delete(font_square)}
-
-*/
-</string>
-          </argument>
-        </arguments>
-      </action>
-    </event>
     <event eventtype="3" enumb="0">
       <action>
         <libid>1</libid>
@@ -237,293 +145,33 @@ if(font_exists(font_square)){font_delete(font_square)}
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>//&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;
-if(mode == 0){ //If mode is normal
-//&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;
-
-// ================================================ === | Colision mouse with buttons | ====================================
-  // --- | Buttons volume bars |
-
-    // Check if the mouse is over the button [MASTER Volume]
-    colli_button0=point_in_rectangle(mouse_x,mouse_y,xm-sprite_get_xoffset(sBoton),ym-sprite_get_yoffset(sBoton),xm+sprite_get_xoffset(sBoton),ym+sprite_get_yoffset(sBoton));
-
-    // Check if the mouse is over the button [Music]
-    colli_button1=point_in_rectangle(mouse_x,mouse_y,x1-sprite_get_xoffset(sBoton),y1-sprite_get_yoffset(sBoton),x1+sprite_get_xoffset(sBoton),y1+sprite_get_yoffset(sBoton));
-
-    // Check if the mouse is over the button [Sound]
-    colli_button2=point_in_rectangle(mouse_x,mouse_y,x2-sprite_get_xoffset(sBoton),y2-sprite_get_yoffset(sBoton),x2+sprite_get_xoffset(sBoton),y2+sprite_get_yoffset(sBoton));
-
-    // Check if the mouse is over the button [Ambience]
-    colli_button3=point_in_rectangle(mouse_x,mouse_y,x3-sprite_get_xoffset(sBoton),y3-sprite_get_yoffset(sBoton),x3+sprite_get_xoffset(sBoton),y3+sprite_get_yoffset(sBoton));
-
-
-    // --- | Buttons "ON-OFF" |
-
-    // Check if the mouse is over the button [ON-OFF MASTER Volume]
-    colli_on_off0=point_in_rectangle(mouse_x,mouse_y,xof-sprite_get_xoffset(sOn_Off_Master),ym-sprite_get_yoffset(sOn_Off_Master),xof+sprite_get_xoffset(sOn_Off_Master),ym+sprite_get_yoffset(sOn_Off_Master));
-
-    // Check if the mouse is over the button [ON-OFF Music]
-    colli_on_off1=point_in_rectangle(mouse_x,mouse_y,xof-sprite_get_xoffset(sOn_Off),y1-sprite_get_yoffset(sOn_Off),xof+sprite_get_xoffset(sOn_Off),y1+sprite_get_yoffset(sOn_Off));
-
-    // Check if the mouse is over the button [ON-OFF Sound]
-    colli_on_off2=point_in_rectangle(mouse_x,mouse_y,xof-sprite_get_xoffset(sOn_Off),y2-sprite_get_yoffset(sOn_Off),xof+sprite_get_xoffset(sOn_Off),y2+sprite_get_yoffset(sOn_Off));
-
-    // Check if the mouse is over the button [ON-OFF Ambience]
-    colli_on_off3=point_in_rectangle(mouse_x,mouse_y,xof-sprite_get_xoffset(sOn_Off),y3-sprite_get_yoffset(sOn_Off),xof+sprite_get_xoffset(sOn_Off),y3+sprite_get_yoffset(sOn_Off));
-
-
-// ================ | Colision mouse area with sliding buttons volume bars | ============== ====
-
-    // Check if the mouse is over the button sliding area [MASTER Volume]
-    colli_area0 = point_in_rectangle(mouse_x, mouse_y, x-50, ym-10, x + 70, ym + 10)
-
-    // Check if the mouse is over the button sliding area [Music]
-    colli_area1 = point_in_rectangle(mouse_x, mouse_y, x-50, y1-10, x + 70, y1 + 10)
-
-    // Check if the mouse is over the button sliding area [Sound]
-    colli_area2 = point_in_rectangle(mouse_x, mouse_y, x-50, y2-10, x + 70, y2 + 10)
-
-    // Check if the mouse is over the button sliding area [Ambience]
-    colli_area3 = point_in_rectangle(mouse_x, mouse_y, x-50, y3-10, x + 70, y3 + 10)
-
-
-
-// ====================================== | Activation and deactivation of each button "ON -OFF "| ================================
-
-    if(colli_on_off0 &amp;&amp; mouse_check_button_pressed(mb_left)){
-     on_off0=!on_off0
-       // If the "On-Off" button is in "ON", assigned to the variables of the "On-Off" button the value recorded the last time the Button "On-Off" MASTER Volume was deactivated
-      if(on_off0==true){
-       ini_open(working_directory + "volume.vol")
-        on_off1=ini_read_real("Volume","on_off1",true) //Button[Music]
-        on_off2=ini_read_real("Volume","on_off2",true) //Button[Sound]
-        on_off3=ini_read_real("Volume","on_off3",true) //Button[Ambience]
-       ini_close()
-
-         // If all the "On-Off" buttons were disabled ... when you turn the master volume all activated
-        if(on_off1==false &amp;&amp; on_off2==false &amp;&amp; on_off3==false){
-         on_off1=true
-         on_off2=true
-         on_off3=true
-        }
-
-       } else {
-        // The state of each button "On-Off" is recorded and then deactivated
-       ini_open(working_directory + "volume.vol")
-        ini_write_real("Volume","on_off1",on_off1) //Button[Music]
-        ini_write_real("Volume","on_off2",on_off2) //Button[Sound]
-        ini_write_real("Volume","on_off3",on_off3) //Button[Ambience]
-       ini_close()
-
-       on_off1=false;
-       on_off2=false;
-       on_off3=false;
-      }
-    }
-
-     // If the "On-Off" button MASTER Volume is equal to "ON" / true ....
-     if(colli_on_off1 &amp;&amp; mouse_check_button_pressed(mb_left)){on_off1=!on_off1;}
-     if(colli_on_off2 &amp;&amp; mouse_check_button_pressed(mb_left)){on_off2=!on_off2;}
-     if(colli_on_off3 &amp;&amp; mouse_check_button_pressed(mb_left)){on_off3=!on_off3;}
-      
-
-
-//==========================================================|CONDITION|=======================================================
-
-        /* If the "On-Off" button will MASTER Volume is equal to "ON" / true and the other buttons "On-Off" is equal to "Off" / false
-         then the current state of each button "On-Off" is saved and then the MASTER Volume is disabled */
-         if (on_off0 == true &amp;&amp; (on_off1 &amp;&amp; on_off2 &amp;&amp; on_off3) == false) {
-           ini_open (working_directory + "volume.vol")
-           ini_write_real ("Volume", "on_off1", on_off1) // Button [Music]
-           ini_write_real ("Volume", "on_off2", on_off2) // Button [Sound]
-           ini_write_real ("Volume", "on_off3", on_off3) // Button [Ambience]
-         ini_close ()
-
-          on_off0 = false
-         }
-
-         // If the "On-Off" button MASTER Volume is equal to "Off" / false and activate one of the other buttons, the MASTER Volume is activated
-         if (on_off0 == false &amp;&amp; (on_off1 || on_off2 || on_off3) == true) {
-          on_off0 = true
-         }
-
-
-// ============================= | Activation Glide each button of the volume bar | ====== ======================
-
-    // Activation button [MASTER Volume]
-    if(on_off0==true){// Only check if you can turn the volume bar button when the button "ON-OFF" is set to "ON" / true and the other toolbar buttons are disabled volume
-     if(a1==false &amp;&amp; a2==false &amp;&amp; a3==false){ 
-      if( (mouse_check_button(mb_left) &amp;&amp; colli_button0) || (mouse_check_button_pressed(mb_left) &amp;&amp; colli_area0)){a0=true;}
-     }
-   }
-    
-    // Activation button [Music]
-    if (on_off1 == true) {// Only check if you can turn the volume bar button when the button "ON-OFF" is set to "ON" / true and the other toolbar buttons are disabled volume
-    if(a0==false &amp;&amp; a2==false &amp;&amp; a3==false){ 
-     if( (mouse_check_button(mb_left) &amp;&amp; colli_button1) || (mouse_check_button_pressed(mb_left) &amp;&amp; colli_area1)){a1=true;}
-    }
-   }
-    
-
-    // Activation button [Sound]
-    if (on_off2 == true) {// Only check if you can turn the volume bar button when the button "ON-OFF" is set to "ON" / true and the other toolbar buttons are disabled volume
-    if(a0==false &amp;&amp; a1==false &amp;&amp; a3==false){ 
-     if( (mouse_check_button(mb_left) &amp;&amp; colli_button2) || (mouse_check_button_pressed(mb_left) &amp;&amp; colli_area2)){a2=true;}
-    }
-   }
-
-    // Activation button [Ambience]
-    if (on_off3 == true) {// Only check if you can turn the volume bar button when the button "ON-OFF" is set to "ON" / true and the other toolbar buttons are disabled volume
-    if(a0==false &amp;&amp; a1==false &amp;&amp; a2==false){ 
-     if( (mouse_check_button(mb_left) &amp;&amp; colli_button3) || (mouse_check_button_pressed(mb_left) &amp;&amp; colli_area3)){a3=true;}
-    }
-   }
-
-   
-   
-// =========================================== | Slip algithm for each button | ======================================
-
-    if (mouse_x = clamp (mouse_x, x-50, x + 70)) {// This proves that this mouse positioned in X, a minimum of: x-50, and as a maximum in x + 70, and if so , the button follows the X axis of the mouse
-       if (a0 == true) {xm = mouse_x;}
-       if (a1 == true) {x1 = mouse_x;}
-       if (a2 == true) {x2 = mouse_x;}
-       if (a3 == true) {x3 = mouse_x;}
-
-     } else {// If the variable activation of the button equals true, but the mouse is greater than the maximum limit mentioned in the function "clamp" top (x + 70), then the button takes as its maximum position: x + 70
-
-      if (mouse_x&gt; x + 70) {
-        if (a0 == true) {xm = x + 70;}
-        if (a1 == true) {x1 = x + 70;}
-        if (a2 == true) {x2 = x + 70;}
-        if (a3 == true) {x3 = x + 70;}
-      } else {// If the variable activation of the button equals true, but the mouse is below the minimum limit mentioned in the function "clamp" top (x-50), then the button takes as its maximum position: x- 50
-        if (mouse_x &lt;x-50) {
-         if (a0 == true) {xm = x-50;}
-         if (a1 == true) {x1 = x-50;}
-         if (a2 == true) {x2 = x-50;}
-         if (a3 == true) {x3 = x-50;}
-       }
-      }
-     }
-
-// =================== | Formula to obtain the percentage shift buttons on the bars | ========================
-
-     /* Formula to calculate the percentage Travel button: (x- (Location minima)) / (minimum value location + Width)
-     With that percentage is obtained in decimals * 0 to 1 * to control the volume
-     */
-
-         pm = (xm - (x-50)) / (50 + 70) // Formula [MASTER VOLUME]
-         p = (x1 - (x-50)) / (50 + 70) // Formula [Music]
-         p2 = (x2 - (x-50)) / (50 + 70) // Formula [sound]
-         p3 = (x3 - (x-50)) / (50 + 70) // Formula [Ambience]
-         
-         
-// =========================================== | Deactivation Glide each button | ==================================
-
-    //Deactivation  buttons [MASTER, Music, Sound and Ambience]
-    if(mouse_check_button_released(mb_left)){
-        //************|Sound Test|************
-            if(a0){audio_sound_gain(snd_wood_chop,pm,0); audio_play_sound(snd_wood_chop,0,0);}
-            if(a1){audio_sound_gain(snd_wood_chop,p,0); audio_play_sound(snd_wood_chop,0,0);}
-            if(a2){audio_sound_gain(snd_wood_chop,p2,0); audio_play_sound(snd_wood_chop,0,0);}
-            if(a3){audio_sound_gain(snd_wood_chop,p3,0); audio_play_sound(snd_wood_chop,0,0);}
-
-             a0=false;
-             a1=false;
-             a2=false;
-             a3=false;
-    }
-
-
-// =========================== | Store the largest among all lists in a variable | ======== =========================
-
- size_list=max(ds_list_size(list_music),ds_list_size(list_sounds),ds_list_size(list_ambience))
-
-
-// ======================= | Browse each list and control the volume of the audio contained therein | ========== ===============
-
+            <string>
+  size_list=max(ds_list_size(list_music),ds_list_size(list_sounds),ds_list_size(list_ambience))
 for(i=0; i &lt; size_list; i++){
 
  if(i &lt; ds_list_size(list_music)){
   music[i]=ds_list_find_value(list_music,i)
    if(audio_is_playing(music[i])){
-    if(on_off1==true){audio_sound_gain(music[i],p,0);}else{audio_sound_gain(music[i],0,0)} //Volume music
+    audio_sound_gain(music[i],x1*xm,0); //Volume music
    }
  }
 
  if(i &lt; ds_list_size(list_sounds)){
   sounds[i]=ds_list_find_value(list_sounds,i)
   if(audio_is_playing(sounds[i])){
-   if(on_off2==true){audio_sound_gain(sounds[i],p2,0)}else{audio_sound_gain(sounds[i],0,0)} //Volume sounds
+   audio_sound_gain(sounds[i],x2*xm,0) //Volume sounds
   } 
  }
 
  if(i &lt; ds_list_size(list_ambience)){
   voices[i]=ds_list_find_value(list_ambience,i)
   if(audio_is_playing(voices[i])){
-   if(on_off3==true){audio_sound_gain(voices[i],p3,0)}else{audio_sound_gain(voices[i],0,0)}//Volume voices
+   audio_sound_gain(voices[i],x3*xm,0)//Volume voices
   } 
  } 
 }
 
 // ================================================ ========== | Master Volume | ==================================== ================
-
-
-  if (on_off0 == true) {audio_master_gain(pm)} else {audio_master_gain (0)} // MASTER Volume
-
-//&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;
-}else{ //If mode is Invisible
-//&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;
-
-// =================== | Formula to obtain the percentage shift buttons on the bars | ========================
-
-     /* Formula to calculate the percentage Travel button: (x- (Location minima)) / (minimum value location + Width)
-     With that percentage is obtained in decimals * 0 to 1 * to control the volume
-     */
-
-         pm = (xm - (x-50)) / (50 + 70) // Formula [MASTER VOLUME]
-         p = (x1 - (x-50)) / (50 + 70) // Formula [Music]
-         p2 = (x2 - (x-50)) / (50 + 70) // Formula [sound]
-         p3 = (x3 - (x-50)) / (50 + 70) // Formula [Ambience]
-         
-
-// =========================== | Store the largest among all lists in a variable | ======== =========================
-
- size_list=max(ds_list_size(list_music),ds_list_size(list_sounds),ds_list_size(list_ambience))
-
-
-// ======================= | Browse each list and control the volume of the audio contained therein | ========== ===============
-
-for(i=0; i &lt; size_list; i++){
-
- if(i &lt; ds_list_size(list_music)){
-  music[i]=ds_list_find_value(list_music,i)
-   if(audio_is_playing(music[i])){
-    if(on_off1==true){audio_sound_gain(music[i],p,0);}else{audio_sound_gain(music[i],0,0)} //Volume music
-   }
- }
-
- if(i &lt; ds_list_size(list_sounds)){
-  sounds[i]=ds_list_find_value(list_sounds,i)
-  if(audio_is_playing(sounds[i])){
-   if(on_off2==true){audio_sound_gain(sounds[i],p2,0)}else{audio_sound_gain(sounds[i],0,0)} //Volume sounds
-  } 
- }
-
- if(i &lt; ds_list_size(list_ambience)){
-  voices[i]=ds_list_find_value(list_ambience,i)
-  if(audio_is_playing(voices[i])){
-   if(on_off3==true){audio_sound_gain(voices[i],p3,0)}else{audio_sound_gain(voices[i],0,0)}//Volume voices
-  } 
- } 
-}
-
-// ================================================ ========== | Master Volume | ==================================== ================
-
-  if (on_off0 == true) {audio_master_gain(pm)} else {audio_master_gain (0)} // MASTER Volume
-
-//
-}
 </string>
           </argument>
         </arguments>
@@ -548,17 +196,7 @@ for(i=0; i &lt; size_list; i++){
             <kind>1</kind>
             <string>//==============================================|Enabling buttons "ON-OFF"|===========================================
 
-         ini_open(working_directory + "volume.vol")
-          
-           ini_write_real("Volume","on_off0",on_off0) //Button[MASTER Volume]
-           
-          //Only save the value of the variables in the "On-Off" button, if the "On-Off" button MASTER Volume is equal to "ON" / true
-          if(on_off0==true){
-           ini_write_real("Volume","on_off1",on_off1) //Button[Music]
-           ini_write_real("Volume","on_off2",on_off2) //Button[Sound]
-           ini_write_real("Volume","on_off3",on_off3) //Button[Ambience]
-          }
-
+         ini_open(working_directory + "audio.ini");
 //==========================|Pin end position of each volume bar on axis X (before closing the game)|==========================
 
           ini_write_real("Volume","xm",xm) //X MASTER start
@@ -566,34 +204,6 @@ for(i=0; i &lt; size_list; i++){
           ini_write_real("Volume","x2",x2) //X Sound start
           ini_write_real("Volume","x3",x3) //X Ambience start
          ini_close()
-
-//Delete fonts of the memory
-if(font_exists(font_square)){font_delete(font_square)}
-
-mode = 1;
-</string>
-          </argument>
-        </arguments>
-      </action>
-    </event>
-    <event eventtype="7" enumb="4">
-      <action>
-        <libid>1</libid>
-        <id>603</id>
-        <kind>7</kind>
-        <userelative>0</userelative>
-        <isquestion>0</isquestion>
-        <useapplyto>-1</useapplyto>
-        <exetype>2</exetype>
-        <functionname></functionname>
-        <codestring></codestring>
-        <whoName>self</whoName>
-        <relative>0</relative>
-        <isnot>0</isnot>
-        <arguments>
-          <argument>
-            <kind>1</kind>
-            <string>if(!font_exists(font_square)){font_square = font_add(working_directory + "Square.ttf",27,0,0,48,57);}
 </string>
           </argument>
         </arguments>
@@ -618,17 +228,7 @@ mode = 1;
             <kind>1</kind>
             <string>//==============================================|Enabling buttons "ON-OFF"|===========================================
 
-         ini_open(working_directory + "volume.vol")
-          
-           ini_write_real("Volume","on_off0",on_off0) //Button[MASTER Volume]
-           
-          //Only save the value of the variables in the "On-Off" button, if the "On-Off" button MASTER Volume is equal to "ON" / true
-          if(on_off0==true){
-           ini_write_real("Volume","on_off1",on_off1) //Button[Music]
-           ini_write_real("Volume","on_off2",on_off2) //Button[Sound]
-           ini_write_real("Volume","on_off3",on_off3) //Button[Ambience]
-          }
-
+         ini_open(working_directory + "audio.ini")
 //==========================|Pin end position of each volume bar on axis X (before closing the game)|==========================
 
           ini_write_real("Volume","xm",xm) //X MASTER start
@@ -636,165 +236,6 @@ mode = 1;
           ini_write_real("Volume","x2",x2) //X Sound start
           ini_write_real("Volume","x3",x3) //X Ambience start
          ini_close()
-
-//Delete fonts of the memory
-if(font_exists(font_square)){font_delete(font_square)}
-</string>
-          </argument>
-        </arguments>
-      </action>
-    </event>
-    <event eventtype="8" enumb="0">
-      <action>
-        <libid>1</libid>
-        <id>603</id>
-        <kind>7</kind>
-        <userelative>0</userelative>
-        <isquestion>0</isquestion>
-        <useapplyto>-1</useapplyto>
-        <exetype>2</exetype>
-        <functionname></functionname>
-        <codestring></codestring>
-        <whoName>self</whoName>
-        <relative>0</relative>
-        <isnot>0</isnot>
-        <arguments>
-          <argument>
-            <kind>1</kind>
-            <string>
-if(mode == 0){ //If mode is normal
-
-c_first=draw_get_color();
-
-
-//====================================================|Draw color bars|=============================================
- 
-  //*If the "On-Off" button MASTER Volume is equal to "ON" / true, the color bars are drawn, otherwise they are drawn gray *
-    //MASTER Volume //*ANIMATED BAR TEST (IN THIS BUTTON IS WHERE SHOWN HOW TO CHANGE THE CONDITIONS FOR ANIMATION APPEARANCE AND DEPENDING ON HOW YOU ARE THE BAR (ON / OFF)
-    if(on_off0==true){
-      draw_set_color($42D6BC)
-      animation_01++;
-      blend_01 = c_white;
-    }else{
-      draw_set_color(c_gray);
-      blend_01 = c_gray;
-    }
-    draw_roundrect_ext(x-52,ym-6,x+73,ym+4,10,10,0); //Please remove as comments and delete the line below in case you want to remove the lively bar
-
-   //Music
-   if(on_off1==true){draw_set_color(c_ltgray)}else{draw_set_color(c_gray)} // $FF9900
-   draw_roundrect_ext(x-52,y1-6,x+73,y1+4,10,10,0);
-   
-   //Sound
-   if(on_off2==true){draw_set_color(c_ltgray)}else{draw_set_color(c_gray)} // $274CF2
-   draw_roundrect_ext(x-52,y2-6,x+73,y2+6,10,10,0);
-   
-   //Ambience
-   if(on_off3==true){draw_set_color(c_ltgray)}else{draw_set_color(c_gray)} // $3133EF
-   draw_roundrect_ext(x-52,y3-6,x+73,y3+6,10,10,0);
-   
-draw_set_color(c_first)
-
-
-//=========================================================|Draw gray base|=============================================
-//draw_set_color($101010)
-draw_set_color(c_dkgray);
-    //Master Volume
-    draw_roundrect_ext(xm,ym-6,x+73,ym+4,10,10,0);
-
-    //Music
-    draw_roundrect_ext(x1,y1-6,x+73,y1+4,10,10,0);
-    
-    //Sound
-    draw_roundrect_ext(x2,y2-6,x+73,y2+6,10,10,0);
-
-    //Voices
-    draw_roundrect_ext(x3,y3-6,x+73,y3+6,10,10,0);
-
-draw_set_color(c_first);
-
-
-//====================================================| Draw Sprite object |=============================================
-
-draw_sprite(sBars_borders,0,x,y);
-
-
-// =================== | Draw percent of the volumes | ============== =========
-
-     draw_set_color (c_white); // Set the text color to white
-     // Set source
-     draw_set_halign(fa_center);
-     draw_set_valign(fa_middle);
-     draw_set_font (font_gulim_28);
-
-    draw_text(xpercent,ym,string(round(pm*100)) + '%')
-    draw_text(xpercent,y1,string(round(p*100)) + '%')
-    draw_text(xpercent,y2,string(round(p2*100)) + '%')
-    draw_text(xpercent,y3,string(round(p3*100)) + '%')
-    
-// ======== Draw Text For Volume Bars ======== \\
-    draw_set_font (font_gulim_12);
-    draw_text(xpercent+170,ym-24,"Master");
-    draw_text(xpercent+170,y1-24,"Music");
-    draw_text(xpercent+170,y2-24,"Sounds");
-    draw_text(xpercent+170,y3-24,"Ambience");
-
-// ================================================ ===== | Draw bar Buttons | ======================================= ======
-
-// Draw button [MASTER Volume]
-draw_sprite (sBoton, 0, xm, ym);
-
-// Draw button [Music]
-draw_sprite (sBoton, 0, x1, y1);
-
-// Draw button [Sounds]
-draw_sprite (sBoton, 0, x2, y2);
-
-// Draw button [Ambience]
-draw_sprite (sBoton, 0, x3, y3);
-
-
-// ================================================ ==== | Draw buttons "On-Off" | ===================================== ===========
-
-// Draw ON-OFF [Master]
-if (on_off0 == true) {// If "ON" display the first sub-image display ELSE {0} sub-image
-  if (colli_on_off0) {color = c_ltgray} else {color = c_white} // If the mouse is over the button, darkens a bit
-  draw_sprite_ext(sOn_Off_Master, 1, xof, ym, 1,1,0, color, 1)
-} else {
-  if (colli_on_off0) {color = c_ltgray} else {color = c_white}
-  draw_sprite_ext(sOn_Off_Master, 0, xof, ym, 1,1,0, color, 1)
-}
-
-// Draw ON-OFF [Music]
-if (on_off1 == true) {// If "ON" display the first sub-image display ELSE {0} sub-image
-  if (colli_on_off1) {color = c_ltgray} else {color = c_white} // If the mouse is over the button, darkens a bit
-  draw_sprite_ext (sOn_Off, 1, xof, y1,1,1,0, color, 1)
-} else {
-  if (colli_on_off1) {color = c_ltgray} else {color = c_white}
-  draw_sprite_ext (sOn_Off, 0, xof, y1,1,1,0, color, 1)
-}
-
-// Draw ON-OFF [Sound]
-if (on_off2 == true) {// If "ON" display the first sub-image display ELSE {0} sub-image
-  if (colli_on_off2) {color = c_ltgray} else {color = c_white} // If the mouse is over the button, darkens a bit
-  draw_sprite_ext (sOn_Off, 1, xof, y2,1,1,0, color, 1)
-} else {
-  if (colli_on_off2) {color = c_ltgray} else {color = c_white}
-  draw_sprite_ext (sOn_Off, 0, xof, y2,1,1,0, color, 1)
-}
-
-// Draw ON-OFF [Ambience]
-if (on_off3 == true) {// If "ON" display the first sub-image display ELSE {0} sub-image
-  if (colli_on_off3) {color = c_ltgray} else {color = c_white} // If the mouse is over the button, darkens a bit
-  draw_sprite_ext (sOn_Off, 1, xof, y3,1,1,0, color, 1)
-} else {
-  if (colli_on_off3) {color = c_ltgray} else {color = c_white}
-  draw_sprite_ext (sOn_Off, 0, xof, y3,1,1,0, color, 1)
-}
-
-//
-//If mode is invisible
-}else{exit;}
 </string>
           </argument>
         </arguments>

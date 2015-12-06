@@ -10,4 +10,5 @@ while ( file_exists(file_test+".txt") ) // Step through our log files until we h
 global.file_log_dest = file_test+".txt";
 
 global.file_log = file_text_open_write(global.file_log_dest);
-file_text_write_string(global.file_log,"Logging system initiated... ("+string(current_time)+"ms since game was launched)");file_text_writeln(global.file_log);file_text_close(global.file_log);
+file_text_write_string(global.file_log,"Logging system initiated... ("+string(current_time)+"ms since game was launched)");file_text_writeln(global.file_log);
+file_text_close(global.file_log);
